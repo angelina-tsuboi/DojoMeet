@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import fire from '../config/fire-config';
+import fire from '../config/fire-conf';
 
 const CreatePost = () => {
   const [title, setTitle] = useState('');

@@ -1,5 +1,8 @@
+import { useState, useEffect } from 'react';
 import Head from 'next/head';
 import CreatePost from '../components/CreatePost';
+import fire from '../config/fire-conf';
+
 const Home = () => {
   const [blogs, setBlogs] = useState([]);
 
@@ -29,7 +32,7 @@ const Home = () => {
           </li>
         )}
       </ul>
-      
+
       <CreatePost />
     </div>
   )
