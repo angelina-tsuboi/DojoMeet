@@ -1,5 +1,5 @@
 import { useState } from 'react'; 
-import fire from '../../config/fire-config';
+import fire from '../../config/fire-conf';
 import { useRouter } from 'next/router';
 const Register = () => {
   const router = useRouter();
