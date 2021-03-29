@@ -1,4 +1,5 @@
 import Head from 'next/head';
+import CreatePost from '../components/CreatePost';
 const Home = () => {
   return (
     <div>
@@ -6,6 +7,7 @@ const Home = () => {
         <title>Blog App</title>
       </Head>
       <h1>Epic Blog</h1>
+      <CreatePost />
     </div>
   )
 }
