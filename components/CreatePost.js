@@ -1,13 +1,19 @@
 import React, { useState } from 'react';
+import fire from '../config/fire-conf';
+
 const CreatePost = () => {
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
   const handleSubmit = (event) => {
     event.preventDefault();
-    console.log({
-      "title": title,
-      "content": content
-    });
+
+    fire.firestore()
+      .collection('blog')
+      .add({
+        title: title,
+        content: content,
+      });
+
     setTitle('');
     setContent('');
   }
