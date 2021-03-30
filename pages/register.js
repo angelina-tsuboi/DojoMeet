@@ -1,6 +1,8 @@
 import { useState } from 'react'; 
 import fire from '../config/fire-conf';
 import { useRouter } from 'next/router';
+import styles from '../styles/SignUp.module.css';
+
 const Register = () => {
   const router = useRouter();
   const [userName, setUsername] = useState('');
@@ -28,17 +30,20 @@ const Register = () => {
     router.push("/")
   }
   return (
-    <div>
+    <div className={styles.container}>
       <h1>Create new user</h1>
         {notification}
       <form onSubmit={handleLogin}>
-        Email: <input type="text" value={userName} 
+        <h3>Email:</h3>
+       <input type="text" value={userName} 
         onChange={({target}) => setUsername(target.value)} /> 
         <br />
-        Password: <input type="password" value={password} 
+        <h3>Password:</h3>
+        <input type="password" value={password} 
         onChange={({target}) => setPassword(target.value)} /> 
         <br />
-        Password conf: <input type="password" value={passConf}    
+        <h3>Confirm Password:</h3>
+        <input type="password" value={passConf}    
         onChange={({target}) => setPassConf(target.value)} /> 
         <br />
         <button type="submit">Login</button>

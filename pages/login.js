@@ -26,7 +26,7 @@ const Login = () => {
   }
   return (
     <div className={styles.container}>
-      <h1>Login</h1>
+      <h1>Welcome Back 🥋</h1>
       {notify}
       <form onSubmit={handleLogin}>
         <h3 className={styles.subtitle}>Email</h3>
