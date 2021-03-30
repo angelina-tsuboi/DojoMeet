@@ -4,15 +4,16 @@ import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
+import styles from './Navbar.module.css';
 
 const Navbar = () => { 
   return (
     <div>
       <AppBar position="static">
         <Toolbar>
-          <Typography variant="h6" noWrap>
+          <h1 className={styles.title}>
             DojoMeet
-          </Typography>
+          </h1>
           <div />
           <div>
           <Button color="inherit">About</Button>
