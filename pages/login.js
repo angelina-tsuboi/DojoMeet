@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import fire from '../../config/fire-conf';
+import fire from '../config/fire-conf';
 import { useRouter } from 'next/router'
 const Login = () => {
   const [username, setUsername] = useState('');
