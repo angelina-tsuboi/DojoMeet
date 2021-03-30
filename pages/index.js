@@ -7,25 +7,8 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import Link from 'next/link';
 import purple from '@material-ui/core/colors/purple';
 import green from '@material-ui/core/colors/green';
-import AppBar from '@material-ui/core/AppBar';
-import Toolbar from '@material-ui/core/Toolbar';
-import Typography from '@material-ui/core/Typography';
-import Button from '@material-ui/core/Button';
-import IconButton from '@material-ui/core/IconButton';
-import MenuIcon from '@material-ui/icons/Menu';
 import Navbar from '../components/Navbar';
 
-const useStyles = makeStyles((theme) => ({
-  root: {
-    flexGrow: 1,
-  },
-  menuButton: {
-    marginRight: theme.spacing(2),
-  },
-  title: {
-    flexGrow: 1,
-  },
-}));
 
 const theme = createMuiTheme({
   palette: {
@@ -39,7 +22,6 @@ const theme = createMuiTheme({
 });
 
 const Home = () => {
-  const classes = useStyles();
   const [blogs, setBlogs] = useState([]);
   const [notification, setNotification] = useState('');
   const [loggedIn, setLoggedIn] = useState(false);
@@ -90,17 +72,7 @@ const Home = () => {
       <ThemeProvider theme={theme}>
         <CssBaseline />
         <Navbar />
-        <AppBar position="static">
-          <Toolbar>
-            <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
-              <MenuIcon />
-            </IconButton>
-            <Typography variant="h6" className={classes.title}>
-              News
-    </Typography>
-            <Button color="inherit">Login</Button>
-          </Toolbar>
-        </AppBar>
+        
         <h1>Blog</h1>
         {notification}
         {!loggedIn
