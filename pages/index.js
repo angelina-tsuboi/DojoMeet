@@ -13,10 +13,10 @@ import Navbar from '../components/Navbar';
 const theme = createMuiTheme({
   palette: {
     primary: {
-      main: purple[500],
+      main: "#000000",
     },
     secondary: {
-      main: green[500],
+      main: "#3FCDE0",
     },
   },
 });
