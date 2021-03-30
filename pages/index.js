@@ -2,24 +2,9 @@ import { useState, useEffect } from 'react';
 import Head from 'next/head';
 import fire from '../config/fire-conf';
 import CreatePost from '../components/CreatePost';
-import { ThemeProvider, makeStyles, createMuiTheme } from '@material-ui/core/styles';
-import CssBaseline from '@material-ui/core/CssBaseline';
 import Link from 'next/link';
-import purple from '@material-ui/core/colors/purple';
-import green from '@material-ui/core/colors/green';
-import Navbar from '../components/Navbar';
 
 
-const theme = createMuiTheme({
-  palette: {
-    primary: {
-      main: "#000000",
-    },
-    secondary: {
-      main: "#3FCDE0",
-    },
-  },
-});
 
 const Home = () => {
   const [blogs, setBlogs] = useState([]);
@@ -69,9 +54,6 @@ const Home = () => {
       <Head>
         <title>Blog App</title>
       </Head>
-      <ThemeProvider theme={theme}>
-        <CssBaseline />
-        <Navbar />
         
         <h1>Blog</h1>
         {notification}
@@ -98,7 +80,6 @@ const Home = () => {
           )}
         </ul>
         {loggedIn && <CreatePost />}
-      </ThemeProvider>
 
     </div>
   )
