@@ -2,9 +2,14 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 import Dialog from '@material-ui/core/Dialog';
 import Grid from '@material-ui/core/Grid';
 import React from 'react';
+import styles from './CreatePost.module.css';
+import QueryBuilderIcon from '@material-ui/icons/QueryBuilder';
 import TextField from '@material-ui/core/TextField';
 import DateFnsUtils from '@date-io/date-fns';
 import AccountCircle from '@material-ui/icons/AccountCircle';
+import SubjectIcon from '@material-ui/icons/Subject';
+import RoomIcon from '@material-ui/icons/Room';
+
 import {
   MuiPickersUtilsProvider,
   KeyboardTimePicker,
@@ -30,9 +35,9 @@ export default function CreatePost(props) {
     };
   
     return (
-      <Dialog onClose={handleClose} aria-labelledby="simple-dialog-title" open={open}>
+      <Dialog className={styles.dialog} onClose={handleClose} aria-labelledby="simple-dialog-title" open={open}>
         <DialogTitle id="simple-dialog-title">Create Post</DialogTitle>
-        <TextField id="standard-basic" label="Standard" />
+        <TextField id="standard-basic" label="Post Title" />
         <MuiPickersUtilsProvider utils={DateFnsUtils}>
       <Grid container justify="space-around">
         <KeyboardDatePicker
@@ -41,18 +46,7 @@ export default function CreatePost(props) {
           format="MM/dd/yyyy"
           margin="normal"
           id="date-picker-inline"
-          label="Date picker inline"
-          value={selectedDate}
-          onChange={handleDateChange}
-          KeyboardButtonProps={{
-            'aria-label': 'change date',
-          }}
-        />
-        <KeyboardDatePicker
-          margin="normal"
-          id="date-picker-dialog"
-          label="Date picker dialog"
-          format="MM/dd/yyyy"
+          label="Select Date"
           value={selectedDate}
           onChange={handleDateChange}
           KeyboardButtonProps={{
@@ -62,7 +56,7 @@ export default function CreatePost(props) {
         <KeyboardTimePicker
           margin="normal"
           id="time-picker"
-          label="Time picker"
+          label="Select Time"
           value={selectedDate}
           onChange={handleDateChange}
           KeyboardButtonProps={{
@@ -73,18 +67,18 @@ export default function CreatePost(props) {
     </MuiPickersUtilsProvider>
     <Grid container spacing={1} alignItems="flex-end">
           <Grid item>
-            <AccountCircle />
+            <RoomIcon />
           </Grid>
           <Grid item>
-            <TextField id="input-with-icon-grid" label="With a grid" />
+            <TextField id="input-with-icon-grid" label="Enter location" />
           </Grid>
         </Grid>
         <Grid container spacing={1} alignItems="flex-end">
           <Grid item>
-            <AccountCircle />
+            <SubjectIcon />
           </Grid>
           <Grid item>
-            <TextField id="input-with-icon-grid" label="With a grid" />
+            <TextField id="input-with-icon-grid" label="Enter description..." />
           </Grid>
         </Grid>
       </Dialog>
