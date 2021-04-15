@@ -2,13 +2,21 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 import Dialog from '@material-ui/core/Dialog';
 import Grid from '@material-ui/core/Grid';
 import React from 'react';
-import styles from './CreatePost.module.css';
 import QueryBuilderIcon from '@material-ui/icons/QueryBuilder';
 import TextField from '@material-ui/core/TextField';
 import DateFnsUtils from '@date-io/date-fns';
 import AccountCircle from '@material-ui/icons/AccountCircle';
 import SubjectIcon from '@material-ui/icons/Subject';
 import RoomIcon from '@material-ui/icons/Room';
+import { withStyles } from '@material-ui/core/styles';
+
+const styles = {
+    dialog: {
+        padding: "1rem",
+        background: "blue"
+    }
+  };
+  
 
 import {
   MuiPickersUtilsProvider,
@@ -17,9 +25,9 @@ import {
 } from '@material-ui/pickers';
 import 'date-fns';
 
-export default function CreatePost(props) {
+const CreatePost = (props)  => {
     // const classes = useStyles();
-    const { onClose, selectedValue, open } = props;
+    const { onClose, selectedValue, open, classes, children, className } = props;
     const [selectedDate, setSelectedDate] = React.useState(new Date('2014-08-18T21:11:54'));
 
   const handleDateChange = (date) => {
@@ -35,7 +43,7 @@ export default function CreatePost(props) {
     };
   
     return (
-      <Dialog className={styles.dialog} onClose={handleClose} aria-labelledby="simple-dialog-title" open={open}>
+      <Dialog onClose={handleClose} aria-labelledby="simple-dialog-title" open={open}>
         <DialogTitle id="simple-dialog-title">Create Post</DialogTitle>
         <TextField id="standard-basic" label="Post Title" />
         <MuiPickersUtilsProvider utils={DateFnsUtils}>
@@ -84,4 +92,6 @@ export default function CreatePost(props) {
       </Dialog>
     );
   }
+
+  export default withStyles( styles )(CreatePost);
   
