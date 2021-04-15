@@ -1,5 +1,6 @@
 import DialogTitle from '@material-ui/core/DialogTitle';
 import Dialog from '@material-ui/core/Dialog';
+import fire from '../../config/fire-conf';
 import Grid from '@material-ui/core/Grid';
 import React from 'react';
 import styles from './CreatePost.module.css'
@@ -12,8 +13,6 @@ import SubjectIcon from '@material-ui/icons/Subject';
 import RoomIcon from '@material-ui/icons/Room';
 import { withStyles } from '@material-ui/core/styles';
 
-  
-
 import {
   MuiPickersUtilsProvider,
   KeyboardTimePicker,
@@ -24,10 +23,20 @@ import 'date-fns';
 const CreatePost = (props)  => {
     // const classes = useStyles();
     const { onClose, selectedValue, open } = props;
-    const [selectedDate, setSelectedDate] = React.useState(new Date('2014-08-18T21:11:54'));
+    const [selectedDate, setSelectedDate] = React.useState(new Date(''));
+    const [selectedTime, setSelectedTime] = React.useState(new Date(''));
+
+    const [title, setTitle] = useState('');
+    const [description, setDescription] = useState('');
+    const [location, setLocation] = useState('');
+
 
   const handleDateChange = (date) => {
     setSelectedDate(date);
+  };
+
+  const handleTimeChange = (time) => {
+    setSelectedTime(time);
   };
   
     const handleClose = () => {
@@ -37,12 +46,35 @@ const CreatePost = (props)  => {
     const handleListItemClick = (value) => {
       onClose(value);
     };
+
+    const handleCreatePost = () => {
+        e.preventDefault();
+        fire.firestore()
+        .collection('posts')
+        .add({
+            title: title,
+            description: description,
+            date: selectedDate,
+            time: selectedTime, 
+            location: location
+        }).then(() => {
+            alert("Post created!")
+        }).catch((err) => {
+            console.log("Found an error", err);
+        })
+        setTitle('')
+        setDescription('')
+        setLocation('')
+        setSelectedDate(new Date(''))
+        setSelectedTime(new Date(''))
+        router.push("/")
+      }
   
     return (
       <Dialog onClose={handleClose} aria-labelledby="simple-dialog-title" open={open}>
           <div className={styles.Dialog}>
         <DialogTitle id="simple-dialog-title">Create Event</DialogTitle>
-        <TextField id="standard-basic" label="Event Title" />
+        <TextField id="standard-basic" label="Event Title" value={title} onChange= {({target}) => setTitle(target.value)}  />
         <MuiPickersUtilsProvider utils={DateFnsUtils}>
       <Grid container justify="space-between">
         <KeyboardDatePicker
@@ -62,8 +94,8 @@ const CreatePost = (props)  => {
           margin="normal"
           id="time-picker"
           label="Select Time"
-          value={selectedDate}
-          onChange={handleDateChange}
+          value={selectedTime}
+          onChange={handleTimeChange}
           KeyboardButtonProps={{
             'aria-label': 'change time',
           }}
@@ -75,7 +107,7 @@ const CreatePost = (props)  => {
             <RoomIcon />
           </Grid>
           <Grid item>
-            <TextField id="input-with-icon-grid" label="Enter location" />
+            <TextField id="input-with-icon-grid" label="Enter location" value={location} onChange= {({target}) => setLocation(target.value)} />
           </Grid>
         </Grid>
         <Grid container spacing={1} alignItems="flex-end">
@@ -83,13 +115,13 @@ const CreatePost = (props)  => {
             <SubjectIcon />
           </Grid>
           <Grid item>
-            <TextField id="input-with-icon-grid" label="Enter description..." />
+            <TextField id="input-with-icon-grid" label="Enter description..." value={description} onChange= {({target}) => setDescription(target.value)} />
           </Grid>
         </Grid>
 
         <div className={styles.bottomButtons}>
             <Button>Cancel</Button>
-            <Button variant="contained" className={styles.createEvent}>
+            <Button variant="contained" className={styles.createEvent} onClick={() => { handleCreatePost() }} >
             Create Event
             </Button>
         </div>
