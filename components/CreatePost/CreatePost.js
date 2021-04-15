@@ -6,6 +6,7 @@ import styles from './CreatePost.module.css'
 import QueryBuilderIcon from '@material-ui/icons/QueryBuilder';
 import TextField from '@material-ui/core/TextField';
 import DateFnsUtils from '@date-io/date-fns';
+import Button from '@material-ui/core/Button';
 import AccountCircle from '@material-ui/icons/AccountCircle';
 import SubjectIcon from '@material-ui/icons/Subject';
 import RoomIcon from '@material-ui/icons/Room';
@@ -40,10 +41,10 @@ const CreatePost = (props)  => {
     return (
       <Dialog onClose={handleClose} aria-labelledby="simple-dialog-title" open={open}>
           <div className={styles.Dialog}>
-        <DialogTitle id="simple-dialog-title">Create Post</DialogTitle>
-        <TextField id="standard-basic" label="Post Title" />
+        <DialogTitle id="simple-dialog-title">Create Event</DialogTitle>
+        <TextField id="standard-basic" label="Event Title" />
         <MuiPickersUtilsProvider utils={DateFnsUtils}>
-      <Grid container justify="space-around">
+      <Grid container justify="space-between">
         <KeyboardDatePicker
           disableToolbar
           variant="inline"
@@ -85,6 +86,13 @@ const CreatePost = (props)  => {
             <TextField id="input-with-icon-grid" label="Enter description..." />
           </Grid>
         </Grid>
+
+        <div className={styles.bottomButtons}>
+            <Button>Cancel</Button>
+            <Button variant="contained" className={styles.createEvent}>
+            Create Event
+            </Button>
+        </div>
         </div>
       </Dialog>
     );

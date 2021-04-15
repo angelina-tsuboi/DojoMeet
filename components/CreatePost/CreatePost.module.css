@@ -1,3 +1,21 @@
 .Dialog{
     padding: 1rem;
+    width: 34rem;
+    /* position: absolute; */
+}
+
+.bottomButtons{
+    float: right;
+    margin-top: 1rem;
+    margin-right: 1rem;
+}
+
+.createEvent{
+    background-color: rgb(43, 43, 170) !important;
+    color: white !important;
+    margin-left: 1rem !important;
+}
+
+.selectDate{
+    margin-right: 1rem;
 }
