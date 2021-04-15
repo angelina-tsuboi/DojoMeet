@@ -22,3 +22,7 @@
 .option:hover{
     cursor: pointer;
 }
+
+.createPostButton{
+    background-color: rgb(63, 63, 174);
+}
