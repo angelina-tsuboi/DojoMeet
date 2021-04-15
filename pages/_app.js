@@ -1,5 +1,4 @@
 import '../styles/globals.css'
-import Navbar from '../components/Navbar/Navbar';
 import { ThemeProvider, makeStyles, createMuiTheme } from '@material-ui/core/styles';
 import React, { useState, useEffect } from 'react';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -29,7 +28,6 @@ function MyApp({ Component, pageProps }) {
     <div>
       <ThemeProvider theme={theme}>
         <CssBaseline />
-        <Navbar />
         <Component {...pageProps} />
       </ThemeProvider>
     </div>

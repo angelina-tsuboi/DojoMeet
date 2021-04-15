@@ -8,7 +8,7 @@ import Link from '@material-ui/core/Link';
 import styles from './Navbar.module.css';
 import { useRouter } from 'next/router';
 
-const Navbar = () => { 
+const Navbar = ({ loggedIn }) => { 
   const router = useRouter()
 
   const goToRoute = (e) => {
@@ -27,6 +27,11 @@ const Navbar = () => {
           </h1>
           <div className={styles.spacer}/>
           <div>
+          {loggedIn
+          ? <h1>logged in</h1>
+          : <h1>logged out</h1>
+        }
+          
           <button value="about" className={styles.option} onClick={goToRoute}>About</button>
           <button value="features" color="inherit" className={styles.option} onClick={goToRoute}>Features</button>
           <button value="login" color="inherit" className={styles.option} onClick={goToRoute}>Login</button>
