@@ -9,6 +9,7 @@ import Typography from '@material-ui/core/Typography';
 import Card from '@material-ui/core/Card';
 import Avatar from '@material-ui/core/Avatar';
 import CardContent from '@material-ui/core/CardContent';
+import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
 
 
@@ -18,6 +19,8 @@ const Home = () => {
   const { currentUser } = fire.auth()
   const [posts, setPosts] = useState([]);
   const [notification, setNotification] = useState('');
+  const [description, setDescription] = useState('');
+  const [location, setLocation] = useState('');
   const [loggedIn, setLoggedIn] = useState(false);
 
 
@@ -51,6 +54,17 @@ const Home = () => {
         setBlogs(blogs);
       });
   }, []);
+
+  useEffect(() => {
+    fire.firestore()
+      .collection('users')
+      .doc(currentUser.uid)
+      .get().then(data => {
+        setDescription(data.data().description);
+        setLocation(data.data().location);
+        console.log(data.data())
+      })
+  });
 
   useEffect(() => {
     fire.firestore()
@@ -96,6 +110,19 @@ const Home = () => {
               <Typography variant="body2" color="textSecondary" component="p">
                 {currentUser.displayName}
               </Typography>
+              <Typography variant="body2" color="textSecondary" component="p">
+                {location}
+              </Typography>
+              <Typography variant="body2" color="textSecondary" component="p">
+                {description}
+              </Typography>
+              <Button>
+                Edit Profile
+              </Button>
+
+              <Button>
+                Logout
+              </Button>
               </CardContent>
               </Card>
             </Grid>
