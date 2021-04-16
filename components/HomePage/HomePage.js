@@ -25,8 +25,7 @@ const goToRoute = (e) => {
       <Button variant="contained" color="secondary" onClick={goToRoute} value="login">
         Login
       </Button>
-      
-
+    
     </div>
   )
 }

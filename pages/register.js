@@ -1,6 +1,7 @@
 import { useState } from 'react'; 
 import fire from '../config/fire-conf';
 import { useRouter } from 'next/router';
+import Button from '@material-ui/core/Button';
 import styles from '../styles/SignUp.module.css';
 
 const Register = () => {
@@ -29,6 +30,25 @@ const Register = () => {
       });
     router.push("/")
   }
+
+  const handleGoogleLogin = () => {
+    let provider = new fire.auth.GoogleAuthProvider();
+    fire.auth()
+  .signInWithPopup(provider)
+  .then((result) => {
+    var credential = result.credential;
+
+    // This gives you a Google Access Token. You can use it to access the Google API.
+    var token = credential.accessToken;
+    // The signed-in user info.
+    var user = result.user;
+    console.log("got the user", user);
+    // ...
+  }).catch((error) => {
+    console.log("Error: ", err);
+  });
+
+  }
   return (
     <div className={styles.container}>
       <h1>Create new user</h1>
@@ -48,6 +68,10 @@ const Register = () => {
         <br />
         <button type="submit">Login</button>
       </form>
+      <h3>OR</h3>
+      <Button variant="contained" color="primary" onClick={handleGoogleLogin}>
+      Login with Google
+    </Button>
     </div>
   )
 }
