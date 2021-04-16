@@ -26,26 +26,25 @@ const Login = () => {
     router.push("/")
   }
 
-  const handleGoogleSignUp = async() =>{
-    const provider = fire.auth.GoogleAuthProvider();
-    const creds = await fire.auth.signInWithPopup(provider);
-    let user = creds.user;
-    const userRef = fire.firestore().doc(`users/${user.uid}`);
-    const data = {
-      uid: user.uid,
-      email: user.email,
-      photoURL: user.photoURL,
-      name: user.displayName
-    }
+  const handleGoogleLogin = () => {
+    let provider = new fire.auth.GoogleAuthProvider();
+    fire.auth()
+  .signInWithPopup(provider)
+  .then((result) => {
+    var credential = result.credential;
 
-    userRef.get().then((doc) => {
-      if(!doc.exists){
-        userRef.set(data, {merge: true});
-      }
-    })
-
-    router.push("/");
+    // This gives you a Google Access Token. You can use it to access the Google API.
+    var token = credential.accessToken;
+    // The signed-in user info.
+    var user = result.user;
+    console.log("got the user", user);
+    router.push("/")
+    // ...
+  }).catch((error) => {
+    console.log("Error: ", error);
+  });
   }
+  
   return (
     <div className={styles.container}>
       <h1>Welcome Back 🥋</h1>
@@ -64,8 +63,8 @@ const Login = () => {
         <p>Already have an account? <Link href="register">Sign Up.</Link></p>
       </form>
       <h3>OR</h3>
-      <Button variant="contained" color="primary" onClick={handleGoogleSignUp}>
-      Sign up with Google
+      <Button variant="contained" color="primary" onClick={handleGoogleLogin}>
+      Login with Google
     </Button>
     </div>
   )

@@ -31,24 +31,29 @@ const Register = () => {
     router.push("/")
   }
 
-  const handleGoogleLogin = () => {
-    let provider = new fire.auth.GoogleAuthProvider();
-    fire.auth()
-  .signInWithPopup(provider)
-  .then((result) => {
-    var credential = result.credential;
 
-    // This gives you a Google Access Token. You can use it to access the Google API.
-    var token = credential.accessToken;
-    // The signed-in user info.
-    var user = result.user;
-    console.log("got the user", user);
-    // ...
-  }).catch((error) => {
-    console.log("Error: ", err);
-  });
+  const handleGoogleSignUp = async() =>{
+    const provider = new fire.auth.GoogleAuthProvider();
+    const creds = await fire.auth().signInWithPopup(provider);
+    let user = creds.user;
+    const userRef = fire.firestore().doc(`users/${user.uid}`);
+    const data = {
+      uid: user.uid,
+      email: user.email,
+      photoURL: user.photoURL,
+      name: user.displayName
+    }
 
+    userRef.get().then((doc) => {
+      if(!doc.exists){
+        userRef.set(data, {merge: true});
+      }
+    })
+
+    router.push("/");
   }
+
+
   return (
     <div className={styles.container}>
       <h1>Create new user</h1>
@@ -69,8 +74,8 @@ const Register = () => {
         <button type="submit">Login</button>
       </form>
       <h3>OR</h3>
-      <Button variant="contained" color="primary" onClick={handleGoogleLogin}>
-      Login with Google
+      <Button variant="contained" color="primary" onClick={handleGoogleSignUp}>
+      Register with Google
     </Button>
     </div>
   )
