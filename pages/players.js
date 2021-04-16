@@ -4,6 +4,7 @@ import Navbar from '../components/Navbar/Navbar';
 import fire from '../config/fire-conf';
 import Link from 'next/link';
 import PostCard from '../components/PostCard/PostCard';
+import PlayerCard from '../components/PlayerCard/PlayerCard';
 
 
 const Players = () => {
@@ -56,13 +57,7 @@ const Players = () => {
 
         <ul>
           {players.map(player =>
-            // <li key={post.id}>
-            //   <Link href="/posts/[id]" as={'/posts/' + post.id}>
-            //     <a itemProp="hello">{post.title}</a>
-            //   </Link>
-            // </li>
-            <h2>{player.name}</h2>
-            // <PostCard post={post}/>
+            <PlayerCard player={player} key={player.uid}/>
           )}
         </ul>
 
