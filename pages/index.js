@@ -9,6 +9,7 @@ import Link from 'next/link';
 
 const Home = () => {
   const [blogs, setBlogs] = useState([]);
+  const [posts, setPosts] = useState([]);
   const [notification, setNotification] = useState('');
   const [loggedIn, setLoggedIn] = useState(false);
 
@@ -29,6 +30,7 @@ const Home = () => {
         setLoggedIn(false)
       }
     })
+
   useEffect(() => {
     fire.firestore()
       .collection('blog')
@@ -40,6 +42,20 @@ const Home = () => {
         setBlogs(blogs);
       });
   }, []);
+
+  useEffect(() => {
+    fire.firestore()
+      .collection('posts')
+      .onSnapshot(snap => {
+        const postsData = snap.docs.map(doc => ({
+          id: doc.id,
+          ...doc.data()
+        }));
+        setPosts(postsData);
+      });
+  }, []);
+
+
   const handleLogout = () => {
     fire.auth()
       .signOut()
@@ -82,6 +98,18 @@ const Home = () => {
             </li>
           )}
         </ul>
+
+        <ul>
+          {posts.map(post =>
+            <li key={post.id}>
+              <Link href="/posts/[id]" as={'/posts/' + post.id}>
+                <a itemProp="hello">{post.title}</a>
+              </Link>
+            </li>
+          )}
+        </ul>
+
+
         {loggedIn && <CreatePost />}
 
     </div>

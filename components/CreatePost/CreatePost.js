@@ -45,9 +45,6 @@ const CreatePost = (props)  => {
       onClose(selectedValue);
     };
   
-    const handleListItemClick = (value) => {
-      onClose(value);
-    };
 
     const handleCreatePost = () => {
         fire.firestore()
@@ -66,8 +63,8 @@ const CreatePost = (props)  => {
         setTitle('')
         setDescription('')
         setLocation('')
-        setSelectedDate(new Date(''))
-        setSelectedTime(new Date(''))
+        setSelectedDate(new Date())
+        setSelectedTime(new Date())
         router.push("/")
       }
   
