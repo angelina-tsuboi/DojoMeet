@@ -15,10 +15,11 @@ import Grid from '@material-ui/core/Grid';
 
 const Home = () => {
   const [blogs, setBlogs] = useState([]);
+  const { currentUser } = fire.auth()
   const [posts, setPosts] = useState([]);
-  const [profile, setProfile] = useState({name: "", photoURL: "", email: "", uid: ""});
   const [notification, setNotification] = useState('');
   const [loggedIn, setLoggedIn] = useState(false);
+
 
   useEffect(() => {
     // Remove the server-side injected CSS.
@@ -34,7 +35,6 @@ const Home = () => {
     .onAuthStateChanged((user) => {
       if (user) {
         setLoggedIn(true)
-        setProfile({name: user.displayName, photoURL: user.photoURL, email: user.email, uid: user.uid})
       } else {
         setLoggedIn(false)
       }
@@ -91,12 +91,12 @@ const Home = () => {
             <Grid container spacing={3}>
             <Grid item xs={6}>
               <Card>
-              <Avatar aria-label="recipe" src={profile.photoURL}></Avatar>
+              <Avatar aria-label="recipe" src={currentUser.photoURL}></Avatar>
               <CardContent>
               <Typography variant="body2" color="textSecondary" component="p">
-                {profile.name}
+                {currentUser.displayName}
               </Typography>
-            </CardContent>
+              </CardContent>
               </Card>
             </Grid>
             <Grid item xs={6}>

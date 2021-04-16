@@ -42,7 +42,7 @@ const Navbar = ({ loggedIn }) => {
       <AppBar position="static">
         <Toolbar>
           <h1 className={styles.title}>
-            <Link href="/" color="white">
+            <Link href="/">
             DojoMeet
             </Link>
           </h1>
