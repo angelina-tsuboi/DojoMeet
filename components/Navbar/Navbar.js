@@ -41,10 +41,8 @@ const Navbar = ({ loggedIn }) => {
     <div>
       <AppBar position="static">
         <Toolbar>
-          <h1 className={styles.title}>
-            <Link href="/">
-            DojoMeet
-            </Link>
+          <h1 className={styles.link}>
+            <a href="/">Dojo Meet</a>
           </h1>
           <div className={styles.spacer}/>
           <div>

@@ -11,7 +11,7 @@ import Avatar from '@material-ui/core/Avatar';
 import CardContent from '@material-ui/core/CardContent';
 import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
-
+import styles from '../styles/Index.module.css';
 
 
 const Home = () => {
@@ -56,7 +56,8 @@ const Home = () => {
   }, []);
 
   useEffect(() => {
-    fire.firestore()
+    if(currentUser){
+      fire.firestore()
       .collection('users')
       .doc(currentUser.uid)
       .get().then(data => {
@@ -64,6 +65,7 @@ const Home = () => {
         setLocation(data.data().location);
         console.log(data.data())
       })
+    }
   });
 
   useEffect(() => {
@@ -105,7 +107,7 @@ const Home = () => {
             <Grid container spacing={3}>
             <Grid item xs={6}>
               <Card>
-              <Avatar aria-label="recipe" src={currentUser.photoURL}></Avatar>
+              <Avatar aria-label="recipe" src={currentUser.photoURL} style={{ height: '80px', width: '80px' }}></Avatar>
               <CardContent>
               <Typography variant="body2" color="textSecondary" component="p">
                 {currentUser.displayName}
