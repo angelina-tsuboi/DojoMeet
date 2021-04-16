@@ -25,6 +25,7 @@ const CreatePost = (props)  => {
     const router = useRouter()
     // const classes = useStyles();
     const { onClose, selectedValue, open } = props;
+    const { currentUser } = fire.auth();
     const [selectedDate, setSelectedDate] = React.useState(new Date());
     const [selectedTime, setSelectedTime] = React.useState(new Date());
 
@@ -54,7 +55,8 @@ const CreatePost = (props)  => {
             description: description,
             date: selectedDate,
             time: selectedTime, 
-            location: location
+            location: location,
+            ...currentUser
         }).then(() => {
             onClose(selectedValue);
         }).catch((err) => {

@@ -16,8 +16,9 @@ import styles from '../styles/Index.module.css';
 
 const Home = () => {
   const [blogs, setBlogs] = useState([]);
-  const { currentUser } = fire.auth()
+  const { currentUser } = fire.auth();
   const [posts, setPosts] = useState([]);
+  const [userPosts, setUserPosts] = useState([]);
   const [notification, setNotification] = useState('');
   const [description, setDescription] = useState('');
   const [location, setLocation] = useState('');
@@ -64,6 +65,19 @@ const Home = () => {
         setDescription(data.data().description);
         setLocation(data.data().location);
         console.log(data.data())
+        
+
+        fire.firestore()
+        .collection('posts')
+        .where('uid', '==', currentUser.uid)
+        .get().then((snapshot) => {
+          const userData = snapshot.docs.map(doc => ({
+            id: doc.id,
+            ...doc.data()
+          }));
+          setUserPosts(userData);
+        })
+
       })
     }
   });
@@ -129,9 +143,23 @@ const Home = () => {
               </Card>
             </Grid>
             <Grid item xs={6}>
+              <h3>Upcoming Events</h3>
               <Paper>
               <ul>
               {posts.map(post =>
+                <li key={post.id}>
+                  <Link href="/posts/[id]" as={'/posts/' + post.id}>
+                    <a itemProp="hello">{post.title}</a>
+                  </Link>
+                </li>
+              )}
+            </ul>
+              </Paper>
+
+              <h3>Your Events</h3>
+              <Paper>
+              <ul>
+              {userPosts.map(post =>
                 <li key={post.id}>
                   <Link href="/posts/[id]" as={'/posts/' + post.id}>
                     <a itemProp="hello">{post.title}</a>
