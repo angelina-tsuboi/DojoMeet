@@ -9,9 +9,13 @@ import Typography from '@material-ui/core/Typography';
 
 const PostCard = ({post})  => {
     const router = useRouter()
+
+    const goToPost = (postId) => {
+        router.push(`/posts/${postId}`);
+    };
   
     return (
-        <Card>
+        <Card onClick={() => goToPost(post.id)}>
         <CardContent>
           <Typography variant="h5" component="h2">
             { post.title }

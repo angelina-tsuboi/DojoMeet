@@ -73,8 +73,6 @@ const Home = () => {
         <title>Blog App</title>
       </Head>
       
-        
-        <h1>Recent Posts</h1>
         {notification}
         {!loggedIn
           ?
