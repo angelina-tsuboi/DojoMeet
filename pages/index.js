@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import Head from 'next/head';
 import Navbar from '../components/Navbar/Navbar';
 import fire from '../config/fire-conf';
-import CreatePost from '../components/CreatePost';
+import HomePage from '../components/HomePage/HomePage';
 import Link from 'next/link';
 
 
@@ -74,32 +74,14 @@ const Home = () => {
       </Head>
       
         
-        <h1>Blog</h1>
+        <h1>Recent Posts</h1>
         {notification}
         {!loggedIn
           ?
-          <div>
-            <Link href="/users/register">
-              <a>Register</a>
-            </Link> |
-          <Link href="/users/login">
-              <a> Login</a>
-            </Link>
-          </div>
+          <HomePage />
           :
-          <button onClick={handleLogout}>Logout</button>
-        }
-        <ul>
-          {blogs.map(blog =>
-            <li key={blog.id}>
-              <Link href="/blog/[id]" as={'/blog/' + blog.id}>
-                <a itemProp="hello">{blog.title}</a>
-              </Link>
-            </li>
-          )}
-        </ul>
-
-        <ul>
+          <div>
+             <ul>
           {posts.map(post =>
             <li key={post.id}>
               <Link href="/posts/[id]" as={'/posts/' + post.id}>
@@ -108,10 +90,10 @@ const Home = () => {
             </li>
           )}
         </ul>
-
-
-        {loggedIn && <CreatePost />}
-
+            <button onClick={handleLogout}>Logout</button>
+          </div>
+          
+        }
     </div>
   )
 }
