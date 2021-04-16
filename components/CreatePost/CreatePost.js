@@ -5,6 +5,7 @@ import Grid from '@material-ui/core/Grid';
 import React from 'react';
 import styles from './CreatePost.module.css'
 import QueryBuilderIcon from '@material-ui/icons/QueryBuilder';
+import { useRouter } from 'next/router';
 import TextField from '@material-ui/core/TextField';
 import DateFnsUtils from '@date-io/date-fns';
 import Button from '@material-ui/core/Button';
@@ -21,14 +22,15 @@ import {
 import 'date-fns';
 
 const CreatePost = (props)  => {
+    const router = useRouter()
     // const classes = useStyles();
     const { onClose, selectedValue, open } = props;
-    const [selectedDate, setSelectedDate] = React.useState(new Date(''));
-    const [selectedTime, setSelectedTime] = React.useState(new Date(''));
+    const [selectedDate, setSelectedDate] = React.useState(new Date());
+    const [selectedTime, setSelectedTime] = React.useState(new Date());
 
-    const [title, setTitle] = useState('');
-    const [description, setDescription] = useState('');
-    const [location, setLocation] = useState('');
+    const [title, setTitle] = React.useState('');
+    const [description, setDescription] = React.useState('');
+    const [location, setLocation] = React.useState('');
 
 
   const handleDateChange = (date) => {
@@ -48,7 +50,6 @@ const CreatePost = (props)  => {
     };
 
     const handleCreatePost = () => {
-        e.preventDefault();
         fire.firestore()
         .collection('posts')
         .add({
@@ -58,7 +59,7 @@ const CreatePost = (props)  => {
             time: selectedTime, 
             location: location
         }).then(() => {
-            alert("Post created!")
+            onClose(selectedValue);
         }).catch((err) => {
             console.log("Found an error", err);
         })
@@ -120,7 +121,7 @@ const CreatePost = (props)  => {
         </Grid>
 
         <div className={styles.bottomButtons}>
-            <Button>Cancel</Button>
+            <Button onClick={() => handleClose()}>Cancel</Button>
             <Button variant="contained" className={styles.createEvent} onClick={() => { handleCreatePost() }} >
             Create Event
             </Button>
