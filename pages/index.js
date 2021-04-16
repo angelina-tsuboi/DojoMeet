@@ -5,12 +5,14 @@ import fire from '../config/fire-conf';
 import HomePage from '../components/HomePage/HomePage';
 import Link from 'next/link';
 import Paper from '@material-ui/core/Paper';
+import React from 'react';
 import Typography from '@material-ui/core/Typography';
 import Card from '@material-ui/core/Card';
 import Avatar from '@material-ui/core/Avatar';
 import CardContent from '@material-ui/core/CardContent';
 import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
+import EditProfile from '../components/EditProfile/EditProfile';
 import styles from '../styles/Index.module.css';
 
 
@@ -23,6 +25,15 @@ const Home = () => {
   const [description, setDescription] = useState('');
   const [location, setLocation] = useState('');
   const [loggedIn, setLoggedIn] = useState(false);
+  const [open, setOpen] = React.useState(false);
+
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
 
 
   useEffect(() => {
@@ -64,7 +75,6 @@ const Home = () => {
       .get().then(data => {
         setDescription(data.data().description);
         setLocation(data.data().location);
-        console.log(data.data())
         
 
         fire.firestore()
@@ -132,7 +142,7 @@ const Home = () => {
               <Typography variant="body2" color="textSecondary" component="p">
                 {description}
               </Typography>
-              <Button>
+              <Button onClick={handleClickOpen}> 
                 Edit Profile
               </Button>
 
@@ -173,7 +183,11 @@ const Home = () => {
             
           </div>
           
-        }
+        } 
+        {currentUser &&
+        <EditProfile open={open} onClose={handleClose} profile={{name: currentUser.displayName, description: description, location: location, photoURL: currentUser.photoURL, email: currentUser.email}}/>
+      }
+
     </div>
   )
 }
