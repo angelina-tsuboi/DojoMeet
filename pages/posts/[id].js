@@ -11,7 +11,7 @@ const Post = (props) => {
       <p>
         {props.description}
       </p>
-      <Link href="/">
+      <Link href="/posts">
         <a>Back</a>
       </Link>
     </div>
