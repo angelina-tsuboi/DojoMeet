@@ -4,12 +4,19 @@ import Navbar from '../components/Navbar/Navbar';
 import fire from '../config/fire-conf';
 import HomePage from '../components/HomePage/HomePage';
 import Link from 'next/link';
+import Paper from '@material-ui/core/Paper';
+import Typography from '@material-ui/core/Typography';
+import Card from '@material-ui/core/Card';
+import Avatar from '@material-ui/core/Avatar';
+import CardContent from '@material-ui/core/CardContent';
+import Grid from '@material-ui/core/Grid';
 
 
 
 const Home = () => {
   const [blogs, setBlogs] = useState([]);
   const [posts, setPosts] = useState([]);
+  const [profile, setProfile] = useState({name: "", photoURL: "", email: "", uid: ""});
   const [notification, setNotification] = useState('');
   const [loggedIn, setLoggedIn] = useState(false);
 
@@ -22,10 +29,12 @@ const Home = () => {
   }, []);
 
 
+
   fire.auth()
     .onAuthStateChanged((user) => {
       if (user) {
         setLoggedIn(true)
+        setProfile({name: user.displayName, photoURL: user.photoURL, email: user.email, uid: user.uid})
       } else {
         setLoggedIn(false)
       }
@@ -79,16 +88,32 @@ const Home = () => {
           <HomePage />
           :
           <div>
-             <ul>
-          {posts.map(post =>
-            <li key={post.id}>
-              <Link href="/posts/[id]" as={'/posts/' + post.id}>
-                <a itemProp="hello">{post.title}</a>
-              </Link>
-            </li>
-          )}
-        </ul>
-            <button onClick={handleLogout}>Logout</button>
+            <Grid container spacing={3}>
+            <Grid item xs={6}>
+              <Card>
+              <Avatar aria-label="recipe" src={profile.photoURL}></Avatar>
+              <CardContent>
+              <Typography variant="body2" color="textSecondary" component="p">
+                {profile.name}
+              </Typography>
+            </CardContent>
+              </Card>
+            </Grid>
+            <Grid item xs={6}>
+              <Paper>
+              <ul>
+              {posts.map(post =>
+                <li key={post.id}>
+                  <Link href="/posts/[id]" as={'/posts/' + post.id}>
+                    <a itemProp="hello">{post.title}</a>
+                  </Link>
+                </li>
+              )}
+            </ul>
+              </Paper>
+            </Grid>
+            </Grid>
+            
           </div>
           
         }
