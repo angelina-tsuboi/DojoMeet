@@ -32,7 +32,30 @@ const Home = () => {
     setOpen(true);
   };
 
-  const handleClose = (profile) => {
+  const handleClose = () => {
+    if(currentUser){
+      fire.firestore()
+      .collection('users')
+      .doc(currentUser.uid)
+      .get().then(data => {
+        setDescription(data.data().description);
+        setLocation(data.data().location);
+        setName(data.data().name);
+        
+
+        fire.firestore()
+        .collection('posts')
+        .where('uid', '==', currentUser.uid)
+        .get().then((snapshot) => {
+          const userData = snapshot.docs.map(doc => ({
+            id: doc.id,
+            ...doc.data()
+          }));
+          setUserPosts(userData);
+        })
+
+      })
+    }
     setOpen(false);
   };
 

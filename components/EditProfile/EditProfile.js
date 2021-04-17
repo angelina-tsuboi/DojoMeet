@@ -4,6 +4,7 @@ import fire from '../../config/fire-conf';
 import Grid from '@material-ui/core/Grid';
 import React from 'react';
 import styles from './EditProfile.module.css'
+import { useEffect } from 'react';
 import QueryBuilderIcon from '@material-ui/icons/QueryBuilder';
 import { useRouter } from 'next/router';
 import TextField from '@material-ui/core/TextField';
@@ -27,7 +28,8 @@ const EditProfile = (props)  => {
     const handleClose = () => {
       onClose(selectedValue);
     };
-  
+
+
 
     const handleUpdateProfile = () => {
         let completeProfile = {
@@ -43,9 +45,7 @@ const EditProfile = (props)  => {
             onClose(selectedValue);
         }).catch((err) => {
             console.log("Found an error", err);
-        })
-
-        router.push("/")
+        }) 
       }
   
     return (
