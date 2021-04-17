@@ -14,6 +14,14 @@ import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
 import EditProfile from '../components/EditProfile/EditProfile';
 import styles from '../styles/Index.module.css';
+import List from '@material-ui/core/List';
+import ListItem from '@material-ui/core/ListItem';
+import ListItemText from '@material-ui/core/ListItemText';
+import ListItemAvatar from '@material-ui/core/ListItemAvatar';
+import ImageIcon from '@material-ui/icons/Image';
+import WorkIcon from '@material-ui/icons/Work';
+import BeachAccessIcon from '@material-ui/icons/BeachAccess';
+import Divider from '@material-ui/core/Divider';
 
 
 const Home = () => {
@@ -38,28 +46,28 @@ const Home = () => {
   }
 
   const handleClose = () => {
-    if(currentUser){
+    if (currentUser) {
       fire.firestore()
-      .collection('users')
-      .doc(currentUser.uid)
-      .get().then(data => {
-        setDescription(data.data().description);
-        setLocation(data.data().location);
-        setName(data.data().name);
-        
+        .collection('users')
+        .doc(currentUser.uid)
+        .get().then(data => {
+          setDescription(data.data().description);
+          setLocation(data.data().location);
+          setName(data.data().name);
 
-        fire.firestore()
-        .collection('posts')
-        .where('uid', '==', currentUser.uid)
-        .get().then((snapshot) => {
-          const userData = snapshot.docs.map(doc => ({
-            id: doc.id,
-            ...doc.data()
-          }));
-          setUserPosts(userData);
+
+          fire.firestore()
+            .collection('posts')
+            .where('uid', '==', currentUser.uid)
+            .get().then((snapshot) => {
+              const userData = snapshot.docs.map(doc => ({
+                id: doc.id,
+                ...doc.data()
+              }));
+              setUserPosts(userData);
+            })
+
         })
-
-      })
     }
     setOpen(false);
   };
@@ -97,28 +105,28 @@ const Home = () => {
   }, []);
 
   useEffect(() => {
-    if(currentUser){
+    if (currentUser) {
       fire.firestore()
-      .collection('users')
-      .doc(currentUser.uid)
-      .get().then(data => {
-        setDescription(data.data().description);
-        setLocation(data.data().location);
-        setName(data.data().name);
-        
+        .collection('users')
+        .doc(currentUser.uid)
+        .get().then(data => {
+          setDescription(data.data().description);
+          setLocation(data.data().location);
+          setName(data.data().name);
 
-        fire.firestore()
-        .collection('posts')
-        .where('uid', '==', currentUser.uid)
-        .get().then((snapshot) => {
-          const userData = snapshot.docs.map(doc => ({
-            id: doc.id,
-            ...doc.data()
-          }));
-          setUserPosts(userData);
+
+          fire.firestore()
+            .collection('posts')
+            .where('uid', '==', currentUser.uid)
+            .get().then((snapshot) => {
+              const userData = snapshot.docs.map(doc => ({
+                id: doc.id,
+                ...doc.data()
+              }));
+              setUserPosts(userData);
+            })
+
         })
-
-      })
     }
   });
 
@@ -138,75 +146,85 @@ const Home = () => {
 
   return (
     <div>
-      <Navbar loggedIn={loggedIn}/>
+      <Navbar loggedIn={loggedIn} />
       <Head>
         <title>Blog App</title>
       </Head>
-      
-        {notification}
-        {!loggedIn
-          ?
-          <HomePage />
-          :
-          <div>
-            <Grid container spacing={3}>
+
+      {notification}
+      {!loggedIn
+        ?
+        <HomePage />
+        :
+        <div>
+          <Grid container spacing={3}>
             <Grid item xs={6}>
               <Card>
-              <Avatar aria-label="recipe" src={currentUser.photoURL} style={{ height: '80px', width: '80px' }}></Avatar>
-              <CardContent>
-              <Typography variant="body2" color="textSecondary" component="p">
-                {name}
-              </Typography>
-              <Typography variant="body2" color="textSecondary" component="p">
-                {location}
-              </Typography>
-              <Typography variant="body2" color="textSecondary" component="p">
-                {description}
-              </Typography>
-              <Button onClick={handleClickOpen}> 
-                Edit Profile
+                <Avatar aria-label="recipe" src={currentUser.photoURL} style={{ height: '80px', width: '80px' }}></Avatar>
+                <CardContent>
+                  <Typography variant="body2" color="textSecondary" component="p">
+                    {name}
+                  </Typography>
+                  <Typography variant="body2" color="textSecondary" component="p">
+                    {location}
+                  </Typography>
+                  <Typography variant="body2" color="textSecondary" component="p">
+                    {description}
+                  </Typography>
+                  <Button onClick={handleClickOpen}>
+                    Edit Profile
               </Button>
 
-              <Button onClick={handleLogout}>
-                Logout
+                  <Button onClick={handleLogout}>
+                    Logout
               </Button>
-              </CardContent>
+                </CardContent>
               </Card>
             </Grid>
             <Grid item xs={6}>
+
               <h3>Upcoming Events</h3>
-              <Paper>
-              <ul>
-              {posts.map(post =>
-                <li key={post.id}>
-                  <Link href="/posts/[id]" as={'/posts/' + post.id}>
-                    <a itemProp="hello">{post.title}</a>
-                  </Link>
-                </li>
-              )}
-            </ul>
-              </Paper>
+              <List>
+                {posts.map(post =>
+                  <div>
+                    <ListItem key={post.id}>
+                      <ListItemAvatar>
+                        <Avatar>
+                          <ImageIcon />
+                        </Avatar>
+                      </ListItemAvatar>
+                      <ListItemText primary={post.title} secondary="Jan 9, 2014" />
+                    </ListItem>
+                    <Divider variant="inset" component="li" />
+                  </div>
+
+                )}
+              </List>
 
               <h3>Your Events</h3>
-              <Paper>
-              <ul>
               {userPosts.map(post =>
-                <li key={post.id}>
-                  <Link href="/posts/[id]" as={'/posts/' + post.id}>
-                    <a itemProp="hello">{post.title}</a>
-                  </Link>
-                </li>
+                <div>
+                  <ListItem key={post.id}>
+                    <ListItemAvatar>
+                      <Avatar>
+                        <ImageIcon />
+                      </Avatar>
+                    </ListItemAvatar>
+                    <ListItemText primary={post.title} secondary="Jan 9, 2014" />
+                  </ListItem>
+                  {/* <Divider variant="inset" component="li" /> */}
+                </div>
               )}
-            </ul>
-              </Paper>
+
+
             </Grid>
-            </Grid>
-            
-          </div>
-          
-        } 
-        {currentUser &&
-        <EditProfile open={open} onClose={handleClose} profile={{name: name, description: description, location: location, photoURL: currentUser.photoURL, email: currentUser.email, uid: currentUser.uid}}/>
+          </Grid>
+
+        </div>
+
+      }
+      {currentUser &&
+        <EditProfile open={open} onClose={handleClose} profile={{ name: name, description: description, location: location, photoURL: currentUser.photoURL, email: currentUser.email, uid: currentUser.uid }} />
       }
 
     </div>
