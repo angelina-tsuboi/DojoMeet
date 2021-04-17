@@ -15,16 +15,16 @@ const goToRoute = (e) => {
   return (
     <div>
       <h1>Welcome!</h1>
-      <Button variant="contained" color="primary" onClick={goToRoute} value="register">
+      <button onClick={goToRoute} value="register">
         Sign Up 
-      </Button>
+      </button>
       
 
       <h3>OR</h3>
 
-      <Button variant="contained" color="secondary" onClick={goToRoute} value="login">
+      <button  onClick={goToRoute} value="login">
         Login
-      </Button>
+      </button>
     
     </div>
   )

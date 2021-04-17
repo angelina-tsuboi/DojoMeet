@@ -13,6 +13,7 @@ import AddIcon from '@material-ui/icons/Add';
 
 const Navbar = ({ loggedIn }) => { 
   const router = useRouter()
+  let { currentUser } = fire.auth();
   const [open, setOpen] = React.useState(false);
 
   const handleClickOpen = () => {
@@ -22,6 +23,8 @@ const Navbar = ({ loggedIn }) => {
   const handleClose = () => {
     setOpen(false);
   };
+
+
 
 
   const goToRoute = (e) => {
@@ -74,7 +77,8 @@ const Navbar = ({ loggedIn }) => {
           </div>
         </Toolbar>
       </AppBar>
-      <CreatePost open={open} onClose={handleClose} />
+      {currentUser && <CreatePost open={open} onClose={handleClose} uid={currentUser.uid}/>}
+      
     </div>
   );
 }
