@@ -15,7 +15,7 @@ const PostCard = ({post})  => {
     };
   
     return (
-        <Card onClick={() => goToPost(post.id)}>
+        <Card onClick={() => goToPost(post.id)} style={{marginBottom: '1rem'}}>
         <CardContent>
           <Typography variant="h5" component="h2">
             { post.title }

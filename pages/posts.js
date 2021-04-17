@@ -3,6 +3,7 @@ import Head from 'next/head';
 import Navbar from '../components/Navbar/Navbar';
 import fire from '../config/fire-conf';
 import Link from 'next/link';
+import styles from '../styles/Posts.module.css';
 import PostCard from '../components/PostCard/PostCard';
 
 
@@ -20,7 +21,7 @@ const Posts = () => {
   }, []);
 
 
-  fire.auth()
+   fire.auth()
     .onAuthStateChanged((user) => {
       if (user) {
         setLoggedIn(true)
@@ -50,18 +51,16 @@ const Posts = () => {
         <title>Blog App</title>
       </Head>
       
-        
-        <h1>Posts</h1>
         {notification}
 
-        <ul>
+        <ul >
           {posts.map(post =>
             // <li key={post.id}>
             //   <Link href="/posts/[id]" as={'/posts/' + post.id}>
             //     <a itemProp="hello">{post.title}</a>
             //   </Link>
             // </li>
-            <PostCard post={post}/>
+            <PostCard post={post} key={post.id} />
           )}
         </ul>
 
