@@ -20,6 +20,7 @@ const EditProfile = (props)  => {
     const { onClose, selectedValue, open, profile } = props;
     const [name, setName] = React.useState(profile.name);
     const [description, setDescription] = React.useState(profile.description);
+    const [uid, setUID] = React.useState(profile.uid);
     const [location, setLocation] = React.useState(profile.location);
     const [photoURL, setPhotoURL] = React.useState(profile.photoURL);
 
@@ -28,22 +29,20 @@ const EditProfile = (props)  => {
     };
   
 
-    const handleCreatePost = () => {
+    const handleUpdateProfile = () => {
         fire.firestore()
-        .collection('posts')
-        .add({
-            title: title,
+        .doc(`users/${uid}`)
+        .update({
+            name: name,
             description: description,
-            date: selectedDate,
-            time: selectedTime, 
             location: location,
-            ...currentUser
+            photoURL: photoURL
         }).then(() => {
             onClose(selectedValue);
         }).catch((err) => {
             console.log("Found an error", err);
         })
-        setTitle('')
+        setName('')
         setDescription('')
         setLocation('')
 
@@ -74,7 +73,7 @@ const EditProfile = (props)  => {
 
         <div className={styles.bottomButtons}>
             <Button onClick={() => handleClose()}>Cancel</Button>
-            <Button variant="contained" className={styles.createEvent} onClick={() => { handleCreatePost() }} >
+            <Button variant="contained" className={styles.createEvent} onClick={() => { handleUpdateProfile() }} >
             Update Profile
             </Button>
         </div>

@@ -185,7 +185,7 @@ const Home = () => {
           
         } 
         {currentUser &&
-        <EditProfile open={open} onClose={handleClose} profile={{name: currentUser.displayName, description: description, location: location, photoURL: currentUser.photoURL, email: currentUser.email}}/>
+        <EditProfile open={open} onClose={handleClose} profile={{name: currentUser.displayName, description: description, location: location, photoURL: currentUser.photoURL, email: currentUser.email, uid: currentUser.uid}}/>
       }
 
     </div>
