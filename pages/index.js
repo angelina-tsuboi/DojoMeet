@@ -159,16 +159,16 @@ const Home = () => {
         <div>
           <Grid container spacing={3}>
             <Grid item xs={6}>
-              <Card>
-                <Avatar aria-label="recipe" src={currentUser.photoURL} style={{ height: '80px', width: '80px' }}></Avatar>
+              <Card className={styles.profileCard} style={{ width: '70%', margin: 'auto', marginTop: '1rem' }}>
+                <Avatar aria-label="recipe" src={currentUser.photoURL} style={{ height: '100px', width: '100px' }} className={styles.profileImage}></Avatar>
                 <CardContent>
-                  <Typography variant="body2" color="textSecondary" component="p">
+                  <Typography variant="h4" color="textPrimary" component="p">
                     {name}
                   </Typography>
-                  <Typography variant="body2" color="textSecondary" component="p">
+                  <Typography variant="h6" color="textSecondary" component="p">
                     {location}
                   </Typography>
-                  <Typography variant="body2" color="textSecondary" component="p">
+                  <Typography variant="body1" color="textSecondary" component="p">
                     {description}
                   </Typography>
                   <Button onClick={handleClickOpen}>

@@ -3,3 +3,13 @@
     height: 10rem;
     width: 10rem;
 }
+
+.profileCard{
+    text-align: center;
+    margin-top: '1rem';
+}
+
+.profileImage{
+    margin: auto;
+    margin-top: 1rem;
+}
