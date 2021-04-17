@@ -30,7 +30,6 @@ const EditProfile = (props)  => {
     };
 
 
-
     const handleUpdateProfile = () => {
         let completeProfile = {
             name: name,

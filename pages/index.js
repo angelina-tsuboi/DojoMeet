@@ -32,6 +32,11 @@ const Home = () => {
     setOpen(true);
   };
 
+  const handleLogout = () => {
+    fire.auth()
+      .signOut()
+  }
+
   const handleClose = () => {
     if(currentUser){
       fire.firestore()
@@ -130,16 +135,7 @@ const Home = () => {
   }, []);
 
 
-  const handleLogout = () => {
-    fire.auth()
-      .signOut()
-      .then(() => {
-        setNotification('Logged out')
-        setTimeout(() => {
-          setNotification('')
-        }, 2000)
-      });
-  }
+
   return (
     <div>
       <Navbar loggedIn={loggedIn}/>
@@ -171,7 +167,7 @@ const Home = () => {
                 Edit Profile
               </Button>
 
-              <Button>
+              <Button onClick={handleLogout}>
                 Logout
               </Button>
               </CardContent>

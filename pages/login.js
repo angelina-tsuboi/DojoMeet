@@ -38,8 +38,23 @@ const Login = () => {
     // The signed-in user info.
     var user = result.user;
     console.log("got the user", user);
-    router.push("/")
-    // ...
+    fire.firestore().doc(`users/${user.uid}`).get().then(snapshot => {
+      if(!snapshot.exists){
+        const data = {
+          uid: user.uid,
+          email: user.email,
+          photoURL: user.photoURL,
+          name: user.displayName
+        }
+        fire.firestore().collection("users").doc(user.uid).set(data).then(() => {
+          router.push("/");
+        })
+      }else{
+
+        router.push("/")    
+      }
+    })
+    
   }).catch((error) => {
     console.log("Error: ", error);
   });
