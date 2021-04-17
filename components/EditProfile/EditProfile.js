@@ -30,21 +30,20 @@ const EditProfile = (props)  => {
   
 
     const handleUpdateProfile = () => {
-        fire.firestore()
-        .doc(`users/${uid}`)
-        .update({
+        let completeProfile = {
             name: name,
             description: description,
             location: location,
             photoURL: photoURL
-        }).then(() => {
+        };
+
+        fire.firestore()
+        .doc(`users/${uid}`)
+        .update(completeProfile).then(() => {
             onClose(selectedValue);
         }).catch((err) => {
             console.log("Found an error", err);
         })
-        setName('')
-        setDescription('')
-        setLocation('')
 
         router.push("/")
       }

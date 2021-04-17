@@ -24,6 +24,7 @@ const Home = () => {
   const [notification, setNotification] = useState('');
   const [description, setDescription] = useState('');
   const [location, setLocation] = useState('');
+  const [name, setName] = useState('');
   const [loggedIn, setLoggedIn] = useState(false);
   const [open, setOpen] = React.useState(false);
 
@@ -31,7 +32,7 @@ const Home = () => {
     setOpen(true);
   };
 
-  const handleClose = () => {
+  const handleClose = (profile) => {
     setOpen(false);
   };
 
@@ -75,6 +76,7 @@ const Home = () => {
       .get().then(data => {
         setDescription(data.data().description);
         setLocation(data.data().location);
+        setName(data.data().name);
         
 
         fire.firestore()
@@ -134,7 +136,7 @@ const Home = () => {
               <Avatar aria-label="recipe" src={currentUser.photoURL} style={{ height: '80px', width: '80px' }}></Avatar>
               <CardContent>
               <Typography variant="body2" color="textSecondary" component="p">
-                {currentUser.displayName}
+                {name}
               </Typography>
               <Typography variant="body2" color="textSecondary" component="p">
                 {location}
@@ -185,7 +187,7 @@ const Home = () => {
           
         } 
         {currentUser &&
-        <EditProfile open={open} onClose={handleClose} profile={{name: currentUser.displayName, description: description, location: location, photoURL: currentUser.photoURL, email: currentUser.email, uid: currentUser.uid}}/>
+        <EditProfile open={open} onClose={handleClose} profile={{name: name, description: description, location: location, photoURL: currentUser.photoURL, email: currentUser.email, uid: currentUser.uid}}/>
       }
 
     </div>
