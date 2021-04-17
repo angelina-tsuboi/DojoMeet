@@ -15,8 +15,8 @@ const PostCard = ({post})  => {
     };
   
     return (
-        <Card onClick={() => goToPost(post.id)} style={{marginBottom: '1rem'}}>
-        <CardContent>
+        <Card style={{marginBottom: '1rem'}}>
+        <CardContent onClick={() => goToPost(post.id)}>
           <Typography variant="h5" component="h2">
             { post.title }
           </Typography>
@@ -28,7 +28,8 @@ const PostCard = ({post})  => {
           </Typography>
         </CardContent>
         <CardActions>
-          <Button size="small">Sign Up</Button>
+          <Button size="small" onClick={() => window.location.href = `https://mail.google.com/mail/?view=cm&fs=1&to=${post.email}`}>Sign Up</Button>
+          <Button size="small" onClick={() => goToPost(post.id)}>Learn More</Button>
         </CardActions>
       </Card>
     );

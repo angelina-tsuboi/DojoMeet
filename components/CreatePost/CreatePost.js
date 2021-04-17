@@ -24,7 +24,7 @@ import 'date-fns';
 const CreatePost = (props)  => {
     const router = useRouter()
     // const classes = useStyles();
-    const { onClose, selectedValue, open, uid } = props;
+    const { onClose, selectedValue, open, uid, email} = props;
     const { currentUser } = fire.auth();
     const [selectedDate, setSelectedDate] = React.useState(new Date());
     const [selectedTime, setSelectedTime] = React.useState(new Date());
@@ -56,7 +56,8 @@ const CreatePost = (props)  => {
             date: selectedDate,
             time: selectedTime, 
             location: location,
-            uid: uid
+            uid: uid,
+            email: email
         }).then(() => {
             onClose(selectedValue);
         }).catch((err) => {
