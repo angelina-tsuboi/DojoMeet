@@ -17,6 +17,9 @@ const PostCard = ({post})  => {
     return (
         <Card style={{marginBottom: '1rem'}}>
         <CardContent onClick={() => goToPost(post.id)}>
+        <Typography variant="h6" component="h5">
+            { post.title }
+          </Typography>
           <Typography variant="h5" component="h2">
             { post.title }
           </Typography>
