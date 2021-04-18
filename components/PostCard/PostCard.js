@@ -33,6 +33,8 @@ const PostCard = ({post})  => {
           <Typography variant="body2" component="p">
             { post.description }
           </Typography>
+          <Avatar src={post.photoURL} />
+          <p>{post.name}</p>
         </CardContent>
       </Card>
     );

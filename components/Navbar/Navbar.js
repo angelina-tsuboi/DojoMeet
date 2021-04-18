@@ -75,7 +75,7 @@ const Navbar = ({ loggedIn }) => {
           </div>
         </Toolbar>
       </AppBar>
-      {currentUser && <CreatePost open={open} onClose={handleClose} uid={currentUser.uid} email={currentUser.email} name={currentUser.name} photoURL={currentUser.photoURL}/>}
+      {currentUser && <CreatePost open={open} onClose={handleClose} uid={currentUser.uid}/>}
       
     </div>
   );

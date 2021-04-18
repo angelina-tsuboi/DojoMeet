@@ -48,29 +48,33 @@ const CreatePost = (props)  => {
   
 
     const handleCreatePost = () => {
-        fire.firestore()
-        .collection('posts')
-        .add({
-            title: title,
-            description: description,
-            date: selectedDate,
-            time: selectedTime, 
-            location: location,
-            uid: uid,
-            email: email,
-            photoURL: photoURL,
-            name: name
-        }).then(() => {
-            onClose(selectedValue);
-        }).catch((err) => {
-            console.log("Found an error", err);
-        })
-        setTitle('')
-        setDescription('')
-        setLocation('')
-        setSelectedDate(new Date())
-        setSelectedTime(new Date())
-        router.push("/")
+        if(currentUser){
+          fire.firestore().doc(`users/${currentUser.uid}`).get().then((docData) => {
+            fire.firestore()
+            .collection('posts')
+            .add({
+                title: title,
+                description: description,
+                date: selectedDate,
+                time: selectedTime, 
+                location: location,
+                uid: uid,
+                email: docData.data().email,
+                photoURL: docData.data().photoURL,
+                name: docData.data().name
+            }).then(() => {
+                onClose(selectedValue);
+            }).catch((err) => {
+                console.log("Found an error", err);
+            })
+            setTitle('')
+            setDescription('')
+            setLocation('')
+            setSelectedDate(new Date())
+            setSelectedTime(new Date())
+            router.push("/")
+          })
+        }
       }
   
     return (
