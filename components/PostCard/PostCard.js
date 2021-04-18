@@ -20,9 +20,9 @@ const PostCard = ({post})  => {
     return (
         <Card style={{marginBottom: '1rem'}}>
         <CardContent onClick={() => goToPost(post.id)}>
-          {post.time && <Typography variant="h6" component="h5">
-            { formatDistance(new Date(post.time), new Date()) }
-        </Typography>}
+        <Typography variant="h6" component="h5">
+            { formatDistance(new Date(post.time.seconds), new Date()) }
+        </Typography>
         
           <Typography variant="h5" component="h2">
             { post.title }
