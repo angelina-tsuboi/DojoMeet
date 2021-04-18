@@ -9,7 +9,6 @@ import Input from '@material-ui/core/Input';
 import InputLabel from '@material-ui/core/InputLabel';
 import InputAdornment from '@material-ui/core/InputAdornment';
 import FormControl from '@material-ui/core/FormControl';
-import SearchBar from 'react-js-search';
 import TextField from '@material-ui/core/TextField';
 import Grid from '@material-ui/core/Grid';
 import Search from '@material-ui/icons/Search';
@@ -65,25 +64,7 @@ const Players = () => {
         <title>Blog App</title>
       </Head>
       
-      {/* <div>
-        <Grid container spacing={1} alignItems="flex-end">
-          <Grid item>
-            <Search />
-          </Grid>
-          <Grid item>
-            <TextField id="input-with-icon-grid" label="Search for Player" />
-          </Grid>
-        </Grid>
-      </div> */}
-
-{typeof window !== 'undefined' &&  <SearchBar 
-          onSearchTextChange={ (term,hits) => {onSearchChange(term,hits)}}
-          // onSearchButtonClick={this.onSearchClick}
-          placeHolderText={"Search here..."}
-      data={players}
-      />}
-     
-
+  
       <Grid container spacing={3} className={styles.playerGrid}>
       {players.map(player =>
         <Grid item xs={6} sm={3}>
