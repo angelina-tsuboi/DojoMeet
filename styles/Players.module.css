@@ -1,3 +1,5 @@
 .playerGrid{
     padding: 2rem;
+    position: absolute;
+    top: 20%;
 }

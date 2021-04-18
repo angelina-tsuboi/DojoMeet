@@ -78,7 +78,7 @@ const Players = () => {
       </Head>
 
       <Searchbar
-        placeholder="Search"
+        placeholder="Search for players..."
         onChange={(e) => onSearchChange(e.target.value)}
        />
       

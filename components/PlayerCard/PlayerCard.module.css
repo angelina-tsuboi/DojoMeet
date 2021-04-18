@@ -2,4 +2,18 @@
     text-align: center;
     height: 15rem;
     width: 15rem;
+    cursor: pointer;
+}
+
+.topText{
+    font-size: 20px;
+    margin-bottom: 8px;
+}
+
+.bottomText{
+    margin: 0px;
+    font-weight: normal;
+    font-size: 14px;
+    text-overflow: ellipsis;
+    margin-bottom: 10px;
 }
