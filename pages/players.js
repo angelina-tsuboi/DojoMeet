@@ -12,6 +12,7 @@ import FormControl from '@material-ui/core/FormControl';
 import TextField from '@material-ui/core/TextField';
 import Grid from '@material-ui/core/Grid';
 import Search from '@material-ui/icons/Search';
+import styles from '../styles/Players.module.css';
 
 
 const Players = () => {
@@ -69,7 +70,7 @@ const Players = () => {
         </Grid>
       </div>
 
-      <Grid container spacing={3}>
+      <Grid container spacing={3} className={styles.playerGrid}>
       {players.map(player =>
         <Grid item xs={6} sm={3}>
           <PlayerCard player={player} key={player.uid}/>
