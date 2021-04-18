@@ -3,7 +3,16 @@ import Button from '@material-ui/core/Button';
 import classNames from 'classnames';
 import ButtonGroup from '@material-ui/core/ButtonGroup';
 import Link from '@material-ui/core/Link';
+import Container from '@material-ui/core/Container';
 import { useRouter } from 'next/router';
+import Card from '@material-ui/core/Card';
+import CardActions from '@material-ui/core/CardActions';
+import CardContent from '@material-ui/core/CardContent';
+import CardMedia from '@material-ui/core/CardMedia';
+import CssBaseline from '@material-ui/core/CssBaseline';
+import Grid from '@material-ui/core/Grid';
+import Toolbar from '@material-ui/core/Toolbar';
+import Typography from '@material-ui/core/Typography';
 
 
 const HomePage = () => {
@@ -16,64 +25,25 @@ const goToRoute = (e) => {
 
   
   return (
-    // <div>
-    //   <h1>Welcome!</h1>
-    //   <button onClick={goToRoute} value="register">
-    //     Sign Up 
-    //   </button>
+    <div>
+      <h1>Dojo Meet</h1>
+      <p>A web app made with Next.js and Firebase that connects karate players across the globe</p>
+      <img src="https://5.imimg.com/data5/XA/OB/GLADMIN-64233160/martial-arts-training-service-500x500.png"></img>
+
+      <div class="buttons">
+      <button onClick={goToRoute} value="register">
+        Sign Up 
+      </button>
       
 
-    //   <h3>OR</h3>
-
-    //   <button  onClick={goToRoute} value="login">
-    //     Login
-    //   </button>
-    
-    // </div>
-
-
-    <section
-    >
-      <div className="container-sm">
-        <div>
-          <div className="hero-content">
-            <h1 className="mt-0 mb-16 reveal-from-bottom" data-reveal-delay="200">
-              Landing template for <span className="text-color-primary">startups</span>
-            </h1>
-            <div className="container-xs">
-              <p className="m-0 mb-32 reveal-from-bottom" data-reveal-delay="400">
-                Our landing page template works on all devices, so you only have to set it up once, and get beautiful results forever.
-                </p>
-              <div className="reveal-from-bottom" data-reveal-delay="600">
-                <ButtonGroup>
-                  <Button tag="a" color="primary" wideMobile href="https://cruip.com/">
-                    Get started
-                    </Button>
-                  <Button tag="a" color="dark" wideMobile href="https://github.com/cruip/open-react-template/">
-                    View on Github
-                    </Button>
-                </ButtonGroup>
-              </div>
-            </div>
-          </div>
-          <div className="hero-figure reveal-from-bottom illustration-element-01" data-reveal-value="20px" data-reveal-delay="800">
-            <a
-              data-video="https://player.vimeo.com/video/174002812"
-              href="#0"
-              aria-controls="video-modal"
-            >
-              <img
-                className="has-shadow"
-                src="https://raw.githubusercontent.com/cruip/open-react-template/master/src/assets/images/video-placeholder.jpg"
-                alt="Hero"
-                width={896}
-                height={504} />
-            </a>
-          </div>
-
-        </div>
+      <button  onClick={goToRoute} value="login">
+        Login
+      </button>
       </div>
-    </section>
+      
+    
+    </div>
+
   )
 }
 export default HomePage;
