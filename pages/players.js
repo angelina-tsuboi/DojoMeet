@@ -21,7 +21,6 @@ const Players = () => {
   });
 
   const onSearchChange = (pattern) => {
-    console.log(pattern)
     const result = fuse.search(pattern);
     const matches = [];
     if (!result.length) {
@@ -64,7 +63,7 @@ const Players = () => {
         }));
         setPlayers(postsData);
         setData(postsData);
-        fuse = new Fuse(players, {
+        fuse = new Fuse(postsData, {
           keys: ["name"],
         });
       });
@@ -84,7 +83,7 @@ const Players = () => {
       
   
       <Grid container spacing={3} className={styles.playerGrid}>
-      {players.map(player =>
+      {data.map(player =>
         <Grid item xs={6} sm={3} key={player.uid}>
           <PlayerCard player={player} key={player.uid}/>
         </Grid>
