@@ -69,14 +69,16 @@ const Players = () => {
         </Grid>
       </div>
 
+      <Grid container spacing={3}>
+      {players.map(player =>
+        <Grid item xs={6} sm={3}>
+          <PlayerCard player={player} key={player.uid}/>
+        </Grid>
+      )}
+        
+      </Grid>
+
         {notification}
-
-        <ul>
-          {players.map(player =>
-            <PlayerCard player={player} key={player.uid}/>
-          )}
-        </ul>
-
 
     </div>
   )
