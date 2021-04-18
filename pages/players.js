@@ -21,6 +21,7 @@ const Players = () => {
   });
 
   const onSearchChange = (pattern) => {
+    if(pattern == "") setData(players);
     const result = fuse.search(pattern);
     const matches = [];
     if (!result.length) {
