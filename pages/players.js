@@ -5,6 +5,13 @@ import fire from '../config/fire-conf';
 import Link from 'next/link';
 import PostCard from '../components/PostCard/PostCard';
 import PlayerCard from '../components/PlayerCard/PlayerCard';
+import Input from '@material-ui/core/Input';
+import InputLabel from '@material-ui/core/InputLabel';
+import InputAdornment from '@material-ui/core/InputAdornment';
+import FormControl from '@material-ui/core/FormControl';
+import TextField from '@material-ui/core/TextField';
+import Grid from '@material-ui/core/Grid';
+import Search from '@material-ui/icons/Search';
 
 
 const Players = () => {
@@ -51,8 +58,17 @@ const Players = () => {
         <title>Blog App</title>
       </Head>
       
-        
-        <h1>Posts</h1>
+      <div>
+        <Grid container spacing={1} alignItems="flex-end">
+          <Grid item>
+            <Search />
+          </Grid>
+          <Grid item>
+            <TextField id="input-with-icon-grid" label="Search for Player" />
+          </Grid>
+        </Grid>
+      </div>
+
         {notification}
 
         <ul>

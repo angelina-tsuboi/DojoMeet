@@ -21,9 +21,7 @@ const PlayerCard = ({player})  => {
             { player.name }
           </Typography>
         </CardContent>
-        <CardActions>
-          <Button size="small">Sign Up</Button>
-        </CardActions>
+
       </Card>
     );
   }
