@@ -24,11 +24,11 @@ const PlayerCard = ({player})  => {
           <Typography variant="h5" component="h2">
             { player.name }
           </Typography>
-          <Typography variant="h7" component="h7">
+          <Typography variant="h5" component="h5">
             { player.email }
           </Typography>
           <br />
-          <Typography variant="h7" component="h7">
+          <Typography variant="h5" component="h5">
             { player.location }
           </Typography>
         </CardContent>

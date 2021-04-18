@@ -13,7 +13,7 @@ import TextField from '@material-ui/core/TextField';
 import Grid from '@material-ui/core/Grid';
 import Search from '@material-ui/icons/Search';
 import styles from '../styles/Players.module.css';
-
+import Searchbar from '../components/Searchbar/Searchbar';
 
 const Players = () => {
   const [players, setPlayers] = useState([]);
@@ -63,11 +63,16 @@ const Players = () => {
       <Head>
         <title>Blog App</title>
       </Head>
+
+      <Searchbar
+        placeholder="Search"
+        onChange={(e) => console.log(e.target.value)}
+       />
       
   
       <Grid container spacing={3} className={styles.playerGrid}>
       {players.map(player =>
-        <Grid item xs={6} sm={3}>
+        <Grid item xs={6} sm={3} key={player.uid}>
           <PlayerCard player={player} key={player.uid}/>
         </Grid>
       )}

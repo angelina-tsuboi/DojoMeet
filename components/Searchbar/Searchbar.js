@@ -1,10 +1,10 @@
-
+import Search from '@material-ui/icons/Search';
 
 const SearchBar = ({onChange, placeholder}) => {
     return (
       <div className="Search">
         <span className="SearchSpan">
-          <FaSearch />
+          <Search />
         </span>
         <input
           className="SearchInput"
