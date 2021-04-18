@@ -3,6 +3,9 @@ import Card from '@material-ui/core/Card';
 import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import Button from '@material-ui/core/Button';
+import formatDistance from 'date-fns/formatDistance'
+
+
 import Typography from '@material-ui/core/Typography';
 
 
@@ -17,9 +20,10 @@ const PostCard = ({post})  => {
     return (
         <Card style={{marginBottom: '1rem'}}>
         <CardContent onClick={() => goToPost(post.id)}>
-        <Typography variant="h6" component="h5">
-            { post.title }
-          </Typography>
+          {post.time && <Typography variant="h6" component="h5">
+            { formatDistance(new Date(post.time), new Date()) }
+        </Typography>}
+        
           <Typography variant="h5" component="h2">
             { post.title }
           </Typography>
@@ -30,10 +34,6 @@ const PostCard = ({post})  => {
             { post.description }
           </Typography>
         </CardContent>
-        <CardActions>
-          <Button size="small" onClick={() => window.location.href = `https://mail.google.com/mail/?view=cm&fs=1&to=${post.email}`}>Sign Up</Button>
-          <Button size="small" onClick={() => goToPost(post.id)}>Learn More</Button>
-        </CardActions>
       </Card>
     );
   }
