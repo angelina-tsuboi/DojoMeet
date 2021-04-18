@@ -2,6 +2,8 @@ import '../styles/globals.css'
 import { ThemeProvider, makeStyles, createMuiTheme } from '@material-ui/core/styles';
 import React, { useState, useEffect } from 'react';
 import CssBaseline from '@material-ui/core/CssBaseline';
+import fire from '../config/fire-conf';
+import Navbar from '../components/Navbar/Navbar';
 
 
 export const theme = createMuiTheme({
@@ -16,6 +18,7 @@ export const theme = createMuiTheme({
 });
 
 function MyApp({ Component, pageProps }) {
+  const [loggedIn, setLoggedIn] = useState(false);
 
   useEffect(() => {
     // Remove the server-side injected CSS.
@@ -25,10 +28,20 @@ function MyApp({ Component, pageProps }) {
     }
   }, []);
 
+  fire.auth()
+    .onAuthStateChanged((user) => {
+      if (user) {
+        setLoggedIn(true)
+      } else {
+        setLoggedIn(false)
+      }
+    })
+
   return (
     <div>
       <ThemeProvider theme={theme}>
         <CssBaseline />
+        <Navbar loggedIn={loggedIn}/>
         <Component {...pageProps} />
       </ThemeProvider>
     </div>
