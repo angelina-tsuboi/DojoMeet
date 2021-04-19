@@ -25,10 +25,31 @@ const EditProfile = (props)  => {
     const [location, setLocation] = React.useState(profile.location);
     const [photoURL, setPhotoURL] = React.useState(profile.photoURL);
 
+
     const handleClose = () => {
       onClose(selectedValue);
     };
 
+
+    // useEffect(() => {
+    //   // Remove the server-side injected CSS.
+    //  if(profile.name != ""){
+    //    setName(profile.name);
+    //  }
+
+    //  if(profile.description){
+    //    setDescription(profile.description)
+    //  }
+
+    //  if(profile.location){
+    //    setLocation(profile.location)
+    //  }
+
+    //  if(profile.photoURL){
+    //    setPhotoURL(profile.photoURL);
+    //  }
+    // });
+  
 
     const handleUpdateProfile = () => {
         let completeProfile = {
@@ -48,7 +69,7 @@ const EditProfile = (props)  => {
       }
   
     return (
-      <Dialog onClose={handleClose} aria-labelledby="simple-dialog-title" open={open}>
+      <Dialog onClose={handleClose} aria-labelledby="simple-dialog-title" open={open} className={styles.modal}>
           <div className={styles.Dialog}>
         <DialogTitle id="simple-dialog-title">Update Profile</DialogTitle>
         <TextField id="standard-basic" label="Name" value={name} onChange= {({target}) => setName(target.value)}  />

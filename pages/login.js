@@ -106,27 +106,6 @@ const Login = () => {
   }
   
   return (
-    // <div className={styles.container}>
-    //   <h1>Welcome Back 🥋</h1>
-    //   {notify}
-    //   <form onSubmit={handleLogin}>
-    //     <h3 className={styles.subtitle}>Email</h3>
-    //     <input type="text" value={username} 
-    //     onChange= {({target}) => setUsername(target.value)} className={styles.field}/>
-    //     <br />
-    //     <h3 className={styles.subtitle}>Password</h3>
-    //     <input type="password" value={password} 
-    //     onChange={({target}) => setPassword(target.value)} className={styles.field}/>
-    //     <br />
-    //     <button type="submit" className={styles.loginButton}>Login</button>
-
-    //     <p>Already have an account? <Link href="register">Sign Up.</Link></p>
-    //   </form>
-    //   <h3>OR</h3>
-    //   <Button variant="contained" color="primary" onClick={handleGoogleLogin}>
-    //   Login with Google
-    // </Button>
-    // </div>
     <Container component="main" maxWidth="xs">
       <CssBaseline />
       <div className={classes.paper}>
@@ -169,6 +148,17 @@ const Login = () => {
           >
             Sign In
           </Button>
+
+          <Button
+            type="button"
+            onClick={handleGoogleLogin}
+            fullWidth
+            variant="contained"
+            color="tertiary"
+            className={classes.submit}
+          >
+           Google Login
+          </Button>
           <Grid container>
             <Grid item xs>
               <Link href="#" variant="body2">
@@ -182,10 +172,13 @@ const Login = () => {
             </Grid>
           </Grid>
         </form>
+
       </div>
       <Box mt={8}>
         <Copyright />
       </Box>
+
+     
     </Container>
   )
 }
