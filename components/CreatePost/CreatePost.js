@@ -59,6 +59,8 @@ const CreatePost = (props)  => {
                 time: selectedTime, 
                 location: location,
                 uid: uid,
+                likesMembers: [],
+                joining: [{uid: uid, name: docData.data().name, photoURL: docData.data().photoURL}],
                 email: docData.data().email,
                 photoURL: docData.data().photoURL,
                 name: docData.data().name

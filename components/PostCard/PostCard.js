@@ -8,7 +8,9 @@ import fire from '../../config/fire-conf';
 import Avatar from '@material-ui/core/Avatar';
 import Collapse from '@material-ui/core/Collapse';
 import React from 'react';
-import formatDistance from 'date-fns/formatDistance'
+import formatDistance from 'date-fns/formatDistance';
+import Snackbar from '@material-ui/core/Snackbar';
+import CloseIcon from '@material-ui/icons/Close';
 import CardHeader from '@material-ui/core/CardHeader';
 import CardMedia from '@material-ui/core/CardMedia';
 import IconButton from '@material-ui/core/IconButton';
@@ -43,7 +45,10 @@ const JoinButton = ({isUser}) => {
 }
 
 
+
+
 const PostCard = ({post})  => {
+    const [open, setOpen] = React.useState(false);
     const router = useRouter()
     const { currentUser } = fire.auth();
     const [date, setDate] = React.useState(new Date(post.date.seconds));
@@ -52,6 +57,38 @@ const PostCard = ({post})  => {
   const handleExpandClick = () => {
     setExpanded(!expanded);
   };
+
+  const checkJoined = async(uid) => {
+    let result = post.joined.find(x => x.uid === uid);
+    if(result.length == 0){
+      fire.firestore().doc(`/posts/${post.uid}`).update({
+        joined: fire.firestore.FieldValue.arrayUnion({name: currentUser.displayName, uid: currentUser.uid, photoURL: currentUser.photoURL})
+      })
+    }
+  }
+
+  const handleHeart = async(uid) => {
+    let result = post.likesMembers.find(x => x.uid === uid);
+    if(result.length == 0){
+      fire.firestore().doc(`/posts/${post.uid}`).update({
+        likesMembers: fire.firestore.FieldValue.arrayUnion(currentUser.uid)
+      })
+    }
+  }
+
+  const handleClick = async() => {
+    await checkJoined();
+    setOpen(true);
+  };
+  
+  const handleClose = (event, reason) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+  
+    setOpen(false);
+  };
+
 
     const goToPost = (postId) => {
         router.push(`/posts/${postId}`);
@@ -81,12 +118,12 @@ const PostCard = ({post})  => {
       </CardContent>
       <CardActions disableSpacing>
         <JoinButton isUser={post.uid != currentUser.uid}></JoinButton>
-        <Button>JOIN EVENT</Button>
+        <Button onClick={handleClick}>JOIN EVENT</Button>
         <IconButton aria-label="view people" onClick={handleExpandClick}
           aria-expanded={expanded}>
           <PeopleIcon />
         </IconButton>
-        <IconButton aria-label="add to favorites">
+        <IconButton aria-label="add to favorites" onClick={handleHeart}>
           <FavoriteIcon />
         </IconButton>
         <IconButton aria-label="share">
@@ -111,6 +148,23 @@ const PostCard = ({post})  => {
         </CardContent>
       </Collapse>
 
+      <Snackbar
+        anchorOrigin={{
+          vertical: 'bottom',
+          horizontal: 'left',
+        }}
+        open={open}
+        autoHideDuration={2000}
+        onClose={handleClose}
+        message="Event joined"
+        action={
+          <React.Fragment>
+            <IconButton size="small" aria-label="close" color="inherit" onClick={handleClose}>
+              <CloseIcon fontSize="small" />
+            </IconButton>
+          </React.Fragment>
+        }
+      />
     </Card>
     );
   }
