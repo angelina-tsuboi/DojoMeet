@@ -1,0 +1,9 @@
+.profileDescription{
+    display: flex;
+}
+
+.card{
+    width: 80vw;
+    margin: auto;
+    margin-top: 2rem;
+}
