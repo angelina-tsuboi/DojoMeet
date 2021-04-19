@@ -13,6 +13,7 @@ import Snackbar from '@material-ui/core/Snackbar';
 import CloseIcon from '@material-ui/icons/Close';
 import CardHeader from '@material-ui/core/CardHeader';
 import CardMedia from '@material-ui/core/CardMedia';
+import Popover from '@material-ui/core/Popover';
 import IconButton from '@material-ui/core/IconButton';
 
 import { red } from '@material-ui/core/colors';
@@ -24,21 +25,55 @@ import MoreVertIcon from '@material-ui/icons/MoreVert';
 import Typography from '@material-ui/core/Typography';
 
 
-const MenuOption = ({isUser}) => {
-  if(isUser){
+const MenuOption = ({ isUser }) => {
+  const classes = useStyles();
+  const [anchorEl, setAnchorEl] = React.useState(null);
+
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+
+  const open = Boolean(anchorEl);
+  const id = open ? 'simple-popover' : undefined;
+
+  if (isUser) {
     return (
-      <IconButton aria-label="settings">
-                <MoreVertIcon />
-      </IconButton>
-        )
+      <div>
+        <IconButton aria-label="settings" onClick={handleClick} aria-describedby={id} >
+          <MoreVertIcon />
+        </IconButton>
+        <Popover
+          id={id}
+          open={open}
+          anchorEl={anchorEl}
+          onClose={handleClose}
+          anchorOrigin={{
+            vertical: 'bottom',
+            horizontal: 'center',
+          }}
+          transformOrigin={{
+            vertical: 'top',
+            horizontal: 'center',
+          }}
+        >
+          <Typography className={classes.typography}>The content of the Popover.</Typography>
+        </Popover>
+      </div>
+    )
   }
   return null;
+
 }
 
-const JoinButton = ({isUser}) => {
-  if(isUser){
+
+const JoinButton = ({ isUser }) => {
+  if (isUser) {
     return (
-    <Button>JOIN EVENT</Button>
+      <Button>JOIN EVENT</Button>
     )
   }
   return null;
@@ -47,56 +82,56 @@ const JoinButton = ({isUser}) => {
 
 
 
-const PostCard = ({post})  => {
-    const [open, setOpen] = React.useState(false);
-    const router = useRouter()
-    const { currentUser } = fire.auth();
-    const [date, setDate] = React.useState(new Date(post.date.seconds));
-    const [expanded, setExpanded] = React.useState(false);
+const PostCard = ({ post }) => {
+  const [open, setOpen] = React.useState(false);
+  const router = useRouter()
+  const { currentUser } = fire.auth();
+  const [date, setDate] = React.useState(new Date(post.date.seconds));
+  const [expanded, setExpanded] = React.useState(false);
 
   const handleExpandClick = () => {
     setExpanded(!expanded);
   };
 
-  const checkJoined = async(uid) => {
+  const checkJoined = async (uid) => {
     let result = post.joined.find(x => x.uid === uid);
-    if(result.length == 0){
+    if (result.length == 0) {
       fire.firestore().doc(`/posts/${post.uid}`).update({
-        joined: fire.firestore.FieldValue.arrayUnion({name: currentUser.displayName, uid: currentUser.uid, photoURL: currentUser.photoURL})
+        joined: fire.firestore.FieldValue.arrayUnion({ name: currentUser.displayName, uid: currentUser.uid, photoURL: currentUser.photoURL })
       })
     }
   }
 
-  const handleHeart = async(uid) => {
+  const handleHeart = async (uid) => {
     let result = post.likesMembers.find(x => x.uid === uid);
-    if(result.length == 0){
+    if (result.length == 0) {
       fire.firestore().doc(`/posts/${post.uid}`).update({
         likesMembers: fire.firestore.FieldValue.arrayUnion(currentUser.uid)
       })
     }
   }
 
-  const handleClick = async() => {
+  const handleClick = async () => {
     await checkJoined();
     setOpen(true);
   };
-  
+
   const handleClose = (event, reason) => {
     if (reason === 'clickaway') {
       return;
     }
-  
+
     setOpen(false);
   };
 
 
-    const goToPost = (postId) => {
-        router.push(`/posts/${postId}`);
-    };
+  const goToPost = (postId) => {
+    router.push(`/posts/${postId}`);
+  };
 
-  
-    return (
-      <Card className={styles.card}>
+
+  return (
+    <Card className={styles.card}>
       <CardHeader
         avatar={
           <Avatar aria-label="recipe" src={post.photoURL}></Avatar>
@@ -105,11 +140,11 @@ const PostCard = ({post})  => {
           <MenuOption isUser={post.uid == currentUser.uid}></MenuOption>
         }
         title={post.name}
-        subheader={formatDistance(new Date(), date)}
+        subheader={formatDistance(new Date(), date) + " ago"}
       />
 
       <CardContent>
-      <Typography variant="h6" color="textPrimary" component="p">
+        <Typography variant="h6" color="textPrimary" component="p">
           {post.title}
         </Typography>
         <Typography variant="body2" color="textSecondary" component="p">
@@ -139,12 +174,12 @@ const PostCard = ({post})  => {
           </Typography>
           <Typography paragraph>
             <div className={styles.person}>
-            <Avatar aria-label="recipe" src={post.photoURL} className={styles.personAvatar}></Avatar>
-            <p className={styles.personName}>John Doe</p>
+              <Avatar aria-label="recipe" src={post.photoURL} className={styles.personAvatar}></Avatar>
+              <p className={styles.personName}>John Doe</p>
             </div>
-          
+
           </Typography>
-          
+
         </CardContent>
       </Collapse>
 
@@ -166,8 +201,7 @@ const PostCard = ({post})  => {
         }
       />
     </Card>
-    );
-  }
+  );
+}
 
-  export default PostCard;
-  
+export default PostCard;
