@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react';
 import Head from 'next/head';
-import Navbar from '../components/Navbar/Navbar';
 import fire from '../config/fire-conf';
 import HomePage from '../components/HomePage/HomePage';
 import Link from 'next/link';
@@ -146,7 +145,6 @@ const Home = () => {
 
   return (
     <div>
-      <Navbar loggedIn={loggedIn} />
       <Head>
         <title>Blog App</title>
       </Head>

@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, React } from 'react';
 import fire from '../config/fire-conf';
 import { useRouter } from 'next/router';
 import Link from '@material-ui/core/Link';
@@ -31,7 +31,7 @@ function Copyright() {
 
 const useStyles = makeStyles((theme) => ({
   paper: {
-    marginTop: theme.spacing(8),
+    marginTop: theme.spacing(10),
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
@@ -159,10 +159,7 @@ const Login = () => {
             id="password"
             autoComplete="current-password"
           />
-          <FormControlLabel
-            control={<Checkbox value="remember" color="primary" />}
-            label="Remember me"
-          />
+        
           <Button
             type="submit"
             fullWidth
