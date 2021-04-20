@@ -1,14 +1,13 @@
 import { useState, useEffect } from 'react';
 import Head from 'next/head';
 import fire from '../config/fire-conf';
-import Link from 'next/link';
-import PostCard from '../components/PostCard/PostCard';
+import {useFirestore} from '../firebase/useFirestore';
 import PlayerCard from '../components/PlayerCard/PlayerCard';
 import Fuse from "fuse.js";
 import Grid from '@material-ui/core/Grid';
-import Search from '@material-ui/icons/Search';
 import styles from '../styles/Players.module.css';
 import Searchbar from '../components/Searchbar/Searchbar';
+const firestore = useFirestore();
 
 const Players = () => {
   const [players, setPlayers] = useState([]);
@@ -54,20 +53,17 @@ const Players = () => {
 
     // calls after every render
   useEffect(() => {
-    fire.firestore()
-      .collection('users')
-      .onSnapshot(snap => {
-        const postsData = snap.docs.map(doc => ({
-          id: doc.id,
-          ...doc.data()
-        }));
-        setPlayers(postsData);
-        console.log("posts", postsData)
-        setData(postsData);
-        fuse = new Fuse(postsData, {
-          keys: ["name"],
-        });
+    firestore.getCollection("users", (result) => {
+      const userData = result.docs.map(doc => ({
+        id: doc.id,
+        ...doc.data()
+      }));
+      setPlayers(userData);
+      setData(userData);
+      fuse = new Fuse(userData, {
+        keys: ["name"],
       });
+    })
   }, []);
 
   return (
