@@ -106,16 +106,33 @@ const PostCard = ({ post }) => {
   const router = useRouter()
   const { currentUser } = fire.auth();
   const [date, setDate] = useState(new Date(post.date.seconds));
+  const [gotJoinedMembers, setJoinedMembers] = useState(false)
   const [likeMembers, setLikeMembers] = useState([]);
+  const [joining, setJoiningMembers] = useState([]);
   const [expanded, setExpanded] = useState(false);
 
   const handleExpandClick = () => {
+    getJoiningMembers();
     setExpanded(!expanded);
   };
 
   useEffect(() => {
     setLikeMembers(post.likesMembers);
   }, [])
+
+  const getJoiningMembers = () => {
+    if(!gotJoinedMembers){
+      firestore.getCollection(`posts/${post.id}/joining`, (result) => {
+        const returnData = result.docs.map(doc => ({
+          id: doc.id,
+          ...doc.data()
+        }));
+        console.log("return", returnData);
+        setJoinedMembers(true);
+        setJoiningMembers(returnData);
+      })
+    }
+  }
 
   const checkJoined = async (uid) => {
     let result = post.joined.find(x => x.uid === uid);
@@ -200,15 +217,22 @@ const PostCard = ({ post }) => {
         <CardContent>
           <Typography variant="h6" component="p">People Joining:</Typography>
           <Typography paragraph>
-            13 people are joining the event
+            {joining.length} people are joining the event 
           </Typography>
-          <Typography paragraph>
+          {/* <Typography paragraph>
             <div className={styles.person}>
               <Avatar aria-label="recipe" src={post.photoURL} className={styles.personAvatar}></Avatar>
               <p className={styles.personName}>John Doe</p>
             </div>
+          </Typography> */}
+          {joining.map((member) => {
+              <div>
+                <Typography component={'span'} variant={'body2'}>{member.email}</Typography>
+              </div> 
+            })
+            }
 
-          </Typography>
+          
 
         </CardContent>
       </Collapse>

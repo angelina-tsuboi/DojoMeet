@@ -50,6 +50,7 @@ const CreatePost = (props)  => {
     const handleCreatePost = () => {
         if(currentUser){
           fire.firestore().doc(`users/${currentUser.uid}`).get().then((docData) => {
+            let userData = {email: docData.data().email, uid: uid, photoURL: docData.data().photoURL, name: docData.data().name};
             fire.firestore()
             .collection('posts')
             .add({
@@ -58,14 +59,12 @@ const CreatePost = (props)  => {
                 date: selectedDate,
                 time: selectedTime, 
                 location: location,
-                uid: uid,
                 likesMembers: [],
-                joining: [{uid: uid, name: docData.data().name, photoURL: docData.data().photoURL}],
-                email: docData.data().email,
-                photoURL: docData.data().photoURL,
-                name: docData.data().name
-            }).then(() => {
-                onClose(selectedValue);
+                ...userData
+            }).then((doc) => {
+                fire.firestore().collection("posts").doc(doc.id).collection("joining").add(userData).then(() => {
+                  onClose(selectedValue);
+                })  
             }).catch((err) => {
                 console.log("Found an error", err);
             })
