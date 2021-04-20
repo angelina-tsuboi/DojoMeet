@@ -62,6 +62,7 @@ const Players = () => {
           ...doc.data()
         }));
         setPlayers(postsData);
+        console.log("posts", postsData)
         setData(postsData);
         fuse = new Fuse(postsData, {
           keys: ["name"],

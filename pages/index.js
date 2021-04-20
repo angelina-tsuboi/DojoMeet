@@ -127,7 +127,7 @@ const Home = () => {
 
         })
     }
-  });
+  }, []);
 
   useEffect(() => {
     fire.firestore()

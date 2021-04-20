@@ -14,6 +14,8 @@ import CloseIcon from '@material-ui/icons/Close';
 import CardHeader from '@material-ui/core/CardHeader';
 import CardMedia from '@material-ui/core/CardMedia';
 import Popover from '@material-ui/core/Popover';
+import EditPost from '../EditPost/EditPost';
+import DeletePost from '../DeletePost/DeletePost';
 import IconButton from '@material-ui/core/IconButton';
 
 import { red } from '@material-ui/core/colors';
@@ -26,8 +28,10 @@ import Typography from '@material-ui/core/Typography';
 
 
 const MenuOption = ({ isUser }) => {
-  const classes = useStyles();
+
   const [anchorEl, setAnchorEl] = React.useState(null);
+  const [openEdit, setOpenEdit] = React.useState(false);
+  const [openDelete, setOpenDelete] = React.useState(false);
 
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
@@ -60,8 +64,13 @@ const MenuOption = ({ isUser }) => {
             horizontal: 'center',
           }}
         >
-          <Typography className={classes.typography}>The content of the Popover.</Typography>
+          <Button onClick={setOpenEdit(true)}>Edit Post</Button>
+          <br />
+          <Button onClick={setOpenDelete(true)}>Delete Post</Button>
         </Popover>
+
+        <EditPost open={openEdit} onClose={setOpenEdit(false)}/>
+        <DeletePost open={openDelete} onClose={setOpenDelete(false)}/>
       </div>
     )
   }
@@ -131,7 +140,8 @@ const PostCard = ({ post }) => {
 
 
   return (
-    <Card className={styles.card}>
+    <div>
+<Card className={styles.card}>
       <CardHeader
         avatar={
           <Avatar aria-label="recipe" src={post.photoURL}></Avatar>
@@ -201,6 +211,9 @@ const PostCard = ({ post }) => {
         }
       />
     </Card>
+
+    
+    </div>
   );
 }
 
