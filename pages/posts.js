@@ -1,9 +1,9 @@
 import { useState, useEffect } from 'react';
 import Head from 'next/head';
 import fire from '../config/fire-conf';
-import Link from 'next/link';
-import styles from '../styles/Posts.module.css';
+import {useFirestore} from '../firebase/useFirestore';
 import PostCard from '../components/PostCard/PostCard';
+const firestore = useFirestore();
 
 
 const Posts = () => {
@@ -31,17 +31,15 @@ const Posts = () => {
 
 
     // calls after every render
-  useEffect(() => {
-    fire.firestore()
-      .collection('posts')
-      .onSnapshot(snap => {
-        const postsData = snap.docs.map(doc => ({
+    useEffect(() => {
+      firestore.getCollection("posts", (result) => {
+        const returnData = result.docs.map(doc => ({
           id: doc.id,
           ...doc.data()
         }));
-        setPosts(postsData);
-      });
-  }, []);
+        setPosts(returnData);
+      })
+    }, []);
 
   return (
     <div>
@@ -52,14 +50,19 @@ const Posts = () => {
         {notification}
 
         <ul >
-          {posts.map(post =>
+          {/* PostCard causes error */}
+          {/* {posts.map(post =>
             // <li key={post.id}>
             //   <Link href="/posts/[id]" as={'/posts/' + post.id}>
             //     <a itemProp="hello">{post.title}</a>
             //   </Link>
             // </li>
             <PostCard post={post} key={post.id} />
-          )}
+          )} */}
+
+      {posts.map(post =>
+        <h1>{post.title}</h1>
+      )}
         </ul>
 
 
