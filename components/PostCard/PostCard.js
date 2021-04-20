@@ -17,6 +17,7 @@ import Popover from '@material-ui/core/Popover';
 import EditPost from '../EditPost/EditPost';
 import DeletePost from '../DeletePost/DeletePost';
 import IconButton from '@material-ui/core/IconButton';
+import {useFirestore} from '../../firebase/useFirestore';
 
 import { red } from '@material-ui/core/colors';
 import FavoriteIcon from '@material-ui/icons/Favorite';
@@ -25,6 +26,7 @@ import PeopleIcon from '@material-ui/icons/People';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 import Typography from '@material-ui/core/Typography';
+const firestore = useFirestore();
 
 
 const MenuOption = ({ isUser, post }) => {
@@ -112,7 +114,7 @@ const PostCard = ({ post }) => {
 
   const checkJoined = async (uid) => {
     let result = post.joined.find(x => x.uid === uid);
-    if (result.length == 0) {
+    if (!result) {
       fire.firestore().doc(`/posts/${post.uid}`).update({
         joined: fire.firestore.FieldValue.arrayUnion({ name: currentUser.displayName, uid: currentUser.uid, photoURL: currentUser.photoURL })
       })
@@ -121,8 +123,8 @@ const PostCard = ({ post }) => {
 
   const handleHeart = async (uid) => {
     let result = post.likesMembers.find(x => x.uid === uid);
-    if (result.length == 0) {
-      fire.firestore().doc(`/posts/${post.uid}`).update({
+    if (!result) {
+      firestore.updateDocument(`/posts/${post.id}`, {
         likesMembers: fire.firestore.FieldValue.arrayUnion(currentUser.uid)
       })
     }

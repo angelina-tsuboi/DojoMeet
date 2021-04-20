@@ -12,6 +12,12 @@ export const useFirestore = () => {
         .doc(documentPath)
         .set(document);
     }
+
+    const updateDocument = (documentPath, properties) => {
+        fire.firestore()
+          .doc(documentPath)
+          .update(properties);
+      }
   
     const getCollection = (collectionPath, onUpdate) => {
       fire.firestore()
@@ -25,5 +31,5 @@ export const useFirestore = () => {
         .set(collection)
     }
   
-    return { getDocument, saveDocument, getCollection, saveCollection }
+    return { getDocument, saveDocument, getCollection, saveCollection, updateDocument }
   }
