@@ -27,7 +27,7 @@ import MoreVertIcon from '@material-ui/icons/MoreVert';
 import Typography from '@material-ui/core/Typography';
 
 
-const MenuOption = ({ isUser }) => {
+const MenuOption = ({ isUser, post }) => {
 
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [openEdit, setOpenEdit] = React.useState(false);
@@ -40,6 +40,14 @@ const MenuOption = ({ isUser }) => {
   const handleClose = () => {
     setAnchorEl(null);
   };
+
+  const handleOpenEdit = (value) => {
+    setOpenEdit(value);
+  }
+
+  const handleOpenDelete = (value) => {
+    setOpenDelete(value)
+  }
 
   const open = Boolean(anchorEl);
   const id = open ? 'simple-popover' : undefined;
@@ -64,13 +72,13 @@ const MenuOption = ({ isUser }) => {
             horizontal: 'center',
           }}
         >
-          {/* <Button onClick={setOpenEdit(true)}>Edit Post</Button>
+          <Button onClick={() => handleOpenEdit(true)}>Edit Post</Button>
           <br />
-          <Button onClick={setOpenDelete(true)}>Delete Post</Button> */}
+          <Button onClick={() => handleOpenDelete(true)}>Delete Post</Button>
         </Popover>
 
-        {/* <EditPost open={openEdit} onClose={setOpenEdit(false)}/>
-        <DeletePost open={openDelete} onClose={setOpenDelete(false)}/> */}
+        <EditPost  post={post} open={openEdit} onClose={() => handleOpenEdit(false)} />
+        <DeletePost post={post} open={openDelete} onClose={() =>handleOpenDelete(false)}/>
       </div>
     )
   }
@@ -147,7 +155,7 @@ const PostCard = ({ post }) => {
           <Avatar aria-label="recipe" src={post.photoURL}></Avatar>
         }
         action={
-          <MenuOption isUser={post.uid == currentUser.uid}></MenuOption>
+          <MenuOption isUser={post.uid == currentUser.uid} post={post}></MenuOption>
         }
         title={post.name}
         subheader={formatDistance(new Date(), date) + " ago"}

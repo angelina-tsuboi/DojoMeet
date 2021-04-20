@@ -2,7 +2,7 @@
 import React from 'react';
 import styles from './EditPost.module.css';
 
-const EditPost = ({post})  => {
+const EditPost = ({post, open, onClose})  => {
   
     return (
         <div>

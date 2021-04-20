@@ -2,7 +2,7 @@
 import React from 'react';
 import styles from './DeletePost.module.css';
 
-const DeletePost = ({post})  => {
+const DeletePost = ({post, open, onClose})  => {
   
     return (
         <div>
