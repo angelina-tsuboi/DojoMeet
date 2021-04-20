@@ -187,9 +187,10 @@ const PostCard = ({ post }) => {
           aria-expanded={expanded}>
           <PeopleIcon />
         </IconButton>
-        <IconButton aria-label="add to favorites" onClick={()=> handleHeart(currentUser.uid)}>
+        <IconButton aria-label="add to favorites" onClick={()=> handleHeart(currentUser.uid)} className={likeMembers.includes(currentUser.uid) ? styles.highlight : styles.blank}>
           <FavoriteIcon />
         </IconButton>
+        <span>{likeMembers.length}</span>
         <IconButton aria-label="share">
           <ShareIcon />
         </IconButton>
