@@ -7,7 +7,7 @@ import styles from './PostCard.module.css';
 import fire from '../../config/fire-conf';
 import Avatar from '@material-ui/core/Avatar';
 import Collapse from '@material-ui/core/Collapse';
-import React from 'react';
+import { useEffect, useState, Fragment } from 'react';
 import formatDistance from 'date-fns/formatDistance';
 import Snackbar from '@material-ui/core/Snackbar';
 import CloseIcon from '@material-ui/icons/Close';
@@ -31,9 +31,9 @@ const firestore = useFirestore();
 
 const MenuOption = ({ isUser, post }) => {
 
-  const [anchorEl, setAnchorEl] = React.useState(null);
-  const [openEdit, setOpenEdit] = React.useState(false);
-  const [openDelete, setOpenDelete] = React.useState(false);
+  const [anchorEl, setAnchorEl] = useState(null);
+  const [openEdit, setOpenEdit] = useState(false);
+  const [openDelete, setOpenDelete] = useState(false);
 
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
@@ -102,16 +102,20 @@ const JoinButton = ({ isUser }) => {
 
 
 const PostCard = ({ post }) => {
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = useState(false);
   const router = useRouter()
   const { currentUser } = fire.auth();
-  const [date, setDate] = React.useState(new Date(post.date.seconds));
-  const [likeMembers, setLikeMembers] = React.useState(post.likeMembers);
-  const [expanded, setExpanded] = React.useState(false);
+  const [date, setDate] = useState(new Date(post.date.seconds));
+  const [likeMembers, setLikeMembers] = useState([]);
+  const [expanded, setExpanded] = useState(false);
 
   const handleExpandClick = () => {
     setExpanded(!expanded);
   };
+
+  useEffect(() => {
+    setLikeMembers(post.likesMembers);
+  }, [])
 
   const checkJoined = async (uid) => {
     let result = post.joined.find(x => x.uid === uid);
@@ -123,15 +127,15 @@ const PostCard = ({ post }) => {
   }
 
   const handleHeart = async (uid) => {
-    let result = post.likesMembers.find(x => x.uid === uid);
-    if (!result) {
+    let result = likeMembers.find((member) => member == uid);
+    if (result == null || result.length == 0) {
       firestore.updateDocument(`/posts/${post.id}`, {
         likesMembers: fire.firestore.FieldValue.arrayUnion(currentUser.uid)
-      },(result) => {console.log("done linking"); let outcome = likeMembers.push(currentUser.uid); setLikeMembers(outcome)})
+      },(data) => {setLikeMembers([...likeMembers, currentUser.uid])})
     }else{
       firestore.updateDocument(`/posts/${post.id}`, {
         likesMembers: fire.firestore.FieldValue.arrayRemove(currentUser.uid)
-      }, (result) => {console.log("done unlinking"); let outcome = likeMembers.filter((member) => member != currentUser.uid); setLikeMembers(outcome)})
+      }, (data) => {let outcome = likeMembers.filter((member) => member != currentUser.uid); setLikeMembers(outcome)})
     }
   }
 
@@ -183,7 +187,7 @@ const PostCard = ({ post }) => {
           aria-expanded={expanded}>
           <PeopleIcon />
         </IconButton>
-        <IconButton aria-label="add to favorites" onClick={handleHeart}>
+        <IconButton aria-label="add to favorites" onClick={()=> handleHeart(currentUser.uid)}>
           <FavoriteIcon />
         </IconButton>
         <IconButton aria-label="share">
@@ -218,11 +222,11 @@ const PostCard = ({ post }) => {
         onClose={handleClose}
         message="Event joined"
         action={
-          <React.Fragment>
+          <Fragment>
             <IconButton size="small" aria-label="close" color="inherit" onClick={handleClose}>
               <CloseIcon fontSize="small" />
             </IconButton>
-          </React.Fragment>
+          </Fragment>
         }
       />
     </Card>
