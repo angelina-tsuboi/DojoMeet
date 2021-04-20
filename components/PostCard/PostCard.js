@@ -134,15 +134,15 @@ const PostCard = ({ post }) => {
   };
 
 
-  const goToPost = (postId) => {
-    router.push(`/posts/${postId}`);
-  };
+  // const goToPost = (postId) => {
+  //   router.push(`/posts/${postId}`);
+  // };
 
 
   return (
     <div>
 <Card className={styles.card}>
-      <CardHeader
+      {/* <CardHeader
         avatar={
           <Avatar aria-label="recipe" src={post.photoURL}></Avatar>
         }
@@ -151,7 +151,7 @@ const PostCard = ({ post }) => {
         }
         title={post.name}
         subheader={formatDistance(new Date(), date) + " ago"}
-      />
+      /> */}
 
       <CardContent>
         <Typography variant="h6" color="textPrimary" component="p">
@@ -211,7 +211,6 @@ const PostCard = ({ post }) => {
         }
       />
     </Card>
-
     
     </div>
   );

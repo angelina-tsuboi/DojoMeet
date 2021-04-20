@@ -51,18 +51,18 @@ const Posts = () => {
 
         <ul >
           {/* PostCard causes error */}
-          {/* {posts.map(post =>
+          {posts.map(post =>
             // <li key={post.id}>
             //   <Link href="/posts/[id]" as={'/posts/' + post.id}>
             //     <a itemProp="hello">{post.title}</a>
             //   </Link>
             // </li>
             <PostCard post={post} key={post.id} />
-          )} */}
+          )}
 
-      {posts.map(post =>
+      {/* {posts.map(post =>
         <h1>{post.title}</h1>
-      )}
+      )} */}
         </ul>
 
 
