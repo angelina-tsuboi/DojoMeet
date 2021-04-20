@@ -13,10 +13,11 @@ export const useFirestore = () => {
         .set(document);
     }
 
-    const updateDocument = (documentPath, properties) => {
+    const updateDocument = (documentPath, properties, result) => {
         fire.firestore()
           .doc(documentPath)
-          .update(properties);
+          .update(properties)
+          .then(result)
       }
   
     const getCollection = (collectionPath, onUpdate) => {

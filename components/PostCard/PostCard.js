@@ -126,7 +126,11 @@ const PostCard = ({ post }) => {
     if (!result) {
       firestore.updateDocument(`/posts/${post.id}`, {
         likesMembers: fire.firestore.FieldValue.arrayUnion(currentUser.uid)
-      })
+      },(result) => {console.log("done linking")})
+    }else{
+      firestore.updateDocument(`/posts/${post.id}`, {
+        likesMembers: fire.firestore.FieldValue.arrayRemove(currentUser.uid)
+      }, (result) => {console.log("done unlinking")})
     }
   }
 
