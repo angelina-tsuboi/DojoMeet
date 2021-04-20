@@ -29,3 +29,8 @@
 .blank{
     color: gray !important;
 }
+
+.avatarDisplay{
+    display: flex;
+    align-items:center;
+}

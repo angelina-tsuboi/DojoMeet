@@ -204,6 +204,7 @@ const PostCard = ({ post }) => {
           aria-expanded={expanded}>
           <PeopleIcon />
         </IconButton>
+        <span>{joining.length}</span>
         <IconButton aria-label="add to favorites" onClick={()=> handleHeart(currentUser.uid)} className={likeMembers.includes(currentUser.uid) ? styles.highlight : styles.blank}>
           <FavoriteIcon />
         </IconButton>
@@ -219,20 +220,13 @@ const PostCard = ({ post }) => {
           <Typography paragraph>
             {joining.length} people are joining the event 
           </Typography>
-          {/* <Typography paragraph>
-            <div className={styles.person}>
-              <Avatar aria-label="recipe" src={post.photoURL} className={styles.personAvatar}></Avatar>
-              <p className={styles.personName}>John Doe</p>
-            </div>
-          </Typography> */}
-          {joining.map((member) => {
-              <div>
-                <Typography component={'span'} variant={'body2'}>{member.email}</Typography>
-              </div> 
-            })
-            }
 
-          
+          {joining.map(member =>
+          <div className={styles.avatarDisplay}>
+            <Avatar src={member.photoURL} className={styles.personAvatar}/>
+            <span>{member.name}</span>
+          </div>
+          )}
 
         </CardContent>
       </Collapse>
