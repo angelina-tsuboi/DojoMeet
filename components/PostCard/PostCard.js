@@ -106,6 +106,7 @@ const PostCard = ({ post }) => {
   const router = useRouter()
   const { currentUser } = fire.auth();
   const [date, setDate] = React.useState(new Date(post.date.seconds));
+  const [likeMembers, setLikeMembers] = React.useState(post.likeMembers);
   const [expanded, setExpanded] = React.useState(false);
 
   const handleExpandClick = () => {
@@ -126,11 +127,11 @@ const PostCard = ({ post }) => {
     if (!result) {
       firestore.updateDocument(`/posts/${post.id}`, {
         likesMembers: fire.firestore.FieldValue.arrayUnion(currentUser.uid)
-      },(result) => {console.log("done linking")})
+      },(result) => {console.log("done linking"); let outcome = likeMembers.push(currentUser.uid); setLikeMembers(outcome)})
     }else{
       firestore.updateDocument(`/posts/${post.id}`, {
         likesMembers: fire.firestore.FieldValue.arrayRemove(currentUser.uid)
-      }, (result) => {console.log("done unlinking")})
+      }, (result) => {console.log("done unlinking"); let outcome = likeMembers.filter((member) => member != currentUser.uid); setLikeMembers(outcome)})
     }
   }
 
