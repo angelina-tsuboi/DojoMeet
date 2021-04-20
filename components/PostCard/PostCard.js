@@ -64,13 +64,13 @@ const MenuOption = ({ isUser }) => {
             horizontal: 'center',
           }}
         >
-          <Button onClick={setOpenEdit(true)}>Edit Post</Button>
+          {/* <Button onClick={setOpenEdit(true)}>Edit Post</Button>
           <br />
-          <Button onClick={setOpenDelete(true)}>Delete Post</Button>
+          <Button onClick={setOpenDelete(true)}>Delete Post</Button> */}
         </Popover>
 
-        <EditPost open={openEdit} onClose={setOpenEdit(false)}/>
-        <DeletePost open={openDelete} onClose={setOpenDelete(false)}/>
+        {/* <EditPost open={openEdit} onClose={setOpenEdit(false)}/>
+        <DeletePost open={openDelete} onClose={setOpenDelete(false)}/> */}
       </div>
     )
   }
@@ -142,7 +142,7 @@ const PostCard = ({ post }) => {
   return (
     <div>
 <Card className={styles.card}>
-      {/* <CardHeader
+      <CardHeader
         avatar={
           <Avatar aria-label="recipe" src={post.photoURL}></Avatar>
         }
@@ -151,7 +151,7 @@ const PostCard = ({ post }) => {
         }
         title={post.name}
         subheader={formatDistance(new Date(), date) + " ago"}
-      /> */}
+      />
 
       <CardContent>
         <Typography variant="h6" color="textPrimary" component="p">
