@@ -1,4 +1,6 @@
 import React from "react";
+import {AuthContext} from './authprovider';
+import fire from '../config/fire-conf';
 
 const UserDataContext = React.createContext();
 
@@ -8,7 +10,7 @@ export function UserDataProvider({ children }) {
 
     React.useEffect(() => {
         if (!authUser) return;
-        const query = firebase.firestore().collection("/users").where("userId", "==", authUser.uid);
+        const query = fire.firestore().collection("/users").where("uid", "==", authUser.uid);
         return query.onSnapshot(snapshot => setUserData(snapshot.empty ? null : snapshot.docs[0].data()));
     }, [authUser]);
 

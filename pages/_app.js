@@ -4,6 +4,8 @@ import React, { useState, useEffect } from 'react';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import fire from '../config/fire-conf';
 import Navbar from '../components/Navbar/Navbar';
+import { AuthProvider } from '../providers/authprovider';
+import { UserDataProvider } from '../providers/userdataprovider';
 
 
 export const theme = createMuiTheme({
@@ -39,11 +41,15 @@ function MyApp({ Component, pageProps }) {
 
   return (
     <div>
-      <ThemeProvider theme={theme}>
-        <CssBaseline />
-        <Navbar loggedIn={loggedIn}/>
-        <Component {...pageProps} />
-      </ThemeProvider>
+      <AuthProvider>
+        <UserDataProvider>
+          <ThemeProvider theme={theme}>
+            <CssBaseline />
+            <Navbar loggedIn={loggedIn} />
+            <Component {...pageProps} />
+          </ThemeProvider>
+        </UserDataProvider>
+      </AuthProvider>
     </div>
   )
 }

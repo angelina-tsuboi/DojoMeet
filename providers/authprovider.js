@@ -1,12 +1,13 @@
 import React from "react";
+import fire from '../config/fire-conf';
 
-const AuthContext = React.createContext();
+export const AuthContext = React.createContext();
 
 export function AuthProvider({ children }) {
     const [authUser, setAuthUser] = React.useState(undefined);
 
     React.useEffect(() => {
-        return firebase.auth().onAuthStateChanged(user => setAuthUser(user));
+        return fire.auth().onAuthStateChanged(user => setAuthUser(user));
     }, []);
 
     return <AuthContext.Provider value={authUser}>{children}</AuthContext.Provider>;
