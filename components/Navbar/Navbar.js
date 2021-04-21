@@ -44,7 +44,8 @@ const Navbar = ({ loggedIn }) => {
     <div>
       <AppBar position="static">
         <Toolbar>
-            <a href="/" className={styles.title}>Dojo Meet</a>
+          <img src="../public/dojomeetIcon.png" />
+          <a href="/" className={styles.title}>Dojo Meet</a>
           <div className={styles.spacer}/>
           <div>
 

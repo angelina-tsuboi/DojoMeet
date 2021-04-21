@@ -1,8 +1,11 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+
 .title{
     font-weight: bold;
     color: white;
     margin-top: 0px;
     font-weight: bold;
+    width: 30%;
     font-size: 1.5rem !important;
     margin-bottom: 0px;
 }
@@ -23,6 +26,7 @@
     outline: none;
     background: transparent;
     border-color: transparent;
+    font-family: "Roboto";
 }
 
 .option:hover{

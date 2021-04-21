@@ -90,21 +90,6 @@ const Players = () => {
       {notification}
 
 
-      <div class="container">
-        <div className={styles.grid7}>
-          <div className={styles.card}>
-            <img src="https://images.unsplash.com/photo-1499557354967-2b2d8910bcca?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=7d5363c18112a02ce22d0c46f8570147&auto=format&fit=crop&w=635&q=80%20635w" alt="profile-pic" className={styles.profile} />
-            <h1 className={styles.title}>Bevely Little</h1>
-            <p className={styles.jobTitle}> SENIOR PRODUCT DESIGNER</p>
-            <div className={styles.desc}>
-              <p>Create usable interface and designs @GraphicSpark</p>
-            </div>
-            <button className={styles.btn}> Hire me</button>
-            <hr />
-          </div>
-        </div>
-      </div>
-
     </div>
   )
 }
