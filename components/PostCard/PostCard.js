@@ -12,18 +12,14 @@ import formatDistance from 'date-fns/formatDistance';
 import Snackbar from '@material-ui/core/Snackbar';
 import CloseIcon from '@material-ui/icons/Close';
 import CardHeader from '@material-ui/core/CardHeader';
-import CardMedia from '@material-ui/core/CardMedia';
 import Popover from '@material-ui/core/Popover';
 import EditPost from '../EditPost/EditPost';
 import DeletePost from '../DeletePost/DeletePost';
 import IconButton from '@material-ui/core/IconButton';
 import {useFirestore} from '../../firebase/useFirestore';
-
-import { red } from '@material-ui/core/colors';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import ShareIcon from '@material-ui/icons/Share';
 import PeopleIcon from '@material-ui/icons/People';
-import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 import Typography from '@material-ui/core/Typography';
 const firestore = useFirestore();
@@ -90,12 +86,21 @@ const MenuOption = ({ isUser, post }) => {
 
 
 const JoinButton = ({ isUser }) => {
+
+  const handleClick = () => {
+    console.log("click");
+  }
+
+  const handleUnClick = () => {
+    console.log("unclick");
+  }
+  
   if (isUser) {
     return (
-      <Button>JOIN EVENT</Button>
+      <Button onClick={handleClick}>JOIN EVENT</Button>
     )
   }
-  return null;
+  return <Button onClick={handleUnClick}>LEAVE EVENT</Button>;
 }
 
 
@@ -112,11 +117,11 @@ const PostCard = ({ post }) => {
   const [expanded, setExpanded] = useState(false);
 
   const handleExpandClick = () => {
-    getJoiningMembers();
     setExpanded(!expanded);
   };
 
   useEffect(() => {
+    getJoiningMembers();
     setLikeMembers(post.likesMembers);
   }, [])
 
@@ -134,15 +139,6 @@ const PostCard = ({ post }) => {
     }
   }
 
-  const checkJoined = async (uid) => {
-    let result = post.joined.find(x => x.uid === uid);
-    if (!result) {
-      fire.firestore().doc(`/posts/${post.uid}`).update({
-        joined: fire.firestore.FieldValue.arrayUnion({ name: currentUser.displayName, uid: currentUser.uid, photoURL: currentUser.photoURL })
-      })
-    }
-  }
-
   const handleHeart = async (uid) => {
     let result = likeMembers.find((member) => member == uid);
     if (result == null || result.length == 0) {
@@ -155,11 +151,6 @@ const PostCard = ({ post }) => {
       }, (data) => {let outcome = likeMembers.filter((member) => member != currentUser.uid); setLikeMembers(outcome)})
     }
   }
-
-  const handleClick = async () => {
-    await checkJoined();
-    setOpen(true);
-  };
 
   const handleClose = (event, reason) => {
     if (reason === 'clickaway') {
@@ -199,7 +190,6 @@ const PostCard = ({ post }) => {
       </CardContent>
       <CardActions disableSpacing>
         <JoinButton isUser={post.uid != currentUser.uid}></JoinButton>
-        <Button onClick={handleClick}>JOIN EVENT</Button>
         <IconButton aria-label="view people" onClick={handleExpandClick}
           aria-expanded={expanded}>
           <PeopleIcon />
