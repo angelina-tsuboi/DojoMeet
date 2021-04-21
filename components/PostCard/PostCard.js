@@ -31,6 +31,7 @@ const MenuOption = ({ isUser, post }) => {
   const [anchorEl, setAnchorEl] = useState(null);
   const [openEdit, setOpenEdit] = useState(false);
   const [openDelete, setOpenDelete] = useState(false);
+  const [openSnackbar, setOpenSnackbar] = useState(false);
 
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
@@ -44,8 +45,19 @@ const MenuOption = ({ isUser, post }) => {
     setOpenEdit(value);
   }
 
+  const handleCloseSnackbar = () => {
+    setOpenSnackbar(false);
+  }
+
   const handleOpenDelete = (value) => {
     setOpenDelete(value)
+  }
+
+  const handleDeleteFunc = (value, response) => {
+    setOpenDelete(value);
+    if(response){
+      setOpenSnackbar(true);
+    }
   }
 
   const open = Boolean(anchorEl);
@@ -77,7 +89,26 @@ const MenuOption = ({ isUser, post }) => {
         </Popover>
 
         <EditPost  post={post} open={openEdit} onClose={() => handleOpenEdit(false)} />
-        <DeletePost post={post} open={openDelete} onClose={() =>handleOpenDelete(false)}/>
+        <DeletePost post={post} open={openDelete} onClose={(value) =>handleDeleteFunc(false, value)}/>
+
+        <Snackbar
+        anchorOrigin={{
+          vertical: 'bottom',
+          horizontal: 'right',
+        }}
+        open={openSnackbar}
+        autoHideDuration={3000}
+        onClose={handleCloseSnackbar}
+        message="Post Deleted!"
+        action={
+          <Fragment>
+            <IconButton size="small" aria-label="close" color="inherit" onClick={handleClose}>
+              <CloseIcon fontSize="small" />
+            </IconButton>
+          </Fragment>
+        }
+      />
+
       </div>
     )
   }
@@ -98,7 +129,7 @@ const JoinButton = ({ joiningEvent, onJoin, onLeave }) => {
 
 
 
-const PostCard = ({ post }) => {
+const PostCard = ({ post }) => {  
   const [open, setOpen] = useState(false);
   const router = useRouter()
   const userData = useContext(UserDataContext);
@@ -114,6 +145,8 @@ const PostCard = ({ post }) => {
       setJoiningMembers([...joining, user]);
     })
   }
+
+ 
 
   const handleLeave = () => {
     let outcome = joining.filter((member) => member.uid != userData.uid); 
@@ -244,7 +277,7 @@ const PostCard = ({ post }) => {
           }
         />
       </Card>
-      
+    
       </div>
     );
   }else{

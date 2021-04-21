@@ -12,27 +12,14 @@ const firestore = useFirestore();
 
 
 const DeletePost = ({ post, open, onClose }) => {
-  const [openSnackbar, setOpenSnackbar] = React.useState(false);
-
-  const handleClose = (event, reason) => {
-    if (reason === 'clickaway') {
-      return;
-    }
-
-    setOpen(false);
-  };
-
+  
   const handleCloseDialog = () => {
-    onClose();
+    onClose(false);
   };
-
-  const handleCloseSnackbar = () => {
-    openSnackbar(false);
-  }
 
   const deletePost = () => {
     firestore.deleteDocument(`posts/${post.id}`, (result) => {
-      setOpenSnackbar(true);
+      onClose(true);
     })
   }
 
@@ -46,23 +33,7 @@ const DeletePost = ({ post, open, onClose }) => {
           <Button onClick={deletePost}>Delete</Button>
         </div>
       </Dialog>
-      <Snackbar
-        anchorOrigin={{
-          vertical: 'bottom',
-          horizontal: 'right',
-        }}
-        open={openSnackbar}
-        autoHideDuration={3000}
-        onClose={handleCloseSnackbar}
-        message="Post Deleted!"
-        action={
-          <React.Fragment>
-            <IconButton size="small" aria-label="close" color="inherit" onClick={handleClose}>
-              <CloseIcon fontSize="small" />
-            </IconButton>
-          </React.Fragment>
-        }
-      />
+      
     </div>
 
   );
