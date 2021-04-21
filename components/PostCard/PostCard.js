@@ -109,12 +109,17 @@ const PostCard = ({ post }) => {
   const [expanded, setExpanded] = useState(false);
 
   const handleJoin = () => {
-    setJoiningMembers([...joining, {email: userData.email, name: userData.name, uid: userData.uid, photoURL: userData.photoURL}])
+    let user = {email: userData.email, name: userData.name, uid: userData.uid, photoURL: userData.photoURL};
+    firestore.saveDocument(`/posts/${post.id}/joining/${user.uid}`, user, (result) => {
+      setJoiningMembers([...joining, user]);
+    })
   }
 
   const handleLeave = () => {
     let outcome = joining.filter((member) => member.uid != userData.uid); 
-    setJoiningMembers(outcome)
+    firestore.deleteDocument(`posts/${post.id}/joining/${userData.uid}`, (result) => {
+      setJoiningMembers(outcome)
+    })
   }
 
   const handleExpandClick = () => {
@@ -165,82 +170,87 @@ const PostCard = ({ post }) => {
     setOpen(false);
   };
 
-  return (
-    <div>
-<Card className={styles.card}>
-      <CardHeader
-        avatar={
-          <Avatar aria-label="recipe" src={post.photoURL}></Avatar>
-        }
-        action={
-          <MenuOption isUser={post.uid == userData.uid} post={post}></MenuOption>
-        }
-        title={post.name}
-        subheader={formatDistance(new Date(), date) + " ago"}
-      />
-
-      <CardContent>
-        <Typography variant="h6" color="textPrimary" component="p">
-          {post.title}
-        </Typography>
-        <Typography variant="body2" color="textSecondary" component="p">
-          {post.description}
-        </Typography>
-      </CardContent>
-      <CardActions disableSpacing>
-        <JoinButton joiningEvent={includesJoiningMember(userData.uid)} onJoin={() => handleJoin()} onLeave={() => handleLeave()}></JoinButton>
-        <IconButton aria-label="view people" onClick={handleExpandClick}
-          aria-expanded={expanded}>
-          <PeopleIcon />
-        </IconButton>
-        <span>{joining.length}</span>
-        <IconButton aria-label="add to favorites" onClick={()=> handleHeart(userData.uid)} className={likeMembers.includes(userData.uid) ? styles.highlight : styles.blank}>
-          <FavoriteIcon />
-        </IconButton>
-        <span>{likeMembers.length}</span>
-        <IconButton aria-label="share">
-          <ShareIcon />
-        </IconButton>
-      </CardActions>
-
-      <Collapse in={expanded} timeout="auto" unmountOnExit>
+  if(userData){
+    return (
+      <div>
+  <Card className={styles.card}>
+        <CardHeader
+          avatar={
+            <Avatar aria-label="recipe" src={post.photoURL}></Avatar>
+          }
+          action={
+            <MenuOption isUser={post.uid == userData.uid} post={post}></MenuOption>
+          }
+          title={post.name}
+          subheader={formatDistance(new Date(), date) + " ago"}
+        />
+  
         <CardContent>
-          <Typography variant="h6" component="p">People Joining:</Typography>
-          <Typography paragraph>
-            {joining.length} people are joining the event 
+          <Typography variant="h6" color="textPrimary" component="p">
+            {post.title}
           </Typography>
-
-          {joining.map(member =>
-          <div className={styles.avatarDisplay} key={member.uid}>
-            <Avatar src={member.photoURL} className={styles.personAvatar}/>
-            <span>{member.name}</span>
-          </div>
-          )}
-
+          <Typography variant="body2" color="textSecondary" component="p">
+            {post.description}
+          </Typography>
         </CardContent>
-      </Collapse>
-
-      <Snackbar
-        anchorOrigin={{
-          vertical: 'bottom',
-          horizontal: 'left',
-        }}
-        open={open}
-        autoHideDuration={2000}
-        onClose={handleClose}
-        message="Event joined"
-        action={
-          <Fragment>
-            <IconButton size="small" aria-label="close" color="inherit" onClick={handleClose}>
-              <CloseIcon fontSize="small" />
-            </IconButton>
-          </Fragment>
-        }
-      />
-    </Card>
-    
-    </div>
-  );
+        <CardActions disableSpacing>
+          <JoinButton joiningEvent={includesJoiningMember(userData.uid)} onJoin={() => handleJoin()} onLeave={() => handleLeave()}></JoinButton>
+          <IconButton aria-label="view people" onClick={handleExpandClick}
+            aria-expanded={expanded}>
+            <PeopleIcon />
+          </IconButton>
+          <span>{joining.length}</span>
+          <IconButton aria-label="add to favorites" onClick={()=> handleHeart(userData.uid)} className={likeMembers.includes(userData.uid) ? styles.highlight : styles.blank}>
+            <FavoriteIcon />
+          </IconButton>
+          <span>{likeMembers.length}</span>
+          <IconButton aria-label="share">
+            <ShareIcon />
+          </IconButton>
+        </CardActions>
+  
+        <Collapse in={expanded} timeout="auto" unmountOnExit>
+          <CardContent>
+            <Typography variant="h6" component="p">People Joining:</Typography>
+            <Typography paragraph>
+              {joining.length} people are joining the event 
+            </Typography>
+  
+            {joining.map(member =>
+            <div className={styles.avatarDisplay} key={member.uid}>
+              <Avatar src={member.photoURL} className={styles.personAvatar}/>
+              <span>{member.name}</span>
+            </div>
+            )}
+  
+          </CardContent>
+        </Collapse>
+  
+        <Snackbar
+          anchorOrigin={{
+            vertical: 'bottom',
+            horizontal: 'left',
+          }}
+          open={open}
+          autoHideDuration={2000}
+          onClose={handleClose}
+          message="Event joined"
+          action={
+            <Fragment>
+              <IconButton size="small" aria-label="close" color="inherit" onClick={handleClose}>
+                <CloseIcon fontSize="small" />
+              </IconButton>
+            </Fragment>
+          }
+        />
+      </Card>
+      
+      </div>
+    );
+  }else{
+    return (<h1>Loading...</h1>)
+  }
+  
 }
 
 export default PostCard;

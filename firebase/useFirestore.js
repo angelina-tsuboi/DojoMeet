@@ -13,6 +13,20 @@ export const useFirestore = () => {
         .set(document);
     }
 
+    const createDocument = (collectionPath, document, onAdd) => {
+      fire.firestore()
+        .collection(collectionPath)
+        .add(document)
+        .then(onAdd)
+    }
+
+    const deleteDocument = (documentPath, onDelete) => {
+      fire.firestore()
+      .doc(documentPath)
+      .delete()
+      .then(onDelete)
+    }
+
     const updateDocument = (documentPath, properties, result) => {
         fire.firestore()
           .doc(documentPath)
@@ -32,5 +46,5 @@ export const useFirestore = () => {
         .set(collection)
     }
   
-    return { getDocument, saveDocument, getCollection, saveCollection, updateDocument }
+    return { getDocument, saveDocument, getCollection, saveCollection, updateDocument, createDocument, deleteDocument }
   }
