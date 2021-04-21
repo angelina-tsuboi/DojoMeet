@@ -18,9 +18,16 @@ const DeletePost = ({ post, open, onClose }) => {
   };
 
   const deletePost = () => {
-    firestore.deleteDocument(`posts/${post.id}`, (result) => {
-      onClose(true);
+    firestore.getCollection(`posts/${post.id}/joining`, (result) => {
+      result.forEach((doc) => {
+        firestore.deleteDocument(`posts/${post.id}/joining/${doc.id}`)
+      })
+
+      firestore.deleteDocument(`posts/${post.id}`, (result) => {
+        onClose(true);
+      })
     })
+    
   }
 
   return (

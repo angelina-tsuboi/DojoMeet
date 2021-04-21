@@ -13,6 +13,7 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import Grid from '@material-ui/core/Grid';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
+import styles from './HomePage.module.css';
 
 
 const HomePage = () => {
@@ -30,7 +31,7 @@ const goToRoute = (e) => {
       <p>A web app made with Next.js and Firebase that connects karate players across the globe</p>
       <img src="https://5.imimg.com/data5/XA/OB/GLADMIN-64233160/martial-arts-training-service-500x500.png"></img>
 
-      <div class="buttons">
+      <div className={styles.buttons}>
       <button onClick={goToRoute} value="register">
         Sign Up 
       </button>

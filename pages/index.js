@@ -184,7 +184,7 @@ const Home = () => {
               <h3>Upcoming Events</h3>
               <List>
                 {posts.map(post =>
-                  <div>
+                  <div key={post.id}>
                     <ListItem key={post.id}>
                       <ListItemAvatar>
                         <Avatar>
@@ -201,7 +201,7 @@ const Home = () => {
 
               <h3>Your Events</h3>
               {userPosts.map(post =>
-                <div>
+                <div key={post.id}>
                   <ListItem key={post.id}>
                     <ListItemAvatar>
                       <Avatar>
