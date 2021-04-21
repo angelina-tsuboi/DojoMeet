@@ -7,7 +7,7 @@ import styles from './PostCard.module.css';
 import fire from '../../config/fire-conf';
 import Avatar from '@material-ui/core/Avatar';
 import Collapse from '@material-ui/core/Collapse';
-import { useEffect, useState, Fragment } from 'react';
+import { useEffect, useState, Fragment, useContext } from 'react';
 import formatDistance from 'date-fns/formatDistance';
 import Snackbar from '@material-ui/core/Snackbar';
 import CloseIcon from '@material-ui/icons/Close';
@@ -22,6 +22,7 @@ import ShareIcon from '@material-ui/icons/Share';
 import PeopleIcon from '@material-ui/icons/People';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 import Typography from '@material-ui/core/Typography';
+import {UserDataContext} from '../../providers/userdataprovider';
 const firestore = useFirestore();
 
 
@@ -100,7 +101,7 @@ const JoinButton = ({ joiningEvent, onJoin, onLeave }) => {
 const PostCard = ({ post }) => {
   const [open, setOpen] = useState(false);
   const router = useRouter()
-  const { currentUser } = fire.auth();
+  const userData = useContext(UserDataContext);
   const [date, setDate] = useState(new Date(post.date.seconds));
   const [gotJoinedMembers, setJoinedMembers] = useState(false)
   const [likeMembers, setLikeMembers] = useState([]);
@@ -108,13 +109,11 @@ const PostCard = ({ post }) => {
   const [expanded, setExpanded] = useState(false);
 
   const handleJoin = () => {
-    console.log("click");
-    setJoiningMembers([...joining, {email: currentUser.email, name: currentUser.displayName, uid: currentUser.uid, photoURL: currentUser.photoURL}])
+    setJoiningMembers([...joining, {email: userData.email, name: userData.name, uid: userData.uid, photoURL: userData.photoURL}])
   }
 
   const handleLeave = () => {
-    console.log("unclick");
-    let outcome = joining.filter((member) => member.uid != currentUser.uid); 
+    let outcome = joining.filter((member) => member.uid != userData.uid); 
     setJoiningMembers(outcome)
   }
 
@@ -134,7 +133,6 @@ const PostCard = ({ post }) => {
           id: doc.id,
           ...doc.data()
         }));
-        console.log("return", returnData);
         setJoinedMembers(true);
         setJoiningMembers(returnData);
       })
@@ -150,12 +148,12 @@ const PostCard = ({ post }) => {
     let result = likeMembers.find((member) => member == uid);
     if (result == null || result.length == 0) {
       firestore.updateDocument(`/posts/${post.id}`, {
-        likesMembers: fire.firestore.FieldValue.arrayUnion(currentUser.uid)
-      },(data) => {setLikeMembers([...likeMembers, currentUser.uid])})
+        likesMembers: fire.firestore.FieldValue.arrayUnion(userData.uid)
+      },(data) => {setLikeMembers([...likeMembers, userData.uid])})
     }else{
       firestore.updateDocument(`/posts/${post.id}`, {
-        likesMembers: fire.firestore.FieldValue.arrayRemove(currentUser.uid)
-      }, (data) => {let outcome = likeMembers.filter((member) => member != currentUser.uid); setLikeMembers(outcome)})
+        likesMembers: fire.firestore.FieldValue.arrayRemove(userData.uid)
+      }, (data) => {let outcome = likeMembers.filter((member) => member != userData.uid); setLikeMembers(outcome)})
     }
   }
 
@@ -175,7 +173,7 @@ const PostCard = ({ post }) => {
           <Avatar aria-label="recipe" src={post.photoURL}></Avatar>
         }
         action={
-          <MenuOption isUser={post.uid == currentUser.uid} post={post}></MenuOption>
+          <MenuOption isUser={post.uid == userData.uid} post={post}></MenuOption>
         }
         title={post.name}
         subheader={formatDistance(new Date(), date) + " ago"}
@@ -190,13 +188,13 @@ const PostCard = ({ post }) => {
         </Typography>
       </CardContent>
       <CardActions disableSpacing>
-        <JoinButton joiningEvent={includesJoiningMember(currentUser.uid)} onJoin={() => handleJoin()} onLeave={() => handleLeave()}></JoinButton>
+        <JoinButton joiningEvent={includesJoiningMember(userData.uid)} onJoin={() => handleJoin()} onLeave={() => handleLeave()}></JoinButton>
         <IconButton aria-label="view people" onClick={handleExpandClick}
           aria-expanded={expanded}>
           <PeopleIcon />
         </IconButton>
         <span>{joining.length}</span>
-        <IconButton aria-label="add to favorites" onClick={()=> handleHeart(currentUser.uid)} className={likeMembers.includes(currentUser.uid) ? styles.highlight : styles.blank}>
+        <IconButton aria-label="add to favorites" onClick={()=> handleHeart(userData.uid)} className={likeMembers.includes(userData.uid) ? styles.highlight : styles.blank}>
           <FavoriteIcon />
         </IconButton>
         <span>{likeMembers.length}</span>

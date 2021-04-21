@@ -2,7 +2,7 @@ import React from "react";
 import {AuthContext} from './authprovider';
 import fire from '../config/fire-conf';
 
-const UserDataContext = React.createContext();
+export const UserDataContext = React.createContext();
 
 export function UserDataProvider({ children }) {
     const [userData, setUserData] = React.useState(null);
