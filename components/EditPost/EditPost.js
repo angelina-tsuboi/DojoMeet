@@ -91,7 +91,7 @@ const EditPost = ({post, open, onClose})  => {
         <div className={styles.bottomButtons}>
             <Button onClick={() => handleClose()}>Cancel</Button>
             <Button variant="contained" className={styles.createEvent} onClick={() => { handleCreatePost() }} >
-            Create Event
+            Update Event
             </Button>
         </div>
         </div>
