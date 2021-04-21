@@ -102,7 +102,7 @@ const PostCard = ({ post }) => {
   const [open, setOpen] = useState(false);
   const router = useRouter()
   const userData = useContext(UserDataContext);
-  const [date, setDate] = useState(new Date(post.date.seconds));
+  const [date, setDate] = useState(post.date.toDate());
   const [gotJoinedMembers, setJoinedMembers] = useState(false)
   const [likeMembers, setLikeMembers] = useState([]);
   const [joining, setJoiningMembers] = useState([]);

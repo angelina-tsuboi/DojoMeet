@@ -20,8 +20,8 @@ import 'date-fns';
 
 const EditPost = ({post, open, onClose})  => {
     const { currentUser } = fire.auth();
-    const [selectedDate, setSelectedDate] = React.useState(new Date(post.date.seconds));
-    const [selectedTime, setSelectedTime] = React.useState(new Date(post.time.seconds));
+    const [selectedDate, setSelectedDate] = React.useState(post.date.toDate());
+    const [selectedTime, setSelectedTime] = React.useState(post.time.toDate());
 
     const [title, setTitle] = React.useState(post.title);
     const [description, setDescription] = React.useState(post.description);
