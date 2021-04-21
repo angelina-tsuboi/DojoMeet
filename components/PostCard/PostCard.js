@@ -85,22 +85,13 @@ const MenuOption = ({ isUser, post }) => {
 }
 
 
-const JoinButton = ({ isUser }) => {
-
-  const handleClick = () => {
-    console.log("click");
-  }
-
-  const handleUnClick = () => {
-    console.log("unclick");
-  }
-  
-  if (isUser) {
+const JoinButton = ({ joiningEvent, onJoin, onLeave }) => {  
+  if (!joiningEvent) {
     return (
-      <Button onClick={handleClick}>JOIN EVENT</Button>
+      <Button onClick={() => onJoin()}>JOIN EVENT</Button>
     )
   }
-  return <Button onClick={handleUnClick}>LEAVE EVENT</Button>;
+  return <Button onClick={() => onLeave()}>LEAVE EVENT</Button>;
 }
 
 
@@ -115,6 +106,17 @@ const PostCard = ({ post }) => {
   const [likeMembers, setLikeMembers] = useState([]);
   const [joining, setJoiningMembers] = useState([]);
   const [expanded, setExpanded] = useState(false);
+
+  const handleJoin = () => {
+    console.log("click");
+    setJoiningMembers([...joining, {email: currentUser.email, name: currentUser.displayName, uid: currentUser.uid, photoURL: currentUser.photoURL}])
+  }
+
+  const handleLeave = () => {
+    console.log("unclick");
+    let outcome = joining.filter((member) => member.uid != currentUser.uid); 
+    setJoiningMembers(outcome)
+  }
 
   const handleExpandClick = () => {
     setExpanded(!expanded);
@@ -139,6 +141,11 @@ const PostCard = ({ post }) => {
     }
   }
 
+  const includesJoiningMember = (uid) => {
+    let joiningMembers = joining.filter((member) => {return member.uid == uid});
+    return (joiningMembers.length > 0);
+  }
+
   const handleHeart = async (uid) => {
     let result = likeMembers.find((member) => member == uid);
     if (result == null || result.length == 0) {
@@ -159,12 +166,6 @@ const PostCard = ({ post }) => {
 
     setOpen(false);
   };
-
-
-  // const goToPost = (postId) => {
-  //   router.push(`/posts/${postId}`);
-  // };
-
 
   return (
     <div>
@@ -189,7 +190,7 @@ const PostCard = ({ post }) => {
         </Typography>
       </CardContent>
       <CardActions disableSpacing>
-        <JoinButton isUser={post.uid != currentUser.uid}></JoinButton>
+        <JoinButton joiningEvent={includesJoiningMember(currentUser.uid)} onJoin={() => handleJoin()} onLeave={() => handleLeave()}></JoinButton>
         <IconButton aria-label="view people" onClick={handleExpandClick}
           aria-expanded={expanded}>
           <PeopleIcon />
@@ -212,7 +213,7 @@ const PostCard = ({ post }) => {
           </Typography>
 
           {joining.map(member =>
-          <div className={styles.avatarDisplay}>
+          <div className={styles.avatarDisplay} key={member.uid}>
             <Avatar src={member.photoURL} className={styles.personAvatar}/>
             <span>{member.name}</span>
           </div>
