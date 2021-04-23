@@ -7,9 +7,11 @@ import Grid from '@material-ui/core/Grid';
 import Button from '@material-ui/core/Button';
 import DateFnsUtils from '@date-io/date-fns';
 import fire from '../../config/fire-conf';
+import { useFirestore } from '../../firebase/useFirestore';
 import RoomIcon from '@material-ui/icons/Room';
 import SubjectIcon from '@material-ui/icons/Subject';
 import styles from './EditPost.module.css';
+const firestore = useFirestore(); 
 
 import {
   MuiPickersUtilsProvider,
@@ -29,6 +31,13 @@ const EditPost = ({post, open, onClose})  => {
     const handleClose = () => {
         onClose();
     };
+
+    const updatePost = () => {
+      let postData = {description: description, location: location, date: selectedDate, time: selectedTime, title: title};
+      firestore.updateDocument(`posts/${post.id}`, postData, (result) => {
+        onClose();
+      })
+    }
 
     const handleDateChange = (date) => {
       setSelectedDate(date);
@@ -90,7 +99,7 @@ const EditPost = ({post, open, onClose})  => {
 
         <div className={styles.bottomButtons}>
             <Button onClick={() => handleClose()}>Cancel</Button>
-            <Button variant="contained" className={styles.createEvent} onClick={() => { handleCreatePost() }} >
+            <Button variant="contained" className={styles.createEvent} onClick={() => { updatePost() }} >
             Update Event
             </Button>
         </div>

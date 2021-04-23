@@ -5,9 +5,15 @@
     color: white;
     margin-top: 0px;
     font-weight: bold;
-    width: 30%;
+    width: 20%;
     font-size: 1.5rem !important;
     margin-bottom: 0px;
+}
+
+.icon{
+    width: 30px;
+    margin-right: 5px;
+    height: 30px;
 }
 
 .link{
@@ -34,5 +40,7 @@
 }
 
 .createPostButton{
-    background-color: rgb(63, 63, 174);
+    background-color: rgb(63, 63, 174) !important;
+    color: white !important;
+    font-weight: bold !important;
 }
