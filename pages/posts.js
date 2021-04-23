@@ -46,16 +46,20 @@ const Posts = () => {
       <Head>
         <title>Blog App</title>
       </Head>
-      
-        {notification}
-
+      <Grid container spacing={3}>
+        <Grid item xs={3}>
+          
+        </Grid>
+        <Grid item xs={9}>
         <ul>
           {posts.map(post =>
             <PostCard post={post} key={post.id} />
           )}
         </ul>
-
-
+        </Grid>
+      </Grid>
+      
+        {notification}
     </div>
   )
 }
