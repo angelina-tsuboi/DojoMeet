@@ -142,15 +142,19 @@ const PostCard = ({ post }) => {
   const handleJoin = () => {
     let user = {email: userData.email, name: userData.name, uid: userData.uid, photoURL: userData.photoURL};
     firestore.saveDocument(`/posts/${post.id}/joining/${user.uid}`, user, (result) => {
-      setJoiningMembers([...joining, user]);
+      firestore.updateDocument(`/posts/${post.id}`, {
+        joiningMembers: fire.firestore.FieldValue.arrayUnion(userData.uid)
+      },(data) => {setJoiningMembers([...joining, user]);})
     })
   }
 
- 
 
   const handleLeave = () => {
     let outcome = joining.filter((member) => member.uid != userData.uid); 
     firestore.deleteDocument(`posts/${post.id}/joining/${userData.uid}`, (result) => {
+      firestore.updateDocument(`/posts/${post.id}`, {
+        joiningMembers: fire.firestore.FieldValue.arrayRemove(userData.uid)
+      }, (data) => {let outcome = joining.filter((member) => member != userData.uid); setJoiningMembers(outcome)})
       setJoiningMembers(outcome)
     })
   }

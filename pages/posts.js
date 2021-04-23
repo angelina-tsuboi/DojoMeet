@@ -13,6 +13,7 @@ import ViewCard from '../components/ViewCard/ViewCard';
 
 const Posts = () => {
   const [posts, setPosts] = useState([]);
+  const [timeEvents, setTimeEvents] = useState([]);
   const [notification, setNotification] = useState('');
   const [loggedIn, setLoggedIn] = useState(false);
   const [value, onChange] = useState(new Date());
@@ -44,6 +45,8 @@ const Posts = () => {
           ...doc.data()
         }));
         setPosts(returnData);
+
+        firestore.getCollection("posts")
       })
     }, []);
 
@@ -60,7 +63,7 @@ const Posts = () => {
       />  
       <h3>Events on {format(value, 'MM/dd/yyyy')}</h3>
       <ul>
-          {posts.map(post =>
+          {timeEvents.map(post =>
             <ViewCard post={post} key={post.id} />
           )}
         </ul>

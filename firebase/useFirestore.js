@@ -20,6 +20,17 @@ export const useFirestore = () => {
         .then(onAdd)
     }
 
+    const getDateDocuments = (date, onFetch) => {
+      let dayDate = date.getDate();
+      let start = dayDate - 1;
+      let end =  dayDate + 1;
+      fire.firestore()
+      .collection("posts")
+      .where('date', '<', end)
+      .get('date', '>', start)
+      .then(onFetch)
+    }
+
     const deleteDocument = (documentPath, onDelete) => {
       fire.firestore()
       .doc(documentPath)
@@ -46,5 +57,5 @@ export const useFirestore = () => {
         .set(collection)
     }
   
-    return { getDocument, saveDocument, getCollection, saveCollection, updateDocument, createDocument, deleteDocument }
+    return { getDocument, saveDocument, getCollection, saveCollection, updateDocument, createDocument, deleteDocument, getDateDocuments }
   }

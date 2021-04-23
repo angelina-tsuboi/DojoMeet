@@ -3,8 +3,9 @@
 }
 
 .card{
-    width: 80vw;
+    width: 30vw;
     margin: auto;
+    height: 8rem;
     margin-top: 2rem;
 }
 
