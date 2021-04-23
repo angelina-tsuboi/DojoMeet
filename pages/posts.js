@@ -7,6 +7,8 @@ const firestore = useFirestore();
 import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
 import Grid from '@material-ui/core/Grid';
+import format from 'date-fns/format';
+import ViewCard from '../components/ViewCard/ViewCard';
 
 
 const Posts = () => {
@@ -56,10 +58,10 @@ const Posts = () => {
         onChange={onChange}
         value={value}
       />  
-      <h3>Events on {value.toString()}</h3>
+      <h3>Events on {format(value, 'MM/dd/yyyy')}</h3>
       <ul>
           {posts.map(post =>
-            <PostCard post={post} key={post.id} />
+            <ViewCard post={post} key={post.id} />
           )}
         </ul>
         </Grid>

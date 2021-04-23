@@ -1,0 +1,36 @@
+.profileDescription{
+    display: flex;
+}
+
+.card{
+    width: 80vw;
+    margin: auto;
+    margin-top: 2rem;
+}
+
+.person{
+    display: flex;
+}
+
+.personAvatar{
+    width: 30px !important;
+    height: 30px !important;
+}
+
+.personName{
+    margin-top: 5px;
+    margin-left: 7px;
+    margin-bottom: 0px;
+}
+.highlight{
+    color: red !important;
+}
+
+.blank{
+    color: gray !important;
+}
+
+.avatarDisplay{
+    display: flex;
+    align-items:center;
+}
