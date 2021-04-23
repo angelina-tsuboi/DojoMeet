@@ -4,12 +4,16 @@ import fire from '../config/fire-conf';
 import {useFirestore} from '../firebase/useFirestore';
 import PostCard from '../components/PostCard/PostCard';
 const firestore = useFirestore();
+import Calendar from 'react-calendar';
+import 'react-calendar/dist/Calendar.css';
+import Grid from '@material-ui/core/Grid';
 
 
 const Posts = () => {
   const [posts, setPosts] = useState([]);
   const [notification, setNotification] = useState('');
   const [loggedIn, setLoggedIn] = useState(false);
+  const [value, onChange] = useState(new Date());
 
   useEffect(() => {
     // Remove the server-side injected CSS.
@@ -48,7 +52,16 @@ const Posts = () => {
       </Head>
       <Grid container spacing={3}>
         <Grid item xs={3}>
-          
+        <Calendar
+        onChange={onChange}
+        value={value}
+      />  
+      <h3>Events on {value.toString()}</h3>
+      <ul>
+          {posts.map(post =>
+            <PostCard post={post} key={post.id} />
+          )}
+        </ul>
         </Grid>
         <Grid item xs={9}>
         <ul>
