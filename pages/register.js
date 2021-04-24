@@ -94,11 +94,14 @@ const RegisterForm = () => {
 }
 
 function getStepContent(step) {
+  const classes = useStyles();
   switch (step) {
     case 0:
-      return 'Select belt color';
+      return (
+        <Typography className={classes.instructions}>Select Belt Color</Typography>
+      );
     case 1:
-      return 'Select your location';
+      return (<Typography className={classes.instructions}>Select Location</Typography>);
     case 2:
       return <RegisterForm />
     default:
@@ -161,7 +164,7 @@ const Register = () => {
           </div>
         ) : (
           <div>
-            <Typography className={classes.instructions}>{getStepContent(activeStep)}</Typography>
+            {getStepContent(activeStep)}
             <div>
               <Button disabled={activeStep === 0} onClick={handleBack} className={classes.button}>
                 Back
