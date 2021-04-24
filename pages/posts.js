@@ -26,6 +26,11 @@ const Posts = () => {
     }
   }, []);
 
+  const updateDate = (date) => {
+    onChange(date);
+
+  }
+
 
    fire.auth()
     .onAuthStateChanged((user) => {
@@ -46,7 +51,9 @@ const Posts = () => {
         }));
         setPosts(returnData);
 
-        firestore.getCollection("posts")
+        firestore.getDateDocuments(new Date(), (result) => {
+          setTimeEvents(result);
+        })
       })
     }, []);
 
@@ -58,15 +65,22 @@ const Posts = () => {
       <Grid container spacing={3}>
         <Grid item xs={3}>
         <Calendar
-        onChange={onChange}
+        onChange={(e) => {updateDate(e)}}
         value={value}
       />  
       <h3>Events on {format(value, 'MM/dd/yyyy')}</h3>
-      <ul>
-          {timeEvents.map(post =>
-            <ViewCard post={post} key={post.id} />
-          )}
-        </ul>
+      {(timeEvents && timeEvents.length > 0) && 
+        <ul>
+        {timeEvents.map(post =>
+          <ViewCard post={post} key={post.id} />
+        )}
+      </ul>
+      }
+      {(timeEvents && timeEvents.length == 0) &&
+          <h3>
+            No Events Found For Date
+          </h3>
+      }
         </Grid>
         <Grid item xs={9}>
         <ul>
