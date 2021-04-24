@@ -2,9 +2,7 @@ import { useState, useEffect } from 'react';
 import Head from 'next/head';
 import fire from '../config/fire-conf';
 import HomePage from '../components/HomePage/HomePage';
-import Link from 'next/link';
-import Paper from '@material-ui/core/Paper';
-import React from 'react';
+import {useContext} from 'react';
 import Typography from '@material-ui/core/Typography';
 import Card from '@material-ui/core/Card';
 import Avatar from '@material-ui/core/Avatar';
@@ -18,8 +16,7 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import ListItemAvatar from '@material-ui/core/ListItemAvatar';
 import ImageIcon from '@material-ui/icons/Image';
-import WorkIcon from '@material-ui/icons/Work';
-import BeachAccessIcon from '@material-ui/icons/BeachAccess';
+import {UserDataContext} from '../providers/userdataprovider';
 import Divider from '@material-ui/core/Divider';
 
 
@@ -27,13 +24,14 @@ const Home = () => {
   const [blogs, setBlogs] = useState([]);
   const { currentUser } = fire.auth();
   const [posts, setPosts] = useState([]);
+  const userData = useContext(UserDataContext);
   const [userPosts, setUserPosts] = useState([]);
   const [notification, setNotification] = useState('');
   const [description, setDescription] = useState('');
   const [location, setLocation] = useState('');
   const [name, setName] = useState('');
   const [loggedIn, setLoggedIn] = useState(false);
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = useState(false);
 
   const handleClickOpen = () => {
     setOpen(true);

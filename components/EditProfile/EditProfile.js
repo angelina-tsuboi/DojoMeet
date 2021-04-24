@@ -4,7 +4,7 @@ import fire from '../../config/fire-conf';
 import Grid from '@material-ui/core/Grid';
 import React from 'react';
 import styles from './EditProfile.module.css'
-import { useEffect, useContext } from 'react';
+import { useEffect } from 'react';
 import QueryBuilderIcon from '@material-ui/icons/QueryBuilder';
 import { useRouter } from 'next/router';
 import TextField from '@material-ui/core/TextField';
@@ -13,57 +13,21 @@ import Button from '@material-ui/core/Button';
 import AccountCircle from '@material-ui/icons/AccountCircle';
 import SubjectIcon from '@material-ui/icons/Subject';
 import RoomIcon from '@material-ui/icons/Room';
-import { withStyles } from '@material-ui/core/styles';
-import {UserDataContext} from '../../providers/userdataprovider';
 
 const EditProfile = (props)  => {
     const router = useRouter()
     // const classes = useStyles();
-    const userData = useContext(UserDataContext);
-    const { onClose, selectedValue, open } = props;
-    const [name, setName] = React.useState('');
-    const [description, setDescription] = React.useState('');
-    const [uid, setUID] = React.useState('');
-    const [location, setLocation] = React.useState('');
-    const [photoURL, setPhotoURL] = React.useState('');
+    const { onClose, selectedValue, open, profile } = props;
+    const [name, setName] = React.useState(profile.name);
+    const [description, setDescription] = React.useState(profile.description);
+    const [uid, setUID] = React.useState(profile.uid);
+    const [location, setLocation] = React.useState(profile.location);
+    const [photoURL, setPhotoURL] = React.useState(profile.photoURL);
 
 
-    useEffect(() => {
-      console.log("call")
-      if(userData){
-        console.log("calla")
-        setName(userData.name);
-        setDescription(userData.description);
-        setUID(userData.uid);
-        setLocation(userData.location);
-        setPhotoURL(userData.photoURL);
-      }
-    }, []);
-    
     const handleClose = () => {
       onClose(selectedValue);
     };
-
-
-    // useEffect(() => {
-    //   // Remove the server-side injected CSS.
-    //  if(profile.name != ""){
-    //    setName(profile.name);
-    //  }
-
-    //  if(profile.description){
-    //    setDescription(profile.description)
-    //  }
-
-    //  if(profile.location){
-    //    setLocation(profile.location)
-    //  }
-
-    //  if(profile.photoURL){
-    //    setPhotoURL(profile.photoURL);
-    //  }
-    // });
-  
 
     const handleUpdateProfile = () => {
         let completeProfile = {
