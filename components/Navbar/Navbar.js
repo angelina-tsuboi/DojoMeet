@@ -28,7 +28,6 @@ const Navbar = ({ loggedIn }) => {
 
 
   const goToRoute = (e) => {
-    e.preventDefault()
     router.push(e.target.value);
   }
   

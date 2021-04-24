@@ -1,6 +1,6 @@
-import Search from '@material-ui/icons/Search';
 import InputBase from '@material-ui/core/InputBase';
 import SearchIcon from '@material-ui/icons/Search';
+import { useState, useEffect } from 'react';
 import { fade, makeStyles } from '@material-ui/core/styles';
 
 
@@ -56,6 +56,15 @@ const useStyles = makeStyles((theme) => ({
 
 const SearchBar = ({onChange, placeholder}) => {
   const classes = useStyles();
+
+  useEffect(() => {
+    // Remove the server-side injected CSS.
+    const jssStyles = document.querySelector('#jss-server-side');
+    if (jssStyles) {
+      jssStyles.parentElement.removeChild(jssStyles);
+    }
+  }, []);
+
     return (
 
       <div className={classes.search}>

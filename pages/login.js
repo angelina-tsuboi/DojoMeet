@@ -154,7 +154,6 @@ const Login = () => {
             onClick={handleGoogleLogin}
             fullWidth
             variant="contained"
-            color="tertiary"
             className={classes.submit}
           >
            Google Login
