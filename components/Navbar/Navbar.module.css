@@ -29,6 +29,12 @@
     color: white;
     margin-right: 1rem;
     font-size: 20px;
+    text-transform: uppercase;
+    text-decoration: none;
+    padding: 20px 0px;
+    margin: 0px 20px;
+    display: inline-block;
+    position: relative;
     outline: none;
     background: transparent;
     border-color: transparent;
@@ -44,3 +50,19 @@
     color: white !important;
     font-weight: bold !important;
 }
+
+  
+  .option::before {
+    transition: 300ms;
+    height: 5px;
+    content: "";
+    position: absolute;
+    background-color: white;
+    width: 0%;
+    bottom: 10px;
+  }
+  
+  
+  .option:hover::before {
+    width: 100%;
+  }
