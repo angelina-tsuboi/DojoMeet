@@ -85,7 +85,7 @@ const Posts = () => {
       }
         </Grid>
         <Grid item xs={8}>
-        <ul>
+        <ul className={styles.postsDisplay}>
           {posts.map(post =>
             <PostCard post={post} key={post.id} />
           )}

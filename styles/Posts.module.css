@@ -11,3 +11,7 @@
     text-align: center;
     margin-top: 20px;
 }
+
+.postsDisplay{
+    padding-left: 0px !important;
+}
