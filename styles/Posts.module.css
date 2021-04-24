@@ -1,3 +1,13 @@
 .post{
     margin-bottom: 1rem;
 }
+
+.Calendar{
+    margin: auto;
+    margin-top: 30px;
+}
+
+.eventDisplay{
+    text-align: center;
+    margin-top: 20px;
+}

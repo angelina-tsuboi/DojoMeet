@@ -9,6 +9,7 @@ import 'react-calendar/dist/Calendar.css';
 import Grid from '@material-ui/core/Grid';
 import format from 'date-fns/format';
 import ViewCard from '../components/ViewCard/ViewCard';
+import styles from '../styles/Posts.module.css';
 
 
 const Posts = () => {
@@ -62,13 +63,14 @@ const Posts = () => {
       <Head>
         <title>Blog App</title>
       </Head>
-      <Grid container spacing={3}>
-        <Grid item xs={3}>
+      <Grid container>
+        <Grid item xs={4}>
         <Calendar
         onChange={(e) => {updateDate(e)}}
         value={value}
+        className={styles.Calendar}
       />  
-      <h3>Events on {format(value, 'MM/dd/yyyy')}</h3>
+      <h3 className={styles.eventDisplay}>Events on {format(value, 'MM/dd/yyyy')}</h3>
       {(timeEvents && timeEvents.length > 0) && 
         <ul>
         {timeEvents.map(post =>
@@ -82,7 +84,7 @@ const Posts = () => {
           </h3>
       }
         </Grid>
-        <Grid item xs={9}>
+        <Grid item xs={8}>
         <ul>
           {posts.map(post =>
             <PostCard post={post} key={post.id} />
