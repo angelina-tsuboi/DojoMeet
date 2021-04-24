@@ -1,4 +1,4 @@
-import { useState } from 'react'; 
+import { useState } from 'react';
 import fire from '../config/fire-conf';
 import { useRouter } from 'next/router';
 import Button from '@material-ui/core/Button';
@@ -7,6 +7,11 @@ import { makeStyles } from '@material-ui/core/styles';
 import Stepper from '@material-ui/core/Stepper';
 import Step from '@material-ui/core/Step';
 import StepLabel from '@material-ui/core/StepLabel';
+import InputLabel from '@material-ui/core/InputLabel';
+import MenuItem from '@material-ui/core/MenuItem';
+import FormHelperText from '@material-ui/core/FormHelperText';
+import FormControl from '@material-ui/core/FormControl';
+import Select from '@material-ui/core/Select';
 import Typography from '@material-ui/core/Typography';
 
 const useStyles = makeStyles((theme) => ({
@@ -37,7 +42,7 @@ const RegisterForm = () => {
       setPassword('');
       setPassConf('');
       return null;
-      }
+    }
     fire.auth()
       .createUserWithEmailAndPassword(userName, password)
       .catch((err) => {
@@ -47,7 +52,7 @@ const RegisterForm = () => {
   }
 
 
-  const handleGoogleSignUp = async() =>{
+  const handleGoogleSignUp = async () => {
     const provider = new fire.auth.GoogleAuthProvider();
     const creds = await fire.auth().signInWithPopup(provider);
     let user = creds.user;
@@ -60,8 +65,8 @@ const RegisterForm = () => {
     }
 
     userRef.get().then((doc) => {
-      if(!doc.exists){
-        userRef.set(data, {merge: true});
+      if (!doc.exists) {
+        userRef.set(data, { merge: true });
       }
     })
 
@@ -69,28 +74,59 @@ const RegisterForm = () => {
   }
 
   return (
-      <div>
-        <h1>Create new user</h1>
+    <div>
+      <h1>Create new user</h1>
       <form onSubmit={handleLogin}>
         <h3>Email:</h3>
-       <input type="text" value={userName} 
-        onChange={({target}) => setUsername(target.value)} /> 
+        <input type="text" value={userName}
+          onChange={({ target }) => setUsername(target.value)} />
         <br />
         <h3>Password:</h3>
-        <input type="password" value={password} 
-        onChange={({target}) => setPassword(target.value)} /> 
+        <input type="password" value={password}
+          onChange={({ target }) => setPassword(target.value)} />
         <br />
         <h3>Confirm Password:</h3>
-        <input type="password" value={passConf}    
-        onChange={({target}) => setPassConf(target.value)} /> 
+        <input type="password" value={passConf}
+          onChange={({ target }) => setPassConf(target.value)} />
         <br />
         <button type="submit">Login</button>
       </form>
       <h3>OR</h3>
       <Button variant="contained" color="primary" onClick={handleGoogleSignUp}>
-      Register with Google
+        Register with Google
     </Button></div>
   )
+}
+
+const SelectOptions = () => {
+  const classes = useStyles();
+  const [belt, setBelt] = useState(10);
+  return (
+    <div>
+<FormControl variant="outlined" className={classes.formControl}>
+      <InputLabel id="demo-simple-select-outlined-label">Age</InputLabel>
+      <Select
+        labelId="demo-simple-select-outlined-label"
+        id="demo-simple-select-outlined"
+        value={belt}
+        onChange={setBelt}
+        label="Age"
+      >
+        <MenuItem value="">
+          <em>None</em>
+        </MenuItem>
+        <MenuItem value={10}>Ten</MenuItem>
+        <MenuItem value={20}>Twenty</MenuItem>
+        <MenuItem value={30}>Thirty</MenuItem>
+      </Select>
+    </FormControl>
+
+
+    </div>
+    
+  )
+
+
 }
 
 function getStepContent(step) {
@@ -98,7 +134,7 @@ function getStepContent(step) {
   switch (step) {
     case 0:
       return (
-        <Typography className={classes.instructions}>Select Belt Color</Typography>
+        <SelectOptions />
       );
     case 1:
       return (<Typography className={classes.instructions}>Select Location</Typography>);
@@ -170,14 +206,18 @@ const Register = () => {
                 Back
               </Button>
 
-              <Button
-                variant="contained"
-                color="primary"
-                onClick={handleNext}
-                className={classes.button}
-              >
-                {activeStep === steps.length - 1 ? 'Finish' : 'Next'}
+              {
+                (activeStep !== steps.length - 1) &&
+                <Button
+                  variant="contained"
+                  color="primary"
+                  onClick={handleNext}
+                  className={classes.button}
+                >
+                  Next
               </Button>
+              }
+
             </div>
           </div>
         )}
