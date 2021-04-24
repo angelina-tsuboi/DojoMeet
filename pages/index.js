@@ -156,32 +156,35 @@ const Home = () => {
         :
         <div>
           <Grid container spacing={3}>
+            {currentUser && 
             <Grid item xs={6}>
-              <Card className={styles.profileCard} style={{ width: '70%', margin: 'auto', marginTop: '1rem' }}>
-                <Avatar aria-label="recipe" src={currentUser.photoURL} style={{ height: '100px', width: '100px' }} className={styles.profileImage}></Avatar>
-                <CardContent>
-                  <Typography variant="h4" color="textPrimary" component="p">
-                    {name}
-                  </Typography>
-                  <Typography variant="h6" color="textSecondary" component="p">
-                    {location}
-                  </Typography>
-                  <Typography variant="body1" color="textSecondary" component="p">
-                    {description}
-                  </Typography>
-                  <Button onClick={handleClickOpen}>
-                    Edit Profile
-              </Button>
+            <Card className={styles.profileCard} style={{ width: '70%', margin: 'auto', marginTop: '1rem' }}>
+              <Avatar aria-label="recipe" src={currentUser.photoURL} style={{ height: '100px', width: '100px' }} className={styles.profileImage}></Avatar>
+              <CardContent>
+                <Typography variant="h4" color="textPrimary" component="p">
+                  {name}
+                </Typography>
+                <Typography variant="h6" color="textSecondary" component="p">
+                  {location}
+                </Typography>
+                <Typography variant="body1" color="textSecondary" component="p">
+                  {description}
+                </Typography>
+                <Button onClick={handleClickOpen}>
+                  Edit Profile
+            </Button>
 
-                  <Button onClick={handleLogout}>
-                    Logout
-              </Button>
-                </CardContent>
-              </Card>
-            </Grid>
+                <Button onClick={handleLogout}>
+                  Logout
+            </Button>
+              </CardContent>
+            </Card>
+          </Grid>
+          }
+            
             <Grid item xs={6}>
 
-              <h3>Upcoming Events</h3>
+              <h3>Your Upcoming Events</h3>
               <List>
                 {posts.map(post =>
                   <div key={post.id}>
