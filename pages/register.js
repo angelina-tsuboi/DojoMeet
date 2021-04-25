@@ -13,7 +13,6 @@ import FormHelperText from '@material-ui/core/FormHelperText';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import Typography from '@material-ui/core/Typography';
-import { geolocated } from "react-geolocated";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -32,41 +31,38 @@ function getSteps() {
   return ['Select belt color', 'Select your location', 'Create an account'];
 }
 
-const locationForm = () =>{
-  return(
-    !this.props.isGeolocationAvailable ? (
-      <div>Your browser does not support Geolocation</div>
-  ) : !this.props.isGeolocationEnabled ? (
-      <div>Geolocation is not enabled</div>
-  ) : this.props.coords ? (
-      <table>
-          <tbody>
-              <tr>
-                  <td>latitude</td>
-                  <td>{this.props.coords.latitude}</td>
-              </tr>
-              <tr>
-                  <td>longitude</td>
-                  <td>{this.props.coords.longitude}</td>
-              </tr>
-              <tr>
-                  <td>altitude</td>
-                  <td>{this.props.coords.altitude}</td>
-              </tr>
-              <tr>
-                  <td>heading</td>
-                  <td>{this.props.coords.heading}</td>
-              </tr>
-              <tr>
-                  <td>speed</td>
-                  <td>{this.props.coords.speed}</td>
-              </tr>
-          </tbody>
-      </table>
-  ) : (
-      <div>Getting the location data&hellip; </div>
+const locationForm = () => {
+  const classes = useStyles();
+  const [belt, setBelt] = useState("white");
+
+  const handleChange = (event) => {
+    setBelt(event.target.value);
+  };
+
+
+  return (
+    <div>
+      <FormControl variant="outlined" className={classes.formControl}>
+        <InputLabel id="demo-simple-select-outlined-label">Country</InputLabel>
+        <Select
+          labelId="demo-simple-select-outlined-label"
+          id="demo-simple-select-outlined"
+          defaultValue="white"
+          value={belt}
+          onChange={handleChange}
+          label="Select your Country..."
+        >
+          <MenuItem value="white">White</MenuItem>
+          <MenuItem value="orange">Orange</MenuItem>
+          <MenuItem value="blue">Blue</MenuItem>
+          <MenuItem value="green">Green</MenuItem>
+          <MenuItem value="purple">Purple</MenuItem>
+          <MenuItem value="brown">Brown</MenuItem>
+          <MenuItem value="black">Black</MenuItem>
+        </Select>
+      </FormControl>
+    </div>
   )
-  ))
 }
 
 const RegisterForm = () => {
@@ -147,29 +143,29 @@ const SelectOptions = () => {
 
   return (
     <div>
-<FormControl variant="outlined" className={classes.formControl}>
-      <InputLabel id="demo-simple-select-outlined-label">Belt Color</InputLabel>
-      <Select
-        labelId="demo-simple-select-outlined-label"
-        id="demo-simple-select-outlined"
-        defaultValue="white"
-        value={belt}
-        onChange={handleChange}
-        label="Select Belt Color..."
-      >
-        <MenuItem value="white">White</MenuItem>
-        <MenuItem value="orange">Orange</MenuItem>
-        <MenuItem value="blue">Blue</MenuItem>
-        <MenuItem value="green">Green</MenuItem>
-        <MenuItem value="purple">Purple</MenuItem>
-        <MenuItem value="brown">Brown</MenuItem>
-        <MenuItem value="black">Black</MenuItem>
-      </Select>
-    </FormControl>
+      <FormControl variant="outlined" className={classes.formControl}>
+        <InputLabel id="demo-simple-select-outlined-label">Belt Color</InputLabel>
+        <Select
+          labelId="demo-simple-select-outlined-label"
+          id="demo-simple-select-outlined"
+          defaultValue="white"
+          value={belt}
+          onChange={handleChange}
+          label="Select Belt Color..."
+        >
+          <MenuItem value="white">White</MenuItem>
+          <MenuItem value="orange">Orange</MenuItem>
+          <MenuItem value="blue">Blue</MenuItem>
+          <MenuItem value="green">Green</MenuItem>
+          <MenuItem value="purple">Purple</MenuItem>
+          <MenuItem value="brown">Brown</MenuItem>
+          <MenuItem value="black">Black</MenuItem>
+        </Select>
+      </FormControl>
 
 
     </div>
-    
+
   )
 
 
