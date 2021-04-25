@@ -25,5 +25,7 @@
     "react-instantsearch-dom": "^6.10.3",
     "react-router-dom": "^5.2.0"
   },
-  "devDependencies": {}
+  "devDependencies": {
+    "@svgr/webpack": "^5.5.0"
+  }
 }

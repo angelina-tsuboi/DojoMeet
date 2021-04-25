@@ -5,6 +5,7 @@ import Button from '@material-ui/core/Button';
 import styles from '../styles/SignUp.module.css';
 import { makeStyles } from '@material-ui/core/styles';
 import Stepper from '@material-ui/core/Stepper';
+import { ReactComponent as Logo } from '../public/belt.svg';
 import Step from '@material-ui/core/Step';
 import StepLabel from '@material-ui/core/StepLabel';
 import InputLabel from '@material-ui/core/InputLabel';
@@ -114,42 +115,9 @@ const RegisterForm = () => {
 }
 
 const SelectOptions = () => {
-  const classes = useStyles();
-  const [belt, setBelt] = useState("white");
-
-  const handleChange = (event) => {
-    setBelt(event.target.value);
-  };
-
-
-  return (
-    <div>
-      <FormControl variant="outlined" className={classes.formControl}>
-        <InputLabel id="demo-simple-select-outlined-label">Belt Color</InputLabel>
-        <Select
-          labelId="demo-simple-select-outlined-label"
-          id="demo-simple-select-outlined"
-          defaultValue="white"
-          value={belt}
-          onChange={handleChange}
-          label="Select Belt Color..."
-        >
-          <MenuItem value="white">White</MenuItem>
-          <MenuItem value="orange">Orange</MenuItem>
-          <MenuItem value="blue">Blue</MenuItem>
-          <MenuItem value="green">Green</MenuItem>
-          <MenuItem value="purple">Purple</MenuItem>
-          <MenuItem value="brown">Brown</MenuItem>
-          <MenuItem value="black">Black</MenuItem>
-        </Select>
-      </FormControl>
-
-
-    </div>
-
-  )
-
-
+ return (
+  <Logo fill="red" stroke="green" />
+ );
 }
 
 function getStepContent(step) {
