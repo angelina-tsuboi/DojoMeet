@@ -15,11 +15,14 @@ import ReactFlagsSelect from 'react-flags-select';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import Typography from '@material-ui/core/Typography';
+import { belts } from '../config/belts';
+// import { belts } from '../config/belts';
 
 const useStyles = makeStyles((theme) => ({
   root: {
     width: '100%',
   },
+
   button: {
     marginRight: theme.spacing(1),
   },
@@ -38,12 +41,12 @@ const LocationForm = () => {
 
   return (
     <ReactFlagsSelect
-    searchable
-    searchPlaceholder="Search countries"
+      searchable
+      searchPlaceholder="Search countries"
       selected={selected}
       onSelect={code => setSelected(code)}
     />
-    );
+  );
 
 }
 
@@ -105,7 +108,7 @@ const RegisterForm = () => {
         <input type="password" value={passConf}
           onChange={({ target }) => setPassConf(target.value)} />
         <br />
-        <button type="submit">Login</button>
+        <Button type="submit">Login</Button>
       </form>
       <h3>OR</h3>
       <Button variant="contained" color="primary" onClick={handleGoogleSignUp}>
@@ -115,9 +118,14 @@ const RegisterForm = () => {
 }
 
 const SelectOptions = () => {
- return (
-  <Logo fill="black" stroke="gray" />
- );
+  return (
+    <div>
+      {belts.map((belt) => {
+       return (<Typography key={belt.main}>{belt.main}</Typography>);
+      })}
+     {/* <Logo fill="black" stroke="gray" /> */}
+    </div>
+  );
 }
 
 function getStepContent(step) {
@@ -169,7 +177,7 @@ const Register = () => {
 
 
   return (
-    <div className={styles.container}>
+    <div>
       <Stepper activeStep={activeStep}>
         {steps.map((label, index) => {
           const stepProps = {};
