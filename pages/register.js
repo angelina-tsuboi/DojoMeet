@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useMemo } from 'react';
 import fire from '../config/fire-conf';
 import { useRouter } from 'next/router';
 import Button from '@material-ui/core/Button';
@@ -12,6 +12,7 @@ import MenuItem from '@material-ui/core/MenuItem';
 import FormHelperText from '@material-ui/core/FormHelperText';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
+import countryList from 'react-select-country-list';
 import Typography from '@material-ui/core/Typography';
 
 const useStyles = makeStyles((theme) => ({
@@ -31,38 +32,15 @@ function getSteps() {
   return ['Select belt color', 'Select your location', 'Create an account'];
 }
 
-const locationForm = () => {
-  const classes = useStyles();
-  const [belt, setBelt] = useState("white");
+const LocationForm = () => {
+  const [value, setValue] = useState('')
+  const options = useMemo(() => countryList().getData(), [])
 
-  const handleChange = (event) => {
-    setBelt(event.target.value);
-  };
+  const changeHandler = value => {
+    setValue(value)
+  }
 
-
-  return (
-    <div>
-      <FormControl variant="outlined" className={classes.formControl}>
-        <InputLabel id="demo-simple-select-outlined-label">Country</InputLabel>
-        <Select
-          labelId="demo-simple-select-outlined-label"
-          id="demo-simple-select-outlined"
-          defaultValue="white"
-          value={belt}
-          onChange={handleChange}
-          label="Select your Country..."
-        >
-          <MenuItem value="white">White</MenuItem>
-          <MenuItem value="orange">Orange</MenuItem>
-          <MenuItem value="blue">Blue</MenuItem>
-          <MenuItem value="green">Green</MenuItem>
-          <MenuItem value="purple">Purple</MenuItem>
-          <MenuItem value="brown">Brown</MenuItem>
-          <MenuItem value="black">Black</MenuItem>
-        </Select>
-      </FormControl>
-    </div>
-  )
+  return <Select options={options} value={value} onChange={changeHandler} />
 }
 
 const RegisterForm = () => {
@@ -179,7 +157,9 @@ function getStepContent(step) {
         <SelectOptions />
       );
     case 1:
-      return (<Typography className={classes.instructions}>Select Location</Typography>);
+      return (
+        <LocationForm />
+      );
     case 2:
       return <RegisterForm />
     default:
