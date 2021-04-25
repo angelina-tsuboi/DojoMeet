@@ -5,7 +5,7 @@ import Button from '@material-ui/core/Button';
 import styles from '../styles/SignUp.module.css';
 import { makeStyles } from '@material-ui/core/styles';
 import Stepper from '@material-ui/core/Stepper';
-import { ReactComponent as Logo } from '../public/belt.svg';
+import Logo from '../public/belt.svg';
 import Step from '@material-ui/core/Step';
 import StepLabel from '@material-ui/core/StepLabel';
 import InputLabel from '@material-ui/core/InputLabel';
@@ -116,7 +116,7 @@ const RegisterForm = () => {
 
 const SelectOptions = () => {
  return (
-  <Logo fill="red" stroke="green" />
+  <Logo fill="black" stroke="gray" />
  );
 }
 
