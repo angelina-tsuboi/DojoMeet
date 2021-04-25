@@ -2,7 +2,6 @@ import { useState, useMemo } from 'react';
 import fire from '../config/fire-conf';
 import { useRouter } from 'next/router';
 import Button from '@material-ui/core/Button';
-import styles from '../styles/SignUp.module.css';
 import { makeStyles } from '@material-ui/core/styles';
 import Stepper from '@material-ui/core/Stepper';
 import Logo from '../public/belt.svg';
@@ -18,21 +17,8 @@ import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import Typography from '@material-ui/core/Typography';
 import { belts } from '../config/belts';
-// import { belts } from '../config/belts';
+import styles from '../styles/Register.module.css';
 
-const useStyles = makeStyles((theme) => ({
-  root: {
-    width: '100%',
-  },
-
-  button: {
-    marginRight: theme.spacing(1),
-  },
-  instructions: {
-    marginTop: theme.spacing(1),
-    marginBottom: theme.spacing(1),
-  },
-}));
 
 function getSteps() {
   return ['Select belt color', 'Select your location', 'Create an account'];
@@ -125,11 +111,13 @@ const SelectOptions = () => {
       {belts.map((belt) => {
         return (
           <Grid item xs={4} key={belt.main}>
+            <div>
             <Logo fill={belt.main} stroke={belt.side} />
             <Radio
               value="b"
               name="radio-button-demo"
             />
+            </div>
           </Grid>
 
         );
@@ -139,7 +127,6 @@ const SelectOptions = () => {
 }
 
 function getStepContent(step) {
-  const classes = useStyles();
   switch (step) {
     case 0:
       return (
@@ -158,7 +145,6 @@ function getStepContent(step) {
 
 const Register = () => {
   const router = useRouter();
-  const classes = useStyles();
 
   // Steps Code
   const [activeStep, setActiveStep] = useState(0);
@@ -205,7 +191,7 @@ const Register = () => {
       <div>
         {activeStep === steps.length ? (
           <div>
-            <Typography className={classes.instructions}>
+            <Typography >
               All steps completed - you&apos;re finished
             </Typography>
           </div>
@@ -213,7 +199,7 @@ const Register = () => {
           <div>
             {getStepContent(activeStep)}
             <div>
-              <Button disabled={activeStep === 0} onClick={handleBack} className={classes.button}>
+              <Button disabled={activeStep === 0} onClick={handleBack}>
                 Back
               </Button>
 
@@ -223,7 +209,6 @@ const Register = () => {
                   variant="contained"
                   color="primary"
                   onClick={handleNext}
-                  className={classes.button}
                 >
                   Next
               </Button>
