@@ -8,7 +8,9 @@ import Stepper from '@material-ui/core/Stepper';
 import Logo from '../public/belt.svg';
 import Step from '@material-ui/core/Step';
 import StepLabel from '@material-ui/core/StepLabel';
+import Grid from '@material-ui/core/Grid';
 import InputLabel from '@material-ui/core/InputLabel';
+import Radio from '@material-ui/core/Radio';
 import MenuItem from '@material-ui/core/MenuItem';
 import FormHelperText from '@material-ui/core/FormHelperText';
 import ReactFlagsSelect from 'react-flags-select';
@@ -119,12 +121,20 @@ const RegisterForm = () => {
 
 const SelectOptions = () => {
   return (
-    <div>
+    <Grid container>
       {belts.map((belt) => {
-       return (<Typography key={belt.main}>{belt.main}</Typography>);
+        return (
+          <Grid item xs={4} key={belt.main}>
+            <Logo fill={belt.main} stroke={belt.side} />
+            <Radio
+              value="b"
+              name="radio-button-demo"
+            />
+          </Grid>
+
+        );
       })}
-     {/* <Logo fill="black" stroke="gray" /> */}
-    </div>
+    </Grid>
   );
 }
 
