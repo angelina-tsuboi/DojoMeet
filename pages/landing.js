@@ -20,11 +20,11 @@ import {
 } from "reactstrap";
 
 // core components
-import DemoNavbar from "components/Navbars/DemoNavbar.js";
-import CardsFooter from "components/Footers/CardsFooter.js";
+import DemoNavbar from "../components/Landing/Navbars/DemoNavbar";
+import CardsFooter from "../components/Landing/Footers/CardsFooter.js";
 
 // index page sections
-import Download from "../IndexSections/Download.js";
+import Download from "../components/Landing/views/IndexSections/Download.js";
 
 class Landing extends React.Component {
   state = {};
