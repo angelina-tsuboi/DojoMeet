@@ -13,9 +13,12 @@
     "@material-ui/icons": "^4.11.2",
     "@material-ui/pickers": "^3.3.10",
     "classnames": "^2.3.1",
+    "css-loader": "^5.2.4",
     "date-fns": "^2.21.1",
+    "file-loader": "^6.2.0",
     "firebase": "^8.3.1",
     "fuse.js": "^6.4.6",
+    "headroom.js": "^0.12.0",
     "i": "^0.3.6",
     "next": "10.0.9",
     "npm": "^7.11.1",
@@ -28,6 +31,7 @@
     "reactstrap": "^8.9.0"
   },
   "devDependencies": {
-    "@svgr/webpack": "^5.5.0"
+    "@svgr/webpack": "^5.5.0",
+    "url-loader": "^4.1.1"
   }
 }
