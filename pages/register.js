@@ -1,20 +1,15 @@
-import { useState, useMemo } from 'react';
+import { useState } from 'react';
 import fire from '../config/fire-conf';
 import { useRouter } from 'next/router';
 import Button from '@material-ui/core/Button';
-import { makeStyles } from '@material-ui/core/styles';
 import Stepper from '@material-ui/core/Stepper';
 import Logo from '../public/belt.svg';
 import Step from '@material-ui/core/Step';
 import StepLabel from '@material-ui/core/StepLabel';
 import Grid from '@material-ui/core/Grid';
-import InputLabel from '@material-ui/core/InputLabel';
 import Radio from '@material-ui/core/Radio';
-import MenuItem from '@material-ui/core/MenuItem';
-import FormHelperText from '@material-ui/core/FormHelperText';
 import ReactFlagsSelect from 'react-flags-select';
 import FormControl from '@material-ui/core/FormControl';
-import Select from '@material-ui/core/Select';
 import Typography from '@material-ui/core/Typography';
 import { belts } from '../config/belts';
 import styles from '../styles/Register.module.css';
@@ -105,10 +100,11 @@ const RegisterForm = () => {
   )
 }
 
-const SelectOptions = () => {
-  const [beltValue, setBeltValue] = useState('white');
+const SelectOptions = ({onSelect}) => {
+  const [beltValue, setBeltValue] = useState('red');
   const handleChangeBelt = (event) => {
     setBeltValue(event.target.value);
+    onSelect(event.target.value);
   }
   return (
     <Grid container>
@@ -135,7 +131,7 @@ function getStepContent(step) {
   switch (step) {
     case 0:
       return (
-        <SelectOptions />
+       ''
       );
     case 1:
       return (
@@ -154,11 +150,16 @@ const Register = () => {
   // Steps Code
   const [activeStep, setActiveStep] = useState(0);
   const [skipped, setSkipped] = useState(new Set());
+  const [beltValue, setBeltValue] = useState('red');
   const steps = getSteps();
 
   const isStepSkipped = (step) => {
     return skipped.has(step);
   };
+
+  const handleBeltValue = (value) => {
+    setBeltValue(value)
+  }
 
   const handleNext = () => {
     let newSkipped = skipped;
@@ -202,7 +203,8 @@ const Register = () => {
           </div>
         ) : (
           <div>
-            {getStepContent(activeStep)}
+            {/* {getStepContent(activeStep, setBeltValue)} */}
+            {(activeStep == 0) && <SelectOptions onSelect={handleBeltValue}/>}
             <div>
               <Button disabled={activeStep === 0} onClick={handleBack}>
                 Back
