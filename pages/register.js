@@ -11,7 +11,8 @@ import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
 import FormHelperText from '@material-ui/core/FormHelperText';
 import FormControl from '@material-ui/core/FormControl';
-import Select from '@material-ui/core/Select';
+// import Select from '@material-ui/core/Select';
+import Select from 'react-select';
 import countryList from 'react-select-country-list';
 import Typography from '@material-ui/core/Typography';
 
@@ -123,7 +124,7 @@ const SelectOptions = () => {
     <div>
       <FormControl variant="outlined" className={classes.formControl}>
         <InputLabel id="demo-simple-select-outlined-label">Belt Color</InputLabel>
-        <Select
+        {/* <Select
           labelId="demo-simple-select-outlined-label"
           id="demo-simple-select-outlined"
           defaultValue="white"
@@ -138,7 +139,7 @@ const SelectOptions = () => {
           <MenuItem value="purple">Purple</MenuItem>
           <MenuItem value="brown">Brown</MenuItem>
           <MenuItem value="black">Black</MenuItem>
-        </Select>
+        </Select> */}
       </FormControl>
 
 
