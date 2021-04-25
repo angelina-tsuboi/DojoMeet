@@ -106,16 +106,21 @@ const RegisterForm = () => {
 }
 
 const SelectOptions = () => {
+  const [beltValue, setBeltValue] = useState('white');
+  const handleChangeBelt = (event) => {
+    setBeltValue(event.target.value);
+  }
   return (
     <Grid container>
       {belts.map((belt) => {
         return (
           <Grid item xs={4} key={belt.main}>
-            <div>
+            <div className={styles.belt}>
             <Logo fill={belt.main} stroke={belt.side} />
             <Radio
-              value="b"
-              name="radio-button-demo"
+              value={belt.main}
+              checked={beltValue === belt.main}
+              onChange={handleChangeBelt}
             />
             </div>
           </Grid>
