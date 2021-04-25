@@ -10,10 +10,9 @@ import StepLabel from '@material-ui/core/StepLabel';
 import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
 import FormHelperText from '@material-ui/core/FormHelperText';
+import ReactFlagsSelect from 'react-flags-select';
 import FormControl from '@material-ui/core/FormControl';
-// import Select from '@material-ui/core/Select';
-import Select from 'react-select';
-import countryList from 'react-select-country-list';
+import Select from '@material-ui/core/Select';
 import Typography from '@material-ui/core/Typography';
 
 const useStyles = makeStyles((theme) => ({
@@ -34,14 +33,17 @@ function getSteps() {
 }
 
 const LocationForm = () => {
-  const [value, setValue] = useState('')
-  const options = useMemo(() => countryList().getData(), [])
+  const [selected, setSelected] = useState('');
 
-  const changeHandler = value => {
-    setValue(value)
-  }
+  return (
+    <ReactFlagsSelect
+    searchable
+    searchPlaceholder="Search countries"
+      selected={selected}
+      onSelect={code => setSelected(code)}
+    />
+    );
 
-  return <Select options={options} value={value} onChange={changeHandler} />
 }
 
 const RegisterForm = () => {
@@ -124,7 +126,7 @@ const SelectOptions = () => {
     <div>
       <FormControl variant="outlined" className={classes.formControl}>
         <InputLabel id="demo-simple-select-outlined-label">Belt Color</InputLabel>
-        {/* <Select
+        <Select
           labelId="demo-simple-select-outlined-label"
           id="demo-simple-select-outlined"
           defaultValue="white"
@@ -139,7 +141,7 @@ const SelectOptions = () => {
           <MenuItem value="purple">Purple</MenuItem>
           <MenuItem value="brown">Brown</MenuItem>
           <MenuItem value="black">Black</MenuItem>
-        </Select> */}
+        </Select>
       </FormControl>
 
 
