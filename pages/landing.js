@@ -2,6 +2,9 @@ import React from "react";
 // nodejs library that concatenates classes
 import classnames from "classnames";
 import RoomIcon from '@material-ui/icons/Room';
+import SportsKabaddiIcon from '@material-ui/icons/SportsKabaddi';
+import DomainIcon from '@material-ui/icons/Domain';
+import QuestionAnswerIcon from '@material-ui/icons/QuestionAnswer';
 
 // reactstrap components
 import {
@@ -58,13 +61,11 @@ class Landing extends React.Component {
                   <Row>
                     <Col lg="6">
                       <h1 className="display-3 text-white">
-                        A beautiful Design System{" "}
-                        <span>completed with examples</span>
+                        Find Players and Dojos
+                        <span>In your community</span>
                       </h1>
                       <p className="lead text-white">
-                        The design system comes with four pre-built pages to
-                        help you get started faster. You can change the text and
-                        images and you're good to go.
+                      A web app made with Next.js and Firebase that connects karate players across the globe
                       </p>
                       {/* <div className="btn-wrapper">
                         <Button
@@ -122,11 +123,10 @@ class Landing extends React.Component {
                       <Card className="card-lift--hover shadow border-0">
                         <CardBody className="py-5">
                           <div className="icon icon-shape icon-shape-primary rounded-circle mb-4">
-                            {/* <i className="ni ni-check-bold" /> */}
-                            <RoomIcon />
+                            <SportsKabaddiIcon />
                           </div>
                           <h6 className="text-primary text-uppercase">
-                            Download Argon
+                            Meet Players
                           </h6>
                           <p className="description mt-3">
                             Argon is a great free UI package based on Bootstrap
@@ -159,10 +159,10 @@ class Landing extends React.Component {
                       <Card className="card-lift--hover shadow border-0">
                         <CardBody className="py-5">
                           <div className="icon icon-shape icon-shape-success rounded-circle mb-4">
-                            <i className="fas fa-heart" />
+                            <DomainIcon />
                           </div>
                           <h6 className="text-success text-uppercase">
-                            Build Something
+                            Find Dojos
                           </h6>
                           <p className="description mt-3">
                             Argon is a great free UI package based on Bootstrap
@@ -195,10 +195,10 @@ class Landing extends React.Component {
                       <Card className="card-lift--hover shadow border-0">
                         <CardBody className="py-5">
                           <div className="icon icon-shape icon-shape-warning rounded-circle mb-4">
-                            <i className="ni ni-planet" />
+                          <QuestionAnswerIcon />
                           </div>
                           <h6 className="text-warning text-uppercase">
-                            Prepare Launch
+                            Find Events
                           </h6>
                           <p className="description mt-3">
                             Argon is a great free UI package based on Bootstrap
