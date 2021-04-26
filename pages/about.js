@@ -129,21 +129,8 @@ class Landing extends React.Component {
                             Meet Players
                           </h6>
                           <p className="description mt-3">
-                            Argon is a great free UI package based on Bootstrap
-                            4 that includes the most important components and
-                            features.
+                            Search and view other players on our Players page
                           </p>
-                          <div>
-                            <Badge color="primary" pill className="mr-1">
-                              design
-                            </Badge>
-                            <Badge color="primary" pill className="mr-1">
-                              system
-                            </Badge>
-                            <Badge color="primary" pill className="mr-1">
-                              creative
-                            </Badge>
-                          </div>
                           {/* <Button
                             className="mt-4"
                             color="primary"
@@ -165,21 +152,8 @@ class Landing extends React.Component {
                             Find Dojos
                           </h6>
                           <p className="description mt-3">
-                            Argon is a great free UI package based on Bootstrap
-                            4 that includes the most important components and
-                            features.
+                            Find local dojos and classes near you location easily 
                           </p>
-                          <div>
-                            <Badge color="success" pill className="mr-1">
-                              business
-                            </Badge>
-                            <Badge color="success" pill className="mr-1">
-                              vision
-                            </Badge>
-                            <Badge color="success" pill className="mr-1">
-                              success
-                            </Badge>
-                          </div>
                           {/* <Button
                             className="mt-4"
                             color="success"
@@ -201,21 +175,8 @@ class Landing extends React.Component {
                             Find Events
                           </h6>
                           <p className="description mt-3">
-                            Argon is a great free UI package based on Bootstrap
-                            4 that includes the most important components and
-                            features.
+                            DojoMeet provides a easy interface to find local Karate events near you. 
                           </p>
-                          <div>
-                            <Badge color="warning" pill className="mr-1">
-                              marketing
-                            </Badge>
-                            <Badge color="warning" pill className="mr-1">
-                              product
-                            </Badge>
-                            <Badge color="warning" pill className="mr-1">
-                              launch
-                            </Badge>
-                          </div>
                           {/* <Button
                             className="mt-4"
                             color="warning"
@@ -247,11 +208,9 @@ class Landing extends React.Component {
                     <div className="icon icon-lg icon-shape icon-shape-success shadow rounded-circle mb-5">
                       <i className="ni ni-settings-gear-65" />
                     </div>
-                    <h3>Awesome features</h3>
+                    <h3>Find Local Events</h3>
                     <p>
-                      The kit comes with three pre-built pages to help you get
-                      started faster. You can change the text and images and
-                      you're good to go.
+                      View local events and competitions with ease using DojoMeet. Never lose track of events and competitions again!
                     </p>
                     <ul className="list-unstyled mt-5">
                       <li className="py-2">
@@ -266,7 +225,7 @@ class Landing extends React.Component {
                           </div>
                           <div>
                             <h6 className="mb-0">
-                              Carefully crafted components
+                              View events in your locations
                             </h6>
                           </div>
                         </div>
@@ -282,7 +241,7 @@ class Landing extends React.Component {
                             </Badge>
                           </div>
                           <div>
-                            <h6 className="mb-0">Amazing page examples</h6>
+                            <h6 className="mb-0">Worldwide event portal</h6>
                           </div>
                         </div>
                       </li>
@@ -298,7 +257,7 @@ class Landing extends React.Component {
                           </div>
                           <div>
                             <h6 className="mb-0">
-                              Super friendly support team
+                              Create and Join Events
                             </h6>
                           </div>
                         </div>
