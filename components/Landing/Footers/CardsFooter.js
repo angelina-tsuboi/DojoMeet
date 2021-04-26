@@ -86,7 +86,7 @@ class CardsFooter extends React.Component {
                 <UncontrolledTooltip delay={0} target="tooltip475038074">
                   Follow us
                 </UncontrolledTooltip>
-                <Button
+                {/* <Button
                   className="btn-icon-only rounded-circle ml-1"
                   color="facebook"
                   href="https://www.facebook.com/creativetim"
@@ -96,11 +96,11 @@ class CardsFooter extends React.Component {
                   <span className="btn-inner--icon">
                     <i className="fa fa-facebook-square" />
                   </span>
-                </Button>
+                </Button> */}
                 <UncontrolledTooltip delay={0} target="tooltip837440414">
                   Like us
                 </UncontrolledTooltip>
-                <Button
+                {/* <Button
                   className="btn-icon-only rounded-circle ml-1"
                   color="dribbble"
                   href="https://dribbble.com/creativetim"
@@ -124,7 +124,7 @@ class CardsFooter extends React.Component {
                   <span className="btn-inner--icon">
                     <i className="fa fa-github" />
                   </span>
-                </Button>
+                </Button> */}
                 <UncontrolledTooltip delay={0} target="tooltip495507257">
                   Star on Github
                 </UncontrolledTooltip>

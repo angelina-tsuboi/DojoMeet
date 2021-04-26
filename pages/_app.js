@@ -7,6 +7,10 @@ import Navbar from '../components/Navbar/Navbar';
 import { AuthProvider } from '../providers/authprovider';
 import { UserDataProvider } from '../providers/userdataprovider';
 
+import "../public/vendor/nucleo/css/nucleo.css";
+import "../public/vendor/font-awesome/css/font-awesome.min.css";
+import "../public/css/argon-design-system-react.css";
+
 
 export const theme = createMuiTheme({
   palette: {

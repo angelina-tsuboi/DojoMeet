@@ -16,7 +16,6 @@
 
 */
 import React from "react";
-import Link from 'next/link';
 
 // reactstrap components
 import {

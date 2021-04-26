@@ -36,7 +36,7 @@ class Landing extends React.Component {
   render() {
     return (
       <>
-        <DemoNavbar />
+        {/* <DemoNavbar /> */}
         <main ref="main">
           <div className="position-relative">
             {/* shape Hero */}
@@ -65,7 +65,7 @@ class Landing extends React.Component {
                         help you get started faster. You can change the text and
                         images and you're good to go.
                       </p>
-                      <div className="btn-wrapper">
+                      {/* <div className="btn-wrapper">
                         <Button
                           className="btn-icon mb-3 mb-sm-0"
                           color="info"
@@ -88,7 +88,7 @@ class Landing extends React.Component {
                             Download React
                           </span>
                         </Button>
-                      </div>
+                      </div> */}
                     </Col>
                   </Row>
                 </div>
@@ -142,14 +142,14 @@ class Landing extends React.Component {
                               creative
                             </Badge>
                           </div>
-                          <Button
+                          {/* <Button
                             className="mt-4"
                             color="primary"
                             href="#pablo"
                             onClick={e => e.preventDefault()}
                           >
                             Learn more
-                          </Button>
+                          </Button> */}
                         </CardBody>
                       </Card>
                     </Col>
@@ -178,14 +178,14 @@ class Landing extends React.Component {
                               success
                             </Badge>
                           </div>
-                          <Button
+                          {/* <Button
                             className="mt-4"
                             color="success"
                             href="#pablo"
                             onClick={e => e.preventDefault()}
                           >
                             Learn more
-                          </Button>
+                          </Button> */}
                         </CardBody>
                       </Card>
                     </Col>
@@ -214,14 +214,14 @@ class Landing extends React.Component {
                               launch
                             </Badge>
                           </div>
-                          <Button
+                          {/* <Button
                             className="mt-4"
                             color="warning"
                             href="#pablo"
                             onClick={e => e.preventDefault()}
                           >
                             Learn more
-                          </Button>
+                          </Button> */}
                         </CardBody>
                       </Card>
                     </Col>
@@ -508,7 +508,7 @@ class Landing extends React.Component {
                         <span className="d-block mb-1">Ryan Tompson</span>
                         <small className="h6 text-muted">Web Developer</small>
                       </h5>
-                      <div className="mt-3">
+                      {/* <div className="mt-3">
                         <Button
                           className="btn-icon-only rounded-circle"
                           color="warning"
@@ -533,7 +533,7 @@ class Landing extends React.Component {
                         >
                           <i className="fa fa-dribbble" />
                         </Button>
-                      </div>
+                      </div> */}
                     </div>
                   </div>
                 </Col>
@@ -552,7 +552,7 @@ class Landing extends React.Component {
                           Marketing Strategist
                         </small>
                       </h5>
-                      <div className="mt-3">
+                      {/* <div className="mt-3">
                         <Button
                           className="btn-icon-only rounded-circle"
                           color="primary"
@@ -577,7 +577,7 @@ class Landing extends React.Component {
                         >
                           <i className="fa fa-dribbble" />
                         </Button>
-                      </div>
+                      </div> */}
                     </div>
                   </div>
                 </Col>
@@ -594,7 +594,7 @@ class Landing extends React.Component {
                         <span className="d-block mb-1">Alexander Smith</span>
                         <small className="h6 text-muted">UI/UX Designer</small>
                       </h5>
-                      <div className="mt-3">
+                      {/* <div className="mt-3">
                         <Button
                           className="btn-icon-only rounded-circle"
                           color="info"
@@ -619,7 +619,7 @@ class Landing extends React.Component {
                         >
                           <i className="fa fa-dribbble" />
                         </Button>
-                      </div>
+                      </div> */}
                     </div>
                   </div>
                 </Col>
@@ -636,7 +636,7 @@ class Landing extends React.Component {
                         <span className="d-block mb-1">John Doe</span>
                         <small className="h6 text-muted">Founder and CEO</small>
                       </h5>
-                      <div className="mt-3">
+                      {/* <div className="mt-3">
                         <Button
                           className="btn-icon-only rounded-circle"
                           color="success"
@@ -661,7 +661,7 @@ class Landing extends React.Component {
                         >
                           <i className="fa fa-dribbble" />
                         </Button>
-                      </div>
+                      </div> */}
                     </div>
                   </div>
                 </Col>
@@ -684,7 +684,7 @@ class Landing extends React.Component {
                       </p>
                     </Col>
                     <Col className="ml-lg-auto" lg="3">
-                      <Button
+                      {/* <Button
                         block
                         className="btn-white"
                         color="default"
@@ -692,7 +692,7 @@ class Landing extends React.Component {
                         size="lg"
                       >
                         Download React
-                      </Button>
+                      </Button> */}
                     </Col>
                   </Row>
                 </div>
@@ -762,7 +762,7 @@ class Landing extends React.Component {
               </svg>
             </div>
           </section>
-          <section className="section section-lg pt-lg-0 section-contact-us">
+          {/* <section className="section section-lg pt-lg-0 section-contact-us">
             <Container>
               <Row className="justify-content-center mt--300">
                 <Col lg="8">
@@ -836,10 +836,10 @@ class Landing extends React.Component {
                 </Col>
               </Row>
             </Container>
-          </section>
-          <Download />
+          </section> */}
+          {/* <Download /> */}
         </main>
-        <CardsFooter />
+        {/* <CardsFooter /> */}
       </>
     );
   }
