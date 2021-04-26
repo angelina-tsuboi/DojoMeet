@@ -47,7 +47,7 @@ class Download extends React.Component {
                     color="primary"
                     href="https://www.creative-tim.com/product/argon-design-system-react?ref=adsr-landing-page"
                   >
-                    Sign Up
+                    Create a DojoMeet Account
                   </Button>
                 </div>
             
