@@ -1,6 +1,7 @@
 import React from "react";
 // nodejs library that concatenates classes
 import classnames from "classnames";
+import RoomIcon from '@material-ui/icons/Room';
 
 // reactstrap components
 import {
@@ -121,7 +122,8 @@ class Landing extends React.Component {
                       <Card className="card-lift--hover shadow border-0">
                         <CardBody className="py-5">
                           <div className="icon icon-shape icon-shape-primary rounded-circle mb-4">
-                            <i className="ni ni-check-bold" />
+                            {/* <i className="ni ni-check-bold" /> */}
+                            <RoomIcon />
                           </div>
                           <h6 className="text-primary text-uppercase">
                             Download Argon
