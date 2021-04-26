@@ -41,22 +41,22 @@ class CardsFooter extends React.Component {
             <Row>
               <Col className="mb-5 mb-md-0" md="6">
                 <Card className="card-lift--hover shadow border-0">
-                  <Link to="/landing-page">
+                  {/* <Link to="/landing-page">
                     <CardImg
                       alt="..."
                       src={require("../../../public/img/theme/landing.jpg")}
                     />
-                  </Link>
+                  </Link> */}
                 </Card>
               </Col>
               <Col className="mb-5 mb-lg-0" md="6">
                 <Card className="card-lift--hover shadow border-0">
-                  <Link to="/profile-page">
+                  {/* <Link to="/profile-page">
                     <CardImg
                       alt="..."
                       src={require("../../../public/img/theme/profile.jpg")}
                     />
-                  </Link>
+                  </Link> */}
                 </Card>
               </Col>
             </Row>

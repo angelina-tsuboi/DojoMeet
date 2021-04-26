@@ -91,12 +91,12 @@ class DemoNavbar extends React.Component {
                 <div className="navbar-collapse-header">
                   <Row>
                     <Col className="collapse-brand" xs="6">
-                      <Link to="/">
+                      {/* <Link to="/">
                         <img
                           alt="..."
                           src="/img/brand/argon-react.png"
                         />
-                      </Link>
+                      </Link> */}
                     </Col>
                     <Col className="collapse-close" xs="6">
                       <button className="navbar-toggler" id="navbar_global">

@@ -65,12 +65,12 @@ class Menus extends React.Component {
                       <div className="navbar-collapse-header">
                         <Row>
                           <Col className="collapse-brand" xs="6">
-                            <Link to="/">
+                            {/* <Link to="/">
                               <img
                                 alt="..."
                                 src={require("assets/img/brand/argon-react.png")}
                               />
-                            </Link>
+                            </Link> */}
                           </Col>
                           <Col className="collapse-close" xs="6">
                             <button
@@ -154,12 +154,12 @@ class Menus extends React.Component {
                       <div className="navbar-collapse-header">
                         <Row>
                           <Col className="collapse-brand" xs="6">
-                            <Link to="/">
+                            {/* <Link to="/">
                               <img
                                 alt="..."
                                 src={require("assets/img/brand/argon-react.png")}
                               />
-                            </Link>
+                            </Link> */}
                           </Col>
                           <Col className="collapse-close" xs="6">
                             <button

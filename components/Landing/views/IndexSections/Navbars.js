@@ -59,12 +59,12 @@ class Navbars extends React.Component {
                 <div className="navbar-collapse-header">
                   <Row>
                     <Col className="collapse-brand" xs="6">
-                      <Link to="/">
+                      {/* <Link to="/">
                         <img
                           alt="..."
                           src={require("assets/img/brand/argon-react.png")}
                         />
-                      </Link>
+                      </Link> */}
                     </Col>
                     <Col className="collapse-close" xs="6">
                       <button className="navbar-toggler" id="navbar-default">
@@ -148,12 +148,12 @@ class Navbars extends React.Component {
                 <div className="navbar-collapse-header">
                   <Row>
                     <Col className="collapse-brand" xs="6">
-                      <Link to="/">
+                      {/* <Link to="/">
                         <img
                           alt="..."
                           src={require("assets/img/brand/argon-react.png")}
                         />
-                      </Link>
+                      </Link> */}
                     </Col>
                     <Col className="collapse-close" xs="6">
                       <button className="navbar-toggler" id="navbar-primary">
@@ -218,12 +218,12 @@ class Navbars extends React.Component {
                 <div className="navbar-collapse-header">
                   <Row>
                     <Col className="collapse-brand" xs="6">
-                      <Link to="/">
+                      {/* <Link to="/">
                         <img
                           alt="..."
                           src={require("assets/img/brand/argon-react.png")}
                         />
-                      </Link>
+                      </Link> */}
                     </Col>
                     <Col className="collapse-close" xs="6">
                       <button className="navbar-toggler" id="navbar-success">
@@ -307,12 +307,12 @@ class Navbars extends React.Component {
                 <div className="navbar-collapse-header">
                   <Row>
                     <Col className="collapse-brand" xs="6">
-                      <Link to="/">
+                      {/* <Link to="/">
                         <img
                           alt="..."
                           src={require("assets/img/brand/argon-react.png")}
                         />
-                      </Link>
+                      </Link> */}
                     </Col>
                     <Col className="collapse-close" xs="6">
                       <button className="navbar-toggler" id="navbar-danger">
@@ -388,12 +388,12 @@ class Navbars extends React.Component {
                 <div className="navbar-collapse-header">
                   <Row>
                     <Col className="collapse-brand" xs="6">
-                      <Link to="/">
+                      {/* <Link to="/">
                         <img
                           alt="..."
                           src={require("assets/img/brand/argon-react.png")}
                         />
-                      </Link>
+                      </Link> */}
                     </Col>
                     <Col className="collapse-close" xs="6">
                       <button className="navbar-toggler" id="navbar-warning">
@@ -457,12 +457,12 @@ class Navbars extends React.Component {
                 <div className="navbar-collapse-header">
                   <Row>
                     <Col className="collapse-brand" xs="6">
-                      <Link to="/">
+                      {/* <Link to="/">
                         <img
                           alt="..."
                           src={require("assets/img/brand/argon-react.png")}
                         />
-                      </Link>
+                      </Link> */}
                     </Col>
                     <Col className="collapse-close" xs="6">
                       <button className="navbar-toggler" id="navbar-info">
