@@ -16,7 +16,7 @@
 
 */
 import React from "react";
-import { Link } from "react-router-dom";
+import Link from 'next/link';
 // nodejs library that concatenates classes
 import classnames from "classnames";
 
