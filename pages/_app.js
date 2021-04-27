@@ -4,6 +4,7 @@ import React, { useState, useEffect } from 'react';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import fire from '../config/fire-conf';
 import Navbar from '../components/Navbar/Navbar';
+import DemoNavbar from "../components/Landing/Navbars/DemoNavbar.js";
 import { AuthProvider } from '../providers/authprovider';
 import { UserDataProvider } from '../providers/userdataprovider';
 
@@ -50,7 +51,7 @@ function MyApp({ Component, pageProps }) {
         <UserDataProvider>
           <ThemeProvider theme={theme}>
             <CssBaseline />
-            <Navbar loggedIn={loggedIn} />
+            <DemoNavbar loggedIn={loggedIn} />
             <Component {...pageProps} />
           </ThemeProvider>
         </UserDataProvider>
