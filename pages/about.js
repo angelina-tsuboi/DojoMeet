@@ -5,6 +5,9 @@ import RoomIcon from '@material-ui/icons/Room';
 import SportsKabaddiIcon from '@material-ui/icons/SportsKabaddi';
 import DomainIcon from '@material-ui/icons/Domain';
 import QuestionAnswerIcon from '@material-ui/icons/QuestionAnswer';
+import EventIcon from '@material-ui/icons/Event';
+import PeopleIcon from '@material-ui/icons/People';
+import CheckIcon from '@material-ui/icons/Check';
 
 // reactstrap components
 import {
@@ -29,6 +32,7 @@ import CardsFooter from "../components/Landing/Footers/CardsFooter.js";
 
 // index page sections
 import Download from "../components/Landing/views/IndexSections/Download.js";
+import { Announcement } from "@material-ui/icons";
 
 class Landing extends React.Component {
   state = {};
@@ -204,7 +208,7 @@ class Landing extends React.Component {
                 <Col className="order-md-1" md="6">
                   <div className="pr-md-5">
                     <div className="icon icon-lg icon-shape icon-shape-success shadow rounded-circle mb-5">
-                      <i className="ni ni-settings-gear-65" />
+                      <EventIcon />
                     </div>
                     <h3>Find Local Events</h3>
                     <p>
@@ -218,7 +222,7 @@ class Landing extends React.Component {
                               className="badge-circle mr-3"
                               color="success"
                             >
-                              <i className="ni ni-settings-gear-65" />
+                              <CheckIcon />
                             </Badge>
                           </div>
                           <div>
@@ -235,7 +239,7 @@ class Landing extends React.Component {
                               className="badge-circle mr-3"
                               color="success"
                             >
-                              <i className="ni ni-html5" />
+                             <CheckIcon />
                             </Badge>
                           </div>
                           <div>
@@ -250,7 +254,7 @@ class Landing extends React.Component {
                               className="badge-circle mr-3"
                               color="success"
                             >
-                              <i className="ni ni-satisfied" />
+                              <CheckIcon />
                             </Badge>
                           </div>
                           <div>
@@ -305,9 +309,9 @@ class Landing extends React.Component {
                 <Col md="6">
                   <div className="pl-md-5">
                     <div className="icon icon-lg icon-shape icon-shape-warning shadow rounded-circle mb-5">
-                      <i className="ni ni-settings" />
+                    <PeopleIcon />
                     </div>
-                    <h3>Our customers</h3>
+                    <h3>Meet Nearby Players</h3>
                     <p className="lead">
                       Don't let your uses guess by attaching tooltips and
                       popoves to any element. Just make sure you enable them
@@ -335,7 +339,7 @@ class Landing extends React.Component {
             <Container className="pt-lg pb-300">
               <Row className="text-center justify-content-center">
                 <Col lg="10">
-                  <h2 className="display-3 text-white">Build something</h2>
+                  <h2 className="display-3 text-white">Discover, Practice, Compete</h2>
                   <p className="lead text-white">
                     According to the National Oceanic and Atmospheric
                     Administration, Ted, Scambos, NSIDClead scentist, puts the
@@ -347,9 +351,9 @@ class Landing extends React.Component {
               <Row className="row-grid mt-5">
                 <Col lg="4">
                   <div className="icon icon-lg icon-shape bg-gradient-white shadow rounded-circle text-primary">
-                    <i className="ni ni-settings text-primary" />
+                    <Announcement />
                   </div>
-                  <h5 className="text-white mt-3">Building tools</h5>
+                  <h5 className="text-white mt-3">Discover Local Events</h5>
                   <p className="text-white mt-3">
                     Some quick example text to build on the card title and make
                     up the bulk of the card's content.
@@ -357,9 +361,9 @@ class Landing extends React.Component {
                 </Col>
                 <Col lg="4">
                   <div className="icon icon-lg icon-shape bg-gradient-white shadow rounded-circle text-primary">
-                    <i className="ni ni-ruler-pencil text-primary" />
+                    <DomainIcon />
                   </div>
-                  <h5 className="text-white mt-3">Grow your market</h5>
+                  <h5 className="text-white mt-3">Practice at Nearby Dojos</h5>
                   <p className="text-white mt-3">
                     Some quick example text to build on the card title and make
                     up the bulk of the card's content.
@@ -367,9 +371,9 @@ class Landing extends React.Component {
                 </Col>
                 <Col lg="4">
                   <div className="icon icon-lg icon-shape bg-gradient-white shadow rounded-circle text-primary">
-                    <i className="ni ni-atom text-primary" />
+                    <SportsKabaddiIcon />
                   </div>
-                  <h5 className="text-white mt-3">Launch time</h5>
+                  <h5 className="text-white mt-3">Compete with other Players</h5>
                   <p className="text-white mt-3">
                     Some quick example text to build on the card title and make
                     up the bulk of the card's content.
