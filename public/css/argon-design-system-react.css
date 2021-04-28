@@ -13540,7 +13540,9 @@ textarea[resize="horizontal"] {
   .section-shaped .shape-style-1 span {
     height: 120px;
     width: 120px;
-    border-radius: 50%; }
+    border-radius: 0%;
+    transform: rotate(70deg);
+    -ms-transform: rotate(70deg); }
   .section-shaped .shape-style-1 .span-200 {
     height: 200px;
     width: 200px; }

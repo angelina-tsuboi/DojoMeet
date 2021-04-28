@@ -64,7 +64,7 @@ class Hero extends React.Component {
                         <span className="btn-inner--icon mr-1">
                           <i className="ni ni-cloud-download-95" />
                         </span>
-                        <span className="btn-inner--text">Download React</span>
+                        <span className="btn-inner--text">Get Started</span>
                       </Button>{" "}
                       <Button
                         className="btn-icon mb-3 mb-sm-0"
@@ -77,8 +77,8 @@ class Hero extends React.Component {
                           <i className="fa fa-github" />
                         </span>
                         <span className="btn-inner--text">
-                          <span className="text-warning mr-1">Star us</span>
-                          on Github
+                          <span className="text-warning mr-1">Login</span>
+                          with Google
                         </span>
                       </Button>
                     </div>
