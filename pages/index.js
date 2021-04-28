@@ -3,21 +3,7 @@ import Head from 'next/head';
 import fire from '../config/fire-conf';
 import HomePage from '../components/HomePage/HomePage';
 import {useContext} from 'react';
-import Typography from '@material-ui/core/Typography';
-// import Card from '@material-ui/core/Card';
-import Avatar from '@material-ui/core/Avatar';
-import CardContent from '@material-ui/core/CardContent';
-// import Button from '@material-ui/core/Button';
-import Grid from '@material-ui/core/Grid';
-import EditProfile from '../components/EditProfile/EditProfile';
-import styles from '../styles/Index.module.css';
-import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemText from '@material-ui/core/ListItemText';
-import ListItemAvatar from '@material-ui/core/ListItemAvatar';
-import ImageIcon from '@material-ui/icons/Image';
 import {UserDataContext} from '../providers/userdataprovider';
-import Divider from '@material-ui/core/Divider';
 import { Button, Card, Container, Row, Col } from "reactstrap";
 
 
@@ -153,79 +139,6 @@ const Home = () => {
         ?
         <HomePage />
         :
-    //     <div>
-    //       <Grid container spacing={3}>
-    //         {currentUser && 
-    //         <Grid item xs={6}>
-    //         <Card className={styles.profileCard} style={{ width: '70%', margin: 'auto', marginTop: '1rem' }}>
-    //           <Avatar aria-label="recipe" src={currentUser.photoURL} style={{ height: '100px', width: '100px' }} className={styles.profileImage}></Avatar>
-    //           <CardContent>
-    //             <Typography variant="h4" color="textPrimary" component="p">
-    //               {name}
-    //             </Typography>
-    //             <Typography variant="h6" color="textSecondary" component="p">
-    //               {location}
-    //             </Typography>
-    //             <Typography variant="body1" color="textSecondary" component="p">
-    //               {description}
-    //             </Typography>
-    //             <Button onClick={handleClickOpen}>
-    //               Edit Profile
-    //         </Button>
-
-    //             <Button onClick={handleLogout}>
-    //               Logout
-    //         </Button>
-    //           </CardContent>
-    //         </Card>
-    //       </Grid>
-    //       }
-            
-    //         <Grid item xs={6}>
-
-    //           <h3>Your Upcoming Events</h3>
-    //           <List>
-    //             {posts.map(post =>
-    //               <div key={post.id}>
-    //                 <ListItem key={post.id}>
-    //                   <ListItemAvatar>
-    //                     <Avatar>
-    //                       <ImageIcon />
-    //                     </Avatar>
-    //                   </ListItemAvatar>
-    //                   <ListItemText primary={post.title} secondary="Jan 9, 2014" />
-    //                 </ListItem>
-    //                 <Divider variant="inset" component="li" />
-    //               </div>
-
-    //             )}
-    //           </List>
-
-    //           <h3>Your Events</h3>
-    //           {userPosts.map(post =>
-    //             <div key={post.id}>
-    //               <ListItem key={post.id}>
-    //                 <ListItemAvatar>
-    //                   <Avatar>
-    //                     <ImageIcon />
-    //                   </Avatar>
-    //                 </ListItemAvatar>
-    //                 <ListItemText primary={post.title} secondary="Jan 9, 2014" />
-    //               </ListItem>
-    //               {/* <Divider variant="inset" component="li" /> */}
-    //             </div>
-    //           )}
-
-
-    //         </Grid>
-    //       </Grid>
-
-    //     </div>
-
-    //   }
-    //   {(currentUser && userData) && 
-    //     <EditProfile open={open} onClose={handleClose} profile={userData}/>
-    //   }
 
     <main className="profile-page" >
           <section className="section-profile-cover section-shaped my-0">

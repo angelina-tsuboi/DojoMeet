@@ -24,9 +24,6 @@ const Navbar = ({ loggedIn }) => {
     setOpen(false);
   };
 
-
-
-
   const goToRoute = (e) => {
     router.push(e.target.value);
   }
