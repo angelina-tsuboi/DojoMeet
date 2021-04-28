@@ -68,14 +68,13 @@ class Login extends React.Component {
                   Bootstrap 4 Design System.
                 </p>
                 <div className="btn-wrapper">
-                  <Button color="success" to="/login-page" tag={Link}>
+                  <Button color="success" to="/login-page">
                     Login Page
                   </Button>
                   <Button
                     className="btn-white"
                     color="default"
                     to="/register-page"
-                    tag={Link}
                   >
                     Register Page
                   </Button>
