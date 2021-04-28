@@ -82,17 +82,6 @@ class Hero extends React.Component {
                         </span>
                       </Button>
                     </div>
-                    <div className="mt-5">
-                      <small className="text-white font-weight-bold mb-0 mr-2">
-                        *proudly coded by
-                      </small>
-                      <img
-                        alt="..."
-                        className="ml-1"
-                        style={{ height: "28px" }}
-                        src="img/brand/creativetim-white-slim.png"
-                      />
-                    </div>
                   </Col>
                 </Row>
               </div>

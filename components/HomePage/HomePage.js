@@ -36,53 +36,57 @@ import Carousel from "../../components/Landing/views/IndexSections/Carousel.js";
 import Icons from "../../components/Landing/views/IndexSections/Icons.js";
 import Login from "../../components/Landing/views/IndexSections/Login.js";
 import Download from "../../components/Landing/views/IndexSections/Download.js";
+import CardsFooter from "../../components/Landing/Footers/CardsFooter";
 
 
 const HomePage = () => {
-    const router = useRouter()
-    
-const goToRoute = (e) => {
+  const router = useRouter()
+
+  const goToRoute = (e) => {
     e.preventDefault()
     router.push(e.target.value);
-    }
+  }
 
-  
+
   return (
-    <main ref="main">
-    <Hero />
-    <Buttons />
-    <Inputs />
-    <section className="section">
-      <Container>
-        <CustomControls />
-        <Menus />
-      </Container>
-    </section>
-    <Navbars />
-    <section className="section section-components">
-      <Container>
-        <Tabs />
-        <Row className="row-grid justify-content-between align-items-center mt-lg">
-          <Progress />
-          <Pagination />
-        </Row>
-        <Row className="row-grid justify-content-between">
-          <Pills />
-          <Labels />
-        </Row>
-        <Alerts />
-        <Typography />
-        <Modals />
-        <Datepicker />
-        <TooltipPopover />
-      </Container>
-    </section>
-    <Carousel />
-    <Icons />
-    <Login />
-    <Download />
-  </main>
+    <div>
+      <main>
+        <Hero />
+        <Buttons />
+        <Inputs />
+        <section className="section">
+          <Container>
+            <CustomControls />
+            <Menus />
+          </Container>
+        </section>
+        <Navbars />
+        <section className="section section-components">
+          <Container>
+            <Tabs />
+            <Row className="row-grid justify-content-between align-items-center mt-lg">
+              <Progress />
+              <Pagination />
+            </Row>
+            <Row className="row-grid justify-content-between">
+              <Pills />
+              <Labels />
+            </Row>
+            <Alerts />
+            <Typography />
+            <Modals />
+            <Datepicker />
+            <TooltipPopover />
+          </Container>
+        </section>
+        <Carousel />
+        <Icons />
+        <Login />
+        <Download />
+      </main>
 
+      <CardsFooter />
+    </div>
   )
 }
 export default HomePage;
