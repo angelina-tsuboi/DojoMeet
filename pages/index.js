@@ -4,10 +4,10 @@ import fire from '../config/fire-conf';
 import HomePage from '../components/HomePage/HomePage';
 import {useContext} from 'react';
 import Typography from '@material-ui/core/Typography';
-import Card from '@material-ui/core/Card';
+// import Card from '@material-ui/core/Card';
 import Avatar from '@material-ui/core/Avatar';
 import CardContent from '@material-ui/core/CardContent';
-import Button from '@material-ui/core/Button';
+// import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
 import EditProfile from '../components/EditProfile/EditProfile';
 import styles from '../styles/Index.module.css';
@@ -18,6 +18,7 @@ import ListItemAvatar from '@material-ui/core/ListItemAvatar';
 import ImageIcon from '@material-ui/icons/Image';
 import {UserDataContext} from '../providers/userdataprovider';
 import Divider from '@material-ui/core/Divider';
+import { Button, Card, Container, Row, Col } from "reactstrap";
 
 
 const Home = () => {
@@ -226,7 +227,7 @@ const Home = () => {
     //     <EditProfile open={open} onClose={handleClose} profile={userData}/>
     //   }
 
-    <main className="profile-page" ref="main">
+    <main className="profile-page" >
           <section className="section-profile-cover section-shaped my-0">
             {/* Circles background */}
             <div className="shape shape-style-1 shape-default alpha-4">
@@ -266,7 +267,8 @@ const Home = () => {
                           <img
                             alt="..."
                             className="rounded-circle"
-                            src={require("assets/img/theme/team-4-800x800.jpg")}
+                            style={{ height: '150px', width: '150px' }}
+                            src={currentUser.photoURL}
                           />
                         </a>
                       </div>
@@ -300,46 +302,42 @@ const Home = () => {
                       <div className="card-profile-stats d-flex justify-content-center">
                         <div>
                           <span className="heading">22</span>
-                          <span className="description">Friends</span>
-                        </div>
-                        <div>
-                          <span className="heading">10</span>
-                          <span className="description">Photos</span>
+                          <span className="description">Followers</span>
                         </div>
                         <div>
                           <span className="heading">89</span>
-                          <span className="description">Comments</span>
+                          <span className="description">Following</span>
+                        </div>
+                        <div>
+                          <span className="heading">10</span>
+                          <span className="description">Events</span>
                         </div>
                       </div>
                     </Col>
                   </Row>
                   <div className="text-center mt-5">
                     <h3>
-                      Jessica Jones{" "}
+                    {name} {" "}
                       <span className="font-weight-light">, 27</span>
                     </h3>
                     <div className="h6 font-weight-300">
                       <i className="ni location_pin mr-2" />
-                      Bucharest, Romania
+                      {location}
                     </div>
                     <div className="h6 mt-4">
                       <i className="ni business_briefcase-24 mr-2" />
-                      Solution Manager - Creative Tim Officer
+                      Southwest Redondo Beach Dojo
                     </div>
                     <div>
                       <i className="ni education_hat mr-2" />
-                      University of Computer Science
+                      Orange Belt
                     </div>
                   </div>
                   <div className="mt-5 py-5 border-top text-center">
                     <Row className="justify-content-center">
                       <Col lg="9">
                         <p>
-                          An artist of considerable range, Ryan — the name taken
-                          by Melbourne-raised, Brooklyn-based Nick Murphy —
-                          writes, performs and records all of his own music,
-                          giving it a warm, intimate feel with a solid groove
-                          structure. An artist of considerable range.
+                        {description}
                         </p>
                         <a href="#pablo" onClick={e => e.preventDefault()}>
                           Show more
@@ -351,7 +349,7 @@ const Home = () => {
               </Card>
             </Container>
           </section>
-        </main>
+    </main>
 }
     </div>
   
