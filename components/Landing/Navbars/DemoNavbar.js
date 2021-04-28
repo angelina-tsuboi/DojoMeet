@@ -2,6 +2,7 @@
 import React from "react";
 // JavaScript plugin that hides or shows a component based on your scroll
 import Headroom from "headroom.js";
+import { useRouter } from 'next/router';
 // reactstrap components
 import {
   Button,
@@ -22,7 +23,13 @@ import {
   UncontrolledTooltip
 } from "reactstrap";
 
+
 class DemoNavbar extends React.Component {
+
+  goToRoute = (e) => {
+    this.props.router.push(e.target.value);
+  }
+  
   componentDidMount() {
     let headroom = new Headroom(document.getElementById("navbar-main"));
     // initialise
@@ -72,17 +79,17 @@ class DemoNavbar extends React.Component {
                 </div>
                 <Nav className="ml-lg-auto" navbar>
                   <NavItem>
-                    <NavLink href="#pablo" onClick={e => e.preventDefault()}>
+                    <NavLink href="about" onClick={e => goToRoute(e)} >
                       About <span className="sr-only">(current)</span>
                     </NavLink>
                   </NavItem>
                   <NavItem>
-                    <NavLink href="#pablo" onClick={e => e.preventDefault()}>
+                    <NavLink href="features" onClick={e => goToRoute(e)} >
                       Features <span className="sr-only">(current)</span>
                     </NavLink>
                   </NavItem>
                   <NavItem>
-                    <NavLink href="#pablo" onClick={e => e.preventDefault()}>
+                    <NavLink href="login" onClick={e => goToRoute(e)}>
                       Login
                     </NavLink>
                   </NavItem>
@@ -94,8 +101,8 @@ class DemoNavbar extends React.Component {
                 <Button
                   className="btn-neutral btn-icon"
                   color="default"
-                  href="https://www.creative-tim.com/product/argon-design-system-react?ref=adsr-navbar"
-                  target="_blank"
+                  href="signup" 
+                  onClick={e => goToRoute(e)}
                 >
                   <span className="btn-inner--icon">
                     <i className="fa fa-cloud-download mr-2" />

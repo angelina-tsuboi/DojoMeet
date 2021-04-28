@@ -4,6 +4,7 @@ import React, { useState, useEffect } from 'react';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import fire from '../config/fire-conf';
 import Navbar from '../components/Navbar/Navbar';
+import { useRouter } from 'next/router';
 import DemoNavbar from "../components/Landing/Navbars/DemoNavbar.js";
 import { AuthProvider } from '../providers/authprovider';
 import { UserDataProvider } from '../providers/userdataprovider';
@@ -27,6 +28,7 @@ export const theme = createMuiTheme({
 
 function MyApp({ Component, pageProps }) {
   const [loggedIn, setLoggedIn] = useState(false);
+  const router = useRouter()
 
   useEffect(() => {
     // Remove the server-side injected CSS.
@@ -51,7 +53,7 @@ function MyApp({ Component, pageProps }) {
         <UserDataProvider>
           <ThemeProvider theme={theme}>
             <CssBaseline />
-            <DemoNavbar loggedIn={loggedIn} />
+            <DemoNavbar loggedIn={loggedIn} router={router}/>
             <Component {...pageProps} />
           </ThemeProvider>
         </UserDataProvider>
