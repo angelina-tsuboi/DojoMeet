@@ -1,17 +1,5 @@
 import React, { useState } from 'react';
-import Button from '@material-ui/core/Button';
-import classNames from 'classnames';
-import ButtonGroup from '@material-ui/core/ButtonGroup';
-import Link from '@material-ui/core/Link';
 import { useRouter } from 'next/router';
-import Card from '@material-ui/core/Card';
-import CardActions from '@material-ui/core/CardActions';
-import CardContent from '@material-ui/core/CardContent';
-import CardMedia from '@material-ui/core/CardMedia';
-import CssBaseline from '@material-ui/core/CssBaseline';
-import Grid from '@material-ui/core/Grid';
-import Toolbar from '@material-ui/core/Toolbar';
-
 import { Container, Row } from "reactstrap";
 
 import styles from './HomePage.module.css';
