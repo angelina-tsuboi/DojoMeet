@@ -4,24 +4,13 @@ import React from "react";
 import Headroom from "headroom.js";
 import fire from '../../../config/fire-conf';
 import { useRouter } from 'next/router';
+import SignedInLinks from './Links/SignedInLinks/SignedInLinks';
+import SignedOutLinks from './Links/SignedOutLinks/SignedOutLinks';
 // reactstrap components
 import {
-  Button,
-  UncontrolledCollapse,
-  DropdownMenu,
-  DropdownItem,
-  DropdownToggle,
-  UncontrolledDropdown,
-  Media,
   NavbarBrand,
   Navbar,
-  NavItem,
-  NavLink,
-  Nav,
-  Container,
-  Row,
-  Col,
-  UncontrolledTooltip
+  Container
 } from "reactstrap";
 
 
@@ -58,19 +47,22 @@ class DemoNavbar extends React.Component {
   };
 
   render() {
-    <header className="header-global">
+    return (
+<header className="header-global">
     <Navbar className="navbar-main navbar-transparent navbar-light headroom" expand="lg" id="navbar-main">
       <Container>
         <NavbarBrand href="" onClick={e => goToRoute(e)}>
           <img src="/logo.png" />
-  </NavbarBrand>
+        </NavbarBrand>
         <button className="navbar-toggler" id="navbar-primary">
           <span className="navbar-toggler-icon" />
         </button>
-        
+        {fire.auth().onAuthStateChanged(user => user ? <SignedInLinks /> : <SignedOutLinks />)}
       </Container>
     </Navbar>
   </header>
+    )
+    
   }
 }
 

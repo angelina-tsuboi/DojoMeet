@@ -8,9 +8,16 @@ import {
     Row,
     Col
   } from "reactstrap";
+  import { useRouter } from 'next/router';
 
 
 const SignedInLinks = () => {
+    let router = useRouter();
+    
+    goToRoute = (e) => {
+        router.push(e.target.value);
+    }
+
     return (
         <div>
             <UncontrolledCollapse navbar toggler="#navbar-primary">
