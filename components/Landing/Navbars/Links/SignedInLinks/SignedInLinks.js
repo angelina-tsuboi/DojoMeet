@@ -14,7 +14,7 @@ import {
 const SignedInLinks = () => {
     let router = useRouter();
     
-    goToRoute = (e) => {
+    const goToRoute = (e) => {
         router.push(e.target.value);
     }
 

@@ -57,7 +57,7 @@ class DemoNavbar extends React.Component {
         <button className="navbar-toggler" id="navbar-primary">
           <span className="navbar-toggler-icon" />
         </button>
-        {fire.auth().onAuthStateChanged(user => user ? <SignedInLinks /> : <SignedOutLinks />)}
+        {fire.auth().currentUser ? <SignedInLinks /> : <SignedOutLinks />}
       </Container>
     </Navbar>
   </header>
