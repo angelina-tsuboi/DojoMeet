@@ -63,8 +63,8 @@ class DemoNavbar extends React.Component {
             <header className="header-global">
               <Navbar className="navbar-main navbar-transparent navbar-light headroom" expand="lg" id="navbar-main">
                 <Container>
-                  <NavbarBrand href="#pablo" onClick={e => e.preventDefault()}>
-                    Primary Color
+                  <NavbarBrand href="" onClick={e => goToRoute(e)}>
+                  <img src="/logo.png" />
             </NavbarBrand>
                   <button className="navbar-toggler" id="navbar-primary">
                     <span className="navbar-toggler-icon" />
@@ -128,8 +128,8 @@ class DemoNavbar extends React.Component {
         <header className="header-global">
           <Navbar className="navbar-main navbar-transparent navbar-light headroom" expand="lg" id="navbar-main">
             <Container>
-              <NavbarBrand href="#pablo" onClick={e => e.preventDefault()}>
-                Primary Color
+              <NavbarBrand href="" onClick={e => goToRoute(e)}>
+                <img src="/logo.png" />
         </NavbarBrand>
               <button className="navbar-toggler" id="navbar-primary">
                 <span className="navbar-toggler-icon" />
