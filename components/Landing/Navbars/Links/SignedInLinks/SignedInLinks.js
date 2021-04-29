@@ -45,6 +45,11 @@ const SignedInLinks = () => {
                         </NavLink>
                     </NavItem>
                     <NavItem>
+                        <NavLink href="profile" onClick={e => goToRoute(e)} >
+                            Profile <span className="sr-only">(current)</span>
+                        </NavLink>
+                    </NavItem>
+                    <NavItem>
                         <NavLink href="login" onClick={e => goToRoute(e)}>
                             Logout
                   </NavLink>

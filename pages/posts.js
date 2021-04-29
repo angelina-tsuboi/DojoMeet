@@ -59,6 +59,20 @@ const Posts = () => {
     }, []);
 
   return (
+      
+<main>
+        <section className="section section-shaped section-lg">
+          <div className="shape shape-style-1 bg-gradient-default">
+            <span />
+            <span />
+            <span />
+            <span />
+            <span />
+            <span />
+            <span />
+            <span />
+          </div>
+          </section>
     <div>
       <Head>
         <title>Blog App</title>
@@ -95,6 +109,7 @@ const Posts = () => {
       
         {notification}
     </div>
+    </main>
   )
 }
 export default Posts;
