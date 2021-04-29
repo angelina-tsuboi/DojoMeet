@@ -22,7 +22,7 @@ const Posts = () => {
   const [notification, setNotification] = useState('');
   const [loggedIn, setLoggedIn] = useState(false);
   const [value, onChange] = useState(new Date());
-  const [value2, setValue] = React.useState(new Date());
+  const [value2, setValue] = useState(new Date());
 
   useEffect(() => {
     // Remove the server-side injected CSS.
