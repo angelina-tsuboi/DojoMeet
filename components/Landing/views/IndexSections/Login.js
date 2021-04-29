@@ -17,6 +17,7 @@
 */
 import React from "react";
 import Link from 'next/link';
+import fire from '../../../../config/fire-conf';
 // nodejs library that concatenates classes
 import classnames from "classnames";
 
@@ -39,6 +40,41 @@ import {
 
 class Login extends React.Component {
   state = {};
+
+  handleGoogleLogin = () => {
+    let provider = new fire.auth.GoogleAuthProvider();
+    fire.auth()
+  .signInWithPopup(provider)
+  .then((result) => {
+    var credential = result.credential;
+
+    // This gives you a Google Access Token. You can use it to access the Google API.
+    var token = credential.accessToken;
+    // The signed-in user info.
+    var user = result.user;
+    console.log("got the user", user);
+    fire.firestore().doc(`users/${user.uid}`).get().then(snapshot => {
+      if(!snapshot.exists){
+        const data = {
+          uid: user.uid,
+          email: user.email,
+          photoURL: user.photoURL,
+          name: user.displayName
+        }
+        fire.firestore().collection("users").doc(user.uid).set(data).then(() => {
+          this.props.router.push("/");
+        })
+      }else{
+
+        this.props.router.push("/")    
+      }
+    })
+    
+  }).catch((error) => {
+    console.log("Error: ", error);
+  });
+  }
+
   render() {
     return (
         <main ref="main">
@@ -66,7 +102,7 @@ class Login extends React.Component {
                         className="btn-neutral btn-icon ml-1"
                         color="default"
                         href="#pablo"
-                        onClick={e => e.preventDefault()}
+                        onClick={() => this.handleGoogleLogin()}
                       >
                         <span className="btn-inner--icon mr-1">
                           <img

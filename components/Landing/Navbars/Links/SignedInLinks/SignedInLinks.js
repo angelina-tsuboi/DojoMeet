@@ -9,6 +9,7 @@ import {
     Col
   } from "reactstrap";
   import { useRouter } from 'next/router';
+  import fire from '../../../../../config/fire-conf';
 
 
 const SignedInLinks = () => {
@@ -17,6 +18,14 @@ const SignedInLinks = () => {
     const goToRoute = (e) => {
         router.push(e.target.value);
     }
+
+    const handleLogout = () => {
+        fire.auth()
+          .signOut()
+          .then(() => {
+            router.push("/");
+          });
+      }
 
     return (
         <div>
@@ -50,7 +59,7 @@ const SignedInLinks = () => {
                         </NavLink>
                     </NavItem>
                     <NavItem>
-                        <NavLink href="login" onClick={e => goToRoute(e)}>
+                        <NavLink onClick={handleLogout}>
                             Logout
                   </NavLink>
                     </NavItem>

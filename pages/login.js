@@ -25,43 +25,9 @@ const LoginPage = () => {
     setPassword('')
     router.push("/")
   }
-
-  const handleGoogleLogin = () => {
-    let provider = new fire.auth.GoogleAuthProvider();
-    fire.auth()
-  .signInWithPopup(provider)
-  .then((result) => {
-    var credential = result.credential;
-
-    // This gives you a Google Access Token. You can use it to access the Google API.
-    var token = credential.accessToken;
-    // The signed-in user info.
-    var user = result.user;
-    console.log("got the user", user);
-    fire.firestore().doc(`users/${user.uid}`).get().then(snapshot => {
-      if(!snapshot.exists){
-        const data = {
-          uid: user.uid,
-          email: user.email,
-          photoURL: user.photoURL,
-          name: user.displayName
-        }
-        fire.firestore().collection("users").doc(user.uid).set(data).then(() => {
-          router.push("/");
-        })
-      }else{
-
-        router.push("/")    
-      }
-    })
-    
-  }).catch((error) => {
-    console.log("Error: ", error);
-  });
-  }
   
   return (
-    <Login />
+    <Login router={router}/>
   )
 }
 export default LoginPage;
