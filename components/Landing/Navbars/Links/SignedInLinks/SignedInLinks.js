@@ -44,12 +44,12 @@ const SignedInLinks = () => {
                 </div>
                 <Nav className="ml-lg-auto" navbar>
                     <NavItem>
-                        <NavLink href="about" onClick={e => goToRoute(e)} >
+                        <NavLink href="posts" onClick={e => goToRoute(e)} >
                             Posts <span className="sr-only">(current)</span>
                         </NavLink>
                     </NavItem>
                     <NavItem>
-                        <NavLink href="features" onClick={e => goToRoute(e)} >
+                        <NavLink href="players" onClick={e => goToRoute(e)} >
                             Players <span className="sr-only">(current)</span>
                         </NavLink>
                     </NavItem>

@@ -10,6 +10,10 @@ import Grid from '@material-ui/core/Grid';
 import format from 'date-fns/format';
 import ViewCard from '../components/ViewCard/ViewCard';
 import styles from '../styles/Posts.module.css';
+import TextField from '@material-ui/core/TextField';
+import AdapterDateFns from '@material-ui/lab/AdapterDateFns';
+import LocalizaitonProvider from '@material-ui/lab/LocalizationProvider';
+import StaticDatePicker from '@material-ui/lab/StaticDatePicker';
 
 
 const Posts = () => {
@@ -18,6 +22,7 @@ const Posts = () => {
   const [notification, setNotification] = useState('');
   const [loggedIn, setLoggedIn] = useState(false);
   const [value, onChange] = useState(new Date());
+  const [value2, setValue] = React.useState(new Date());
 
   useEffect(() => {
     // Remove the server-side injected CSS.
@@ -79,7 +84,7 @@ const Posts = () => {
       </Head>
       <Grid container>
         <Grid item xs={4}>
-        <Calendar
+        {/* <Calendar
         onChange={(e) => {updateDate(e)}}
         value={value}
         className={styles.Calendar}
@@ -96,7 +101,19 @@ const Posts = () => {
           <h3>
             No Events Found For Date
           </h3>
-      }
+      } */}
+
+<LocalizaitonProvider dateAdapter={AdapterDateFns}>
+      <StaticDatePicker
+        displayStaticWrapperAs="desktop"
+        openTo="year"
+        value={value2}
+        onChange={(newValue) => {
+          setValue(newValue);
+        }}
+        renderInput={(params) => <TextField {...params} variant="standard" />}
+      />
+    </LocalizaitonProvider>
         </Grid>
         <Grid item xs={8}>
         <ul className={styles.postsDisplay}>
