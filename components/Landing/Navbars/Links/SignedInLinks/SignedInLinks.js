@@ -53,25 +53,18 @@ const SignedInLinks = () => {
                             Players <span className="sr-only">(current)</span>
                         </NavLink>
                     </NavItem>
-                    <NavItem>
-                        <NavLink href="profile" onClick={e => goToRoute(e)} >
-                            Profile <span className="sr-only">(current)</span>
-                        </NavLink>
-                    </NavItem>
+                    
                     <NavItem>
                         <NavLink onClick={handleLogout}>
                             Logout
                   </NavLink>
                     </NavItem>
 
-                </Nav>
-            </UncontrolledCollapse>
-
-            <NavItem className="d-none d-lg-block ml-lg-4">
+                    <NavItem className="d-none d-lg-block ml-lg-4">
                 <Button
                     className="btn-neutral btn-icon"
                     color="default"
-                    href="signup"
+                    href="profile"
                     onClick={e => goToRoute(e)}
                 >
                     <span className="btn-inner--icon">
@@ -82,6 +75,10 @@ const SignedInLinks = () => {
                     </span>
                 </Button>
             </NavItem>
+
+                </Nav>
+            </UncontrolledCollapse>
+
         </div>
     )
 }

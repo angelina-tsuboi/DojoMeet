@@ -135,7 +135,7 @@ const Home = () => {
       </Head>
 
       {notification}
-      {!loggedIn
+      {!fire.auth().currentUser
         ?
         <HomePage />
         :

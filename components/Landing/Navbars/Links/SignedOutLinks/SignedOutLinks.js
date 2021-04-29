@@ -46,13 +46,10 @@ const SignedOutLinks = () => {
                   <NavItem>
                     <NavLink href="login" onClick={e => goToRoute(e)}>
                         Login
-              </NavLink>
+                  </NavLink>
                   </NavItem>
 
-                </Nav>
-              </UncontrolledCollapse>
-
-              <NavItem className="d-none d-lg-block ml-lg-4">
+                  <NavItem className="d-none d-lg-block ml-lg-4">
                 <Button
                   className="btn-neutral btn-icon"
                   color="default"
@@ -67,6 +64,9 @@ const SignedOutLinks = () => {
                 </span>
                 </Button>
               </NavItem>
+
+                </Nav>
+              </UncontrolledCollapse>
         </div>
     )
 }
