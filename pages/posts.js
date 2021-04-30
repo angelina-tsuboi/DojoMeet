@@ -9,8 +9,7 @@ import 'react-calendar/dist/Calendar.css';
 import Grid from '@material-ui/core/Grid';
 import format from 'date-fns/format';
 import ViewCard from '../components/ViewCard/ViewCard';
-import '../public/css/posts.module.css';
-import styles from '../styles/Posts.module.css';
+import styles from'../public/css/posts.module.css';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import AddIcon from '@material-ui/icons/Add';
@@ -87,7 +86,7 @@ const Posts = () => {
         </Head>
         <Grid container>
           <Grid item xs={8}>
-            <div className="actionDisplay">
+            <div className={styles.actionDisplay}>
               <h3>Events</h3>
               <Button
                 variant="contained"
@@ -95,7 +94,7 @@ const Posts = () => {
                 startIcon={<AddIcon />}
               >
                 Create Event
-      </Button>
+              </Button>
             </div>
 
             <ul className={styles.postsDisplay}>
