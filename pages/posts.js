@@ -33,6 +33,10 @@ const Posts = () => {
     setOpen(false);
   };
 
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+
   useEffect(() => {
     // Remove the server-side injected CSS.
     const jssStyles = document.querySelector('#jss-server-side');
@@ -99,6 +103,7 @@ const Posts = () => {
                 variant="contained"
                 color="secondary"
                 startIcon={<AddIcon />}
+                onClick={handleClickOpen}
               >
                 Create Event
               </Button>
