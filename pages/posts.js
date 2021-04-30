@@ -134,7 +134,7 @@ const Posts = () => {
         {notification}
       </div>
 
-      <CreatePost open={open} onClose={handleClose} uid={currentUser.uid}/>
+      {currentUser && <CreatePost open={open} onClose={handleClose} uid={currentUser.uid}/>}
     </main>
   )
 }

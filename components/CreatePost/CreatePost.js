@@ -8,11 +8,29 @@ import QueryBuilderIcon from '@material-ui/icons/QueryBuilder';
 import { useRouter } from 'next/router';
 import TextField from '@material-ui/core/TextField';
 import DateFnsUtils from '@date-io/date-fns';
-import Button from '@material-ui/core/Button';
+// import Button from '@material-ui/core/Button';
 import AccountCircle from '@material-ui/icons/AccountCircle';
 import SubjectIcon from '@material-ui/icons/Subject';
 import RoomIcon from '@material-ui/icons/Room';
 import { withStyles } from '@material-ui/core/styles';
+// nodejs library that concatenates classes
+import classnames from "classnames";
+// reactstrap components
+import {
+  Button,
+  Card,
+  CardHeader,
+  CardBody,
+  FormGroup,
+  Form,
+  Input,
+  InputGroupAddon,
+  InputGroupText,
+  InputGroup,
+  Modal,
+  Row,
+  Col
+} from "reactstrap";
 
 import {
   MuiPickersUtilsProvider,
@@ -21,8 +39,7 @@ import {
 } from '@material-ui/pickers';
 import 'date-fns';
 
-const CreatePost = (props)  => {
-    const router = useRouter()
+class CreatePost  {
     // const classes = useStyles();
     const { onClose, selectedValue, open, uid, email, name, photoURL} = props;
     const { currentUser } = fire.auth();
@@ -79,62 +96,110 @@ const CreatePost = (props)  => {
       }
   
     return (
-      <Dialog onClose={handleClose} aria-labelledby="simple-dialog-title" open={open}>
-          <div className={styles.Dialog}>
-        <DialogTitle id="simple-dialog-title">Create Event</DialogTitle>
-        <TextField id="standard-basic" label="Event Title" value={title} onChange= {({target}) => setTitle(target.value)}  />
-        <MuiPickersUtilsProvider utils={DateFnsUtils}>
-      <Grid container justify="space-between">
-        <KeyboardDatePicker
-          disableToolbar
-          variant="inline"
-          format="MM/dd/yyyy"
-          margin="normal"
-          id="date-picker-inline"
-          label="Select Date"
-          value={selectedDate}
-          onChange={handleDateChange}
-          KeyboardButtonProps={{
-            'aria-label': 'change date',
-          }}
-        />
-        <KeyboardTimePicker
-          margin="normal"
-          id="time-picker"
-          label="Select Time"
-          value={selectedTime}
-          onChange={handleTimeChange}
-          KeyboardButtonProps={{
-            'aria-label': 'change time',
-          }}
-        />
-      </Grid>
-    </MuiPickersUtilsProvider>
-    <Grid container spacing={1} alignItems="flex-end">
-          <Grid item>
-            <RoomIcon />
-          </Grid>
-          <Grid item>
-            <TextField id="input-with-icon-grid" label="Enter location" value={location} onChange= {({target}) => setLocation(target.value)} />
-          </Grid>
-        </Grid>
-        <Grid container spacing={1} alignItems="flex-end">
-          <Grid item>
-            <SubjectIcon />
-          </Grid>
-          <Grid item>
-            <TextField id="input-with-icon-grid" label="Enter description..." value={description} onChange= {({target}) => setDescription(target.value)} />
-          </Grid>
-        </Grid>
+    //   <Dialog onClose={handleClose} aria-labelledby="simple-dialog-title" open={open}>
+    //       <div className={styles.Dialog}>
+    //     <DialogTitle id="simple-dialog-title">Create Event</DialogTitle>
+    //     <TextField id="standard-basic" label="Event Title" value={title} onChange= {({target}) => setTitle(target.value)}  />
+    //     <MuiPickersUtilsProvider utils={DateFnsUtils}>
+    //   <Grid container justify="space-between">
+    //     <KeyboardDatePicker
+    //       disableToolbar
+    //       variant="inline"
+    //       format="MM/dd/yyyy"
+    //       margin="normal"
+    //       id="date-picker-inline"
+    //       label="Select Date"
+    //       value={selectedDate}
+    //       onChange={handleDateChange}
+    //       KeyboardButtonProps={{
+    //         'aria-label': 'change date',
+    //       }}
+    //     />
+    //     <KeyboardTimePicker
+    //       margin="normal"
+    //       id="time-picker"
+    //       label="Select Time"
+    //       value={selectedTime}
+    //       onChange={handleTimeChange}
+    //       KeyboardButtonProps={{
+    //         'aria-label': 'change time',
+    //       }}
+    //     />
+    //   </Grid>
+    // </MuiPickersUtilsProvider>
+    // <Grid container spacing={1} alignItems="flex-end">
+    //       <Grid item>
+    //         <RoomIcon />
+    //       </Grid>
+    //       <Grid item>
+    //         <TextField id="input-with-icon-grid" label="Enter location" value={location} onChange= {({target}) => setLocation(target.value)} />
+    //       </Grid>
+    //     </Grid>
+    //     <Grid container spacing={1} alignItems="flex-end">
+    //       <Grid item>
+    //         <SubjectIcon />
+    //       </Grid>
+    //       <Grid item>
+    //         <TextField id="input-with-icon-grid" label="Enter description..." value={description} onChange= {({target}) => setDescription(target.value)} />
+    //       </Grid>
+    //     </Grid>
 
-        <div className={styles.bottomButtons}>
-            <Button onClick={() => handleClose()}>Cancel</Button>
-            <Button variant="contained" className={styles.createEvent} onClick={() => { handleCreatePost() }} >
-            Create Event
-            </Button>
-        </div>
-        </div>
-      </Dialog>
+    //     <div className={styles.bottomButtons}>
+    //         <Button onClick={() => handleClose()}>Cancel</Button>
+    //         <Button variant="contained" className={styles.createEvent} onClick={() => { handleCreatePost() }} >
+    //         Create Event
+    //         </Button>
+    //     </div>
+    //     </div>
+    //   </Dialog>
+
+    <Modal
+              className="modal-dialog-centered"
+              isOpen={this.state.defaultModal}
+              toggle={() => this.toggleModal("defaultModal")}
+            >
+              <div className="modal-header">
+                <h6 className="modal-title" id="modal-title-default">
+                  Type your modal title
+                </h6>
+                <button
+                  aria-label="Close"
+                  className="close"
+                  data-dismiss="modal"
+                  type="button"
+                  onClick={() => this.toggleModal("defaultModal")}
+                >
+                  <span aria-hidden={true}>×</span>
+                </button>
+              </div>
+              <div className="modal-body">
+                <p>
+                  Far far away, behind the word mountains, far from the
+                  countries Vokalia and Consonantia, there live the blind texts.
+                  Separated they live in Bookmarksgrove right at the coast of
+                  the Semantics, a large language ocean.
+                </p>
+                <p>
+                  A small river named Duden flows by their place and supplies it
+                  with the necessary regelialia. It is a paradisematic country,
+                  in which roasted parts of sentences fly into your mouth.
+                </p>
+              </div>
+              <div className="modal-footer">
+                <Button color="primary" type="button">
+                  Save changes
+                </Button>
+                <Button
+                  className="ml-auto"
+                  color="link"
+                  data-dismiss="modal"
+                  type="button"
+                  onClick={() => this.toggleModal("defaultModal")}
+                >
+                  Close
+                </Button>
+              </div>
+            </Modal>
     );
   }
 
