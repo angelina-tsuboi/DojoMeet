@@ -14,6 +14,7 @@ import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import AddIcon from '@material-ui/icons/Add';
 import AdapterDateFns from '@material-ui/lab/AdapterDateFns';
+import CreatePost from '../components/CreatePost/CreatePost';
 import LocalizaitonProvider from '@material-ui/lab/LocalizationProvider';
 import StaticDatePicker from '@material-ui/lab/StaticDatePicker';
 
@@ -25,6 +26,12 @@ const Posts = () => {
   const [loggedIn, setLoggedIn] = useState(false);
   const [value, onChange] = useState(new Date());
   const [value2, setValue] = useState(new Date());
+  const [open, setOpen] = useState(false);
+  let { currentUser } = fire.auth();
+
+  const handleClose = () => {
+    setOpen(false);
+  };
 
   useEffect(() => {
     // Remove the server-side injected CSS.
@@ -87,7 +94,7 @@ const Posts = () => {
         <Grid container>
           <Grid item xs={8}>
             <div className={styles.actionDisplay}>
-              <h3>Events</h3>
+              <h3 className={styles.eventTitle}>Events</h3>
               <Button
                 variant="contained"
                 color="secondary"
@@ -114,13 +121,15 @@ const Posts = () => {
                 renderInput={(params) => <TextField {...params} variant="standard" />}
               />
             </LocalizaitonProvider>
-            <h2>Upcoming Events</h2>
+            <h3 className={styles.upcomingTitle}>Upcoming Events</h3>
           </Grid>
 
         </Grid>
 
         {notification}
       </div>
+
+      <CreatePost open={open} onClose={handleClose} uid={currentUser.uid}/>
     </main>
   )
 }
