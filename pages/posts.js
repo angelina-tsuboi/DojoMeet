@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import Head from 'next/head';
 import fire from '../config/fire-conf';
-import {useFirestore} from '../firebase/useFirestore';
+import { useFirestore } from '../firebase/useFirestore';
 import PostCard from '../components/PostCard/PostCard';
 const firestore = useFirestore();
 import Calendar from 'react-calendar';
@@ -9,8 +9,11 @@ import 'react-calendar/dist/Calendar.css';
 import Grid from '@material-ui/core/Grid';
 import format from 'date-fns/format';
 import ViewCard from '../components/ViewCard/ViewCard';
+import '../public/css/posts.module.css';
 import styles from '../styles/Posts.module.css';
 import TextField from '@material-ui/core/TextField';
+import Button from '@material-ui/core/Button';
+import AddIcon from '@material-ui/icons/Add';
 import AdapterDateFns from '@material-ui/lab/AdapterDateFns';
 import LocalizaitonProvider from '@material-ui/lab/LocalizationProvider';
 import StaticDatePicker from '@material-ui/lab/StaticDatePicker';
@@ -38,7 +41,7 @@ const Posts = () => {
   }
 
 
-   fire.auth()
+  fire.auth()
     .onAuthStateChanged((user) => {
       if (user) {
         setLoggedIn(true)
@@ -48,84 +51,77 @@ const Posts = () => {
     })
 
 
-    // calls after every render
-    useEffect(() => {
-      firestore.getCollection("posts", (result) => {
-        const returnData = result.docs.map(doc => ({
-          id: doc.id,
-          ...doc.data()
-        }));
-        setPosts(returnData);
+  // calls after every render
+  useEffect(() => {
+    firestore.getCollection("posts", (result) => {
+      const returnData = result.docs.map(doc => ({
+        id: doc.id,
+        ...doc.data()
+      }));
+      setPosts(returnData);
 
-        firestore.getDateDocuments(new Date(), (result) => {
-          setTimeEvents(result);
-        })
+      firestore.getDateDocuments(new Date(), (result) => {
+        setTimeEvents(result);
       })
-    }, []);
+    })
+  }, []);
 
   return (
-      
-<main>
-        <section className="section section-shaped section-lg">
-          <div className="shape shape-style-1 bg-gradient-default">
-            <span />
-            <span />
-            <span />
-            <span />
-            <span />
-            <span />
-            <span />
-            <span />
-          </div>
-          </section>
-    <div>
-      <Head>
-        <title>Blog App</title>
-      </Head>
-      <Grid container>
-        <Grid item xs={4}>
-        {/* <Calendar
-        onChange={(e) => {updateDate(e)}}
-        value={value}
-        className={styles.Calendar}
-      />  
-      <h3 className={styles.eventDisplay}>Events on {format(value, 'MM/dd/yyyy')}</h3>
-      {(timeEvents && timeEvents.length > 0) && 
-        <ul>
-        {timeEvents.map(post =>
-          <ViewCard post={post} key={post.id} />
-        )}
-      </ul>
-      }
-      {(timeEvents && timeEvents.length == 0) &&
-          <h3>
-            No Events Found For Date
-          </h3>
-      } */}
 
-<LocalizaitonProvider dateAdapter={AdapterDateFns}>
-      <StaticDatePicker
-        displayStaticWrapperAs="desktop"
-        openTo="year"
-        value={value2}
-        onChange={(newValue) => {
-          setValue(newValue);
-        }}
-        renderInput={(params) => <TextField {...params} variant="standard" />}
-      />
-    </LocalizaitonProvider>
+    <main>
+      <section className="section section-shaped section-lg">
+        <div className="shape shape-style-1 bg-gradient-default">
+          <span />
+          <span />
+          <span />
+          <span />
+          <span />
+          <span />
+          <span />
+          <span />
+        </div>
+      </section>
+      <div>
+        <Head>
+          <title>Blog App</title>
+        </Head>
+        <Grid container>
+          <Grid item xs={8}>
+            <div className="actionDisplay">
+              <h3>Events</h3>
+              <Button
+                variant="contained"
+                color="secondary"
+                startIcon={<AddIcon />}
+              >
+                Create Event
+      </Button>
+            </div>
+
+            <ul className={styles.postsDisplay}>
+              {posts.map(post =>
+                <PostCard post={post} key={post.id} />
+              )}
+            </ul>
+          </Grid>
+          <Grid item xs={4}>
+            <LocalizaitonProvider dateAdapter={AdapterDateFns}>
+              <StaticDatePicker
+                displayStaticWrapperAs="desktop"
+                value={value2}
+                onChange={(newValue) => {
+                  setValue(newValue);
+                }}
+                renderInput={(params) => <TextField {...params} variant="standard" />}
+              />
+            </LocalizaitonProvider>
+            <h2>Upcoming Events</h2>
+          </Grid>
+
         </Grid>
-        <Grid item xs={8}>
-        <ul className={styles.postsDisplay}>
-          {posts.map(post =>
-            <PostCard post={post} key={post.id} />
-          )}
-        </ul>
-        </Grid>
-      </Grid>
-      
+
         {notification}
-    </div>
+      </div>
     </main>
   )
 }
