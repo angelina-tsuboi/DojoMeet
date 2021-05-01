@@ -8,7 +8,7 @@ import fire from '../../config/fire-conf';
 import Avatar from '@material-ui/core/Avatar';
 import Collapse from '@material-ui/core/Collapse';
 import { useEffect, useState, Fragment, useContext } from 'react';
-import formatDistance from 'date-fns/formatDistance';
+import {formatDistance, format, getTime} from 'date-fns';
 import Snackbar from '@material-ui/core/Snackbar';
 import CloseIcon from '@material-ui/icons/Close';
 import CardHeader from '@material-ui/core/CardHeader';
@@ -219,7 +219,7 @@ const PostCard = ({ post }) => {
             <MenuOption isUser={post.uid == userData.uid} post={post}></MenuOption>
           }
           title={post.name}
-          subheader={formatDistance(new Date(), date) + " ago"}
+          subheader={format(post.date.toDate(), 'MM/dd/yyyy') + " at " + format(post.time.toDate(), "HH:mm aaaaa'm'")}
         />
   
         <CardContent>
