@@ -1,5 +1,9 @@
-- fix date bug
-- add edit functionality
-- add delete functionality
+
 - view player dialog
-- style home page
+- calendar functionality
+- style update post
+- style delete post
+- resolve auth error
+- remove outlines
+- open post functionality
+- shorten title + description if needed

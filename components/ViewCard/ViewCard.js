@@ -23,13 +23,12 @@ const ViewCard = ({ post }) => {
     router.push(`/posts/${id}`);
   }
 
-  //TODO: shorten title + description if needed
 
   if (userData) {
     return (
       <div>
         <Card className={styles.card}>
-          <div className={styles.cardHover} onClick={() => { openPost(post.id) }}>
+          <div className={styles.cardHover} onClick={() => { this.openPost(post.id) }}>
             <CardHeader
               avatar={
                 <Avatar aria-label="recipe" src={post.photoURL} className={styles.avatar}></Avatar>

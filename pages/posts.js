@@ -22,8 +22,7 @@ import LocalizaitonProvider from '@material-ui/lab/LocalizationProvider';
 import StaticDatePicker from '@material-ui/lab/StaticDatePicker';
 const scroll = infiniteScroll();
 
-// TODO: calendar functionality
-// TODO: open post functionality
+
 
 
 const Posts = () => {

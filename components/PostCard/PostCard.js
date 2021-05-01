@@ -216,7 +216,7 @@ const PostCard = ({ post }) => {
     return (
       <div>
         <Card className={styles.card}>
-          <div onClick={() => { openPost(post.id) }} className={styles.cardBody}>
+          <div>
             <CardHeader
               avatar={
                 <Avatar aria-label="recipe" src={post.photoURL}></Avatar>
@@ -228,7 +228,7 @@ const PostCard = ({ post }) => {
               subheader={format(post.date.toDate(), 'MM/dd/yyyy') + " at " + format(post.time.toDate(), "HH:mm aaaaa'm'")}
             />
 
-            <CardContent>
+            <CardContent onClick={() => { openPost(post.id) }} className={styles.cardBody}>
               <Typography variant="h6" color="textPrimary" component="p">
                 {post.title}
               </Typography>
