@@ -34,8 +34,8 @@ class EditPost extends React.Component {
     title: this.props.post.title,
     description: this.props.post.description,
     location: this.props.post.location,
-    selectedDate: this.props.post.date,
-    selectedTime: this.props.post.time,
+    selectedDate: this.props.post.date.toDate(),
+    selectedTime: this.props.post.time.toDate(),
     userData: {
       uid: this.props.userData.uid,
       email: this.props.userData.email,
@@ -74,6 +74,10 @@ class EditPost extends React.Component {
   handleTimeChange = (time) => {
     setSelectedTime(time);
   };
+
+  handleUpdatePost = () => {
+    console.log(this.state.selectedDate.toDate())
+  }
 
   render() {
     return (
@@ -140,7 +144,7 @@ class EditPost extends React.Component {
       >
         <div className="modal-header">
           <h6 className="modal-title" id="modal-title-default">
-            Create Event
+            Edit Event
       </h6>
           <button
             aria-label="Close"
@@ -185,7 +189,7 @@ class EditPost extends React.Component {
                     placeholder: "Date Picker Here"
                   }}
                   timeFormat={false}
-                  value={this.state.selectedDate}
+                  initialValue={new Date(this.state.selectedDate)}
                   onChange={e =>
                     this.setState({ selectedDate: e.toDate() })
                   }
@@ -205,7 +209,7 @@ class EditPost extends React.Component {
                     placeholder: "Time Picker Here"
                   }}
                   dateFormat={false}
-                  value={this.state.selectedTime}
+                  initialValue={new Date(this.state.selectedTime)}
 
                   onChange={e =>
                     this.setState({ selectedTime: e.toDate() })
@@ -222,8 +226,8 @@ class EditPost extends React.Component {
 
         </div>
         <div className="modal-footer">
-          <Button color="primary" type="button" onClick={() => this.handleCreatePost()} disabled={this.formDisabled()}>
-            Create Event
+          <Button color="primary" type="button" onClick={() => this.handleUpdatePost()} disabled={this.formDisabled()}>
+            Update Event
           </Button>
           <Button
             className="ml-auto"

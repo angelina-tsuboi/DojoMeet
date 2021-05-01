@@ -174,7 +174,6 @@ class CreatePost extends React.Component {
                     placeholder: "Time Picker Here"
                   }}
                   dateFormat={false}
-
                   onChange={e =>
                     this.setState({selectedTime: e.toDate()})
                   }
