@@ -43,3 +43,6 @@
 .cardHeader{
     padding-bottom: 8px !important;
 }
+.cardHover:hover{
+    cursor: pointer;
+}
