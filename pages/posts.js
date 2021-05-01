@@ -7,6 +7,7 @@ const firestore = useFirestore();
 import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
 import Grid from '@material-ui/core/Grid';
+import { useRouter } from 'next/router';
 import format from 'date-fns/format';
 import ViewCard from '../components/ViewCard/ViewCard';
 import styles from'../public/css/posts.module.css';
@@ -20,6 +21,7 @@ import StaticDatePicker from '@material-ui/lab/StaticDatePicker';
 
 
 const Posts = () => {
+  const router = useRouter()
   const [posts, setPosts] = useState([]);
   const [timeEvents, setTimeEvents] = useState([]);
   const [notification, setNotification] = useState('');
@@ -136,7 +138,7 @@ const Posts = () => {
         {notification}
       </div>
 
-      {currentUser && <CreatePost open={open} onClose={handleClose} uid={currentUser.uid}/>}
+      {currentUser && <CreatePost open={open} onClose={handleClose} uid={currentUser.uid} router={router}/>}
     </main>
   )
 }

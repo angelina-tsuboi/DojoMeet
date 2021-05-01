@@ -3,20 +3,8 @@ import Dialog from '@material-ui/core/Dialog';
 import fire from '../../config/fire-conf';
 import Grid from '@material-ui/core/Grid';
 import React from 'react';
-// import TimePicker from 'react-time-picker';
-import styles from './CreatePost.module.css'
-import QueryBuilderIcon from '@material-ui/icons/QueryBuilder';
-import { useRouter } from 'next/router';
 import ReactDatetime from "react-datetime";
-import TextField from '@material-ui/core/TextField';
-import DateFnsUtils from '@date-io/date-fns';
-// import Button from '@material-ui/core/Button';
-import AccountCircle from '@material-ui/icons/AccountCircle';
-import SubjectIcon from '@material-ui/icons/Subject';
-import RoomIcon from '@material-ui/icons/Room';
-import { withStyles } from '@material-ui/core/styles';
-// nodejs library that concatenates classes
-import classnames from "classnames";
+
 // reactstrap components
 import {
   Button,
@@ -60,6 +48,15 @@ class CreatePost extends React.Component {
     this.setState({ selectedDate: date });
   };
 
+  formDisabled = () => {
+    //check time is before current date time
+    //check date is before current date
+    if(this.state.title == "" || this.state.location == ""){
+      return true;
+    }
+    return false;
+  }
+
   handleTimeChange = (time) => {
     this.setState({ selectedDate: time });
   };
@@ -72,37 +69,37 @@ class CreatePost extends React.Component {
 
   handleCreatePost = () => {
     console.log(this.state, "the state");
-    // if (fire.auth().currentUser) {
-    //   fire.firestore().doc(`users/${currentUser.uid}`).get().then((docData) => {
-    //     let userData = { email: docData.data().email, uid: uid, photoURL: docData.data().photoURL, name: docData.data().name };
-    //     fire.firestore()
-    //       .collection('posts')
-    //       .add({
-    //         title: title,
-    //         description: description,
-    //         date: selectedDate,
-    //         time: selectedTime,
-    //         location: location,
-    //         likesMembers: [],
-    //         ...userData
-    //       }).then((doc) => {
-    //         fire.firestore().collection("posts").doc(doc.id).collection("joining").add(userData).then(() => {
-    //           onClose(selectedValue);
-    //         })
-    //       }).catch((err) => {
-    //         console.log("Found an error", err);
-    //       })
+    if (fire.auth().currentUser) {
+      let uid = fire.auth().currentUser.uid;
+      fire.firestore().doc(`users/${uid}`).get().then((docData) => {
+        let userData = { email: docData.data().email, uid: uid, photoURL: docData.data().photoURL, name: docData.data().name };
+        fire.firestore()
+          .collection('posts')
+          .add({
+            title: this.state.title,
+            description: this.state.description,
+            date: this.state.selectedDate,
+            time: this.state.selectedTime,
+            location: this.state.location,
+            likesMembers: [],
+            ...userData
+          }).then((doc) => {
+            fire.firestore().collection("posts").doc(doc.id).collection("joining").add(userData).then(() => {
+              this.handleClose
+            })
+          }).catch((err) => {
+            console.log("Found an error", err);
+          })
 
-    //     this.setState({
-    //       title: "",
-    //       description: "",
-    //       location: "",
-    //       selectedDate: new Date(),
-    //       selectedTime: new Date()
-    //     })
-    //     router.push("/")
-    //   })
-    // }
+        this.setState({
+          title: "",
+          description: "",
+          location: "",
+          selectedDate: new Date(),
+          selectedTime: new Date()
+        })        
+      })
+    }
   }
 
   render() {
@@ -159,7 +156,7 @@ class CreatePost extends React.Component {
                   }}
                   timeFormat={false}
                   onChange={e =>
-                    this.setState({date: e})
+                    this.setState({selectedDate: e.toDate()})
                   }
                 />
               </InputGroup>
@@ -179,7 +176,7 @@ class CreatePost extends React.Component {
                   dateFormat={false}
 
                   onChange={e =>
-                    this.setState({time: e})
+                    this.setState({selectedTime: e.toDate()})
                   }
                 />
               </InputGroup>
@@ -193,7 +190,7 @@ class CreatePost extends React.Component {
 
         </div>
         <div className="modal-footer">
-          <Button color="primary" type="button" onClick={() => this.handleCreatePost()}>
+          <Button color="primary" type="button" onClick={() => this.handleCreatePost()} disabled={this.formDisabled()}>
             Create Event
           </Button>
           <Button
