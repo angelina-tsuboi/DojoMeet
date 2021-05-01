@@ -7,6 +7,7 @@ import { useEffect, useState, Fragment, useContext } from 'react';
 import formatDistance from 'date-fns/formatDistance';
 import CardHeader from '@material-ui/core/CardHeader';
 import {useFirestore} from '../../firebase/useFirestore';
+import {format} from 'date-fns';
 import Typography from '@material-ui/core/Typography';
 import {UserDataContext} from '../../providers/userdataprovider';
 const firestore = useFirestore();
@@ -17,21 +18,31 @@ const ViewCard = ({ post }) => {
   const userData = useContext(UserDataContext);
   const [date, setDate] = useState(post.date.toDate());
 
+  //TODO: shorten title + description if needed
 
   if(userData){
     return (
       <div>
-  <Card className={styles.card}>  
-        <CardContent>
+  <Card className={styles.card}> 
+  <CardHeader
+          avatar={
+            <Avatar aria-label="recipe" src={post.photoURL} className={styles.avatar}></Avatar>
+          }
+          title={post.name}
+          subheader={format(post.date.toDate(), 'MM/dd/yyyy') + " at " + format(post.time.toDate(), "HH:mm aaaaa'm'")}
+          className={styles.cardHeader}
+        /> 
+        <CardContent className={styles.cardBody}>
           <Typography variant="h6" color="textPrimary" component="p">
             {post.title}
           </Typography>
           <Typography variant="body2" color="textSecondary" component="p">
             {post.description}
           </Typography>
-          <Typography variant="body2" color="textSecondary" component="p">
+          {post.joining &&  <Typography variant="body2" color="textSecondary" component="p">
             {post.joining.length} joining
-          </Typography>
+          </Typography>}
+         
         </CardContent>
       </Card>
     

@@ -180,7 +180,7 @@ const Posts = () => {
             <h3 className={styles.upcomingTitle}>Upcoming Events</h3>
             <ul className={styles.postsDisplay} onScroll={handleScroll}>
               { upcomingPosts.map(post =>
-                <PostCard post={post} key={post.id} />
+                <ViewCard post={post} key={post.id} />
               )}
             </ul>
           </Grid>
