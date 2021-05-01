@@ -27,6 +27,7 @@ const scroll = infiniteScroll();
 const Posts = () => {
   const router = useRouter()
   const [posts, setPosts] = useState(scroll.messages);
+  const [upcomingPosts, setUpcomingPosts] = useState(scroll.messages);
   const [hasMore, setHasMore] = useState(true);
   const [timeEvents, setTimeEvents] = useState([]);
   const [notification, setNotification] = useState('');
@@ -44,6 +45,17 @@ const Posts = () => {
   const handleClickOpen = () => {
     setOpen(true);
   };
+
+  const fetchUpcomingData = () => {
+    let postArray = [];
+    fire.firestore().collection("posts").where("date", ">", new Date()).limit(5).get().then((snapshot) => {
+      snapshot.forEach((doc) => {
+        let postData = {...doc.data(), id: doc.id};
+        postArray.push(postData);
+      })
+      setUpcomingPosts(postArray);
+    })
+  }
 
   const fetchMoreData = () => {
     if (posts.length % 10 != 0) {
@@ -69,6 +81,7 @@ const Posts = () => {
       jssStyles.parentElement.removeChild(jssStyles);
     }
     setOpen(false);
+    fetchUpcomingData();
   }, []);
 
   const updateDate = (date) => {
@@ -152,11 +165,6 @@ const Posts = () => {
               )}
             </InfiniteScroll>
 
-            {/* <ul className={styles.postsDisplay} onScroll={handleScroll}>
-              {posts.map(post =>
-                <PostCard post={post} key={post.id} />
-              )}
-            </ul> */}
           </Grid>
           <Grid item xs={4}>
             <LocalizaitonProvider dateAdapter={AdapterDateFns}>
@@ -170,6 +178,11 @@ const Posts = () => {
               />
             </LocalizaitonProvider>
             <h3 className={styles.upcomingTitle}>Upcoming Events</h3>
+            <ul className={styles.postsDisplay} onScroll={handleScroll}>
+              { upcomingPosts.map(post =>
+                <PostCard post={post} key={post.id} />
+              )}
+            </ul>
           </Grid>
 
         </Grid>
