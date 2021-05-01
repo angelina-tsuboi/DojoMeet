@@ -40,10 +40,7 @@ import {
 import 'date-fns';
 
 class CreatePost extends React.Component{
-  // const classes = useStyles();
-  
-  componentDidMount() {
-    this.state = {
+    state = {
       title: "",
       description: "",
       location: "",
@@ -59,7 +56,6 @@ class CreatePost extends React.Component{
       selectedValue: this.props.selectedValue,
       open: this.props.open
     };
-  }
 
 
   handleDateChange = (date) => {
@@ -168,8 +164,8 @@ class CreatePost extends React.Component{
       //     </div>
       //   </Dialog>
       <div>
-{this.state.open && <h1>Open</h1>}
-{!this.state.open && <h1>NOT Open</h1>}
+{this.props.open && <h1>Open</h1>}
+{!this.props.open && <h1>NOT Open</h1>}
       </div>
       
       // <Modal
