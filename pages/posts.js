@@ -43,6 +43,7 @@ const Posts = () => {
     if (jssStyles) {
       jssStyles.parentElement.removeChild(jssStyles);
     }
+    setOpen(false);
   }, []);
 
   const updateDate = (date) => {
