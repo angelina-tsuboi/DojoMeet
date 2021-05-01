@@ -1,11 +1,7 @@
 
 import React from 'react';
-import DateFnsUtils from '@date-io/date-fns';
 import fire from '../../config/fire-conf';
 import { useFirestore } from '../../firebase/useFirestore';
-import RoomIcon from '@material-ui/icons/Room';
-import SubjectIcon from '@material-ui/icons/Subject';
-import styles from './EditPost.module.css';
 import ReactDatetime from "react-datetime";
 const firestore = useFirestore();
 
@@ -21,11 +17,6 @@ import {
   Label
 } from "reactstrap";
 
-import {
-  MuiPickersUtilsProvider,
-  KeyboardTimePicker,
-  KeyboardDatePicker,
-} from '@material-ui/pickers';
 import 'date-fns';
 
 class EditPost extends React.Component {
@@ -59,13 +50,6 @@ class EditPost extends React.Component {
   handleClose = () => {
     this.props.onClose();
   };
-
-  updatePost = () => {
-    let postData = { description: description, location: location, date: selectedDate, time: selectedTime, title: title };
-    firestore.updateDocument(`posts/${post.id}`, postData, (result) => {
-      this.props.onClose();
-    })
-  }
 
   handleDateChange = (date) => {
     setSelectedDate(date);
