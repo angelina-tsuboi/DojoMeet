@@ -88,7 +88,7 @@ const MenuOption = ({ isUser, post }) => {
           <Button onClick={() => handleOpenDelete(true)}>Delete Post</Button>
         </Popover>
 
-        <EditPost post={post} open={openEdit} onClose={() => handleOpenEdit(false)} />
+        <EditPost post={post} userData={fire.auth().currentUser} open={openEdit} onClose={() => handleOpenEdit(false)} />
         <DeletePost post={post} open={openDelete} onClose={(value) => handleDeleteFunc(false, value)} />
 
         <Snackbar

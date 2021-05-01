@@ -6,6 +6,7 @@ import { useFirestore } from '../../firebase/useFirestore';
 import RoomIcon from '@material-ui/icons/Room';
 import SubjectIcon from '@material-ui/icons/Subject';
 import styles from './EditPost.module.css';
+import ReactDatetime from "react-datetime";
 const firestore = useFirestore();
 
 import {
@@ -28,31 +29,41 @@ import {
 import 'date-fns';
 
 class EditPost extends React.Component {
+
   state = {
     title: this.props.post.title,
     description: this.props.post.description,
     location: this.props.post.location,
-    selectedDate: this.props.post.selectedDate,
-    selectedTime: this.props.post.selectedTime,
+    selectedDate: this.props.post.date,
+    selectedTime: this.props.post.time,
     userData: {
-      uid: this.props.uid,
-      email: this.props.email,
-      name: this.props.name,
-      photoURL: this.props.photoURL
+      uid: this.props.userData.uid,
+      email: this.props.userData.email,
+      name: this.props.userData.name,
+      photoURL: this.props.userData.photoURL
     },
     onClose: this.props.onClose,
     selectedValue: this.props.selectedValue,
     open: this.props.open
   };
 
+  formDisabled = () => {
+    //check time is before current date time
+    //check date is before current date
+    if(this.state.title == "" || this.state.location == ""){
+      return true;
+    }
+    return false;
+  }
+
   handleClose = () => {
-    onClose();
+    this.props.onClose();
   };
 
   updatePost = () => {
     let postData = { description: description, location: location, date: selectedDate, time: selectedTime, title: title };
     firestore.updateDocument(`posts/${post.id}`, postData, (result) => {
-      onClose();
+      this.props.onClose();
     })
   }
 
@@ -143,7 +154,7 @@ class EditPost extends React.Component {
         </div>
         <div className="modal-body">
           <Label for="exampleText">Event Title</Label>
-          <Input placeholder="Event Title..." type="text" onChange={({ target }) => this.setState({ title: target.value })} />
+          <Input placeholder="Event Title..." type="text" value={this.state.title} onChange={({ target }) => this.setState({ title: target.value })} />
 
           <Label for="exampleText">Event Location</Label>
           <InputGroup className="mb-4">
@@ -155,6 +166,7 @@ class EditPost extends React.Component {
             <Input
               placeholder="Event Location..."
               type="text"
+              value={this.state.location}
               onChange={({ target }) => this.setState({ location: target.value })}
             />
           </InputGroup>
@@ -173,6 +185,7 @@ class EditPost extends React.Component {
                     placeholder: "Date Picker Here"
                   }}
                   timeFormat={false}
+                  value={this.state.selectedDate}
                   onChange={e =>
                     this.setState({ selectedDate: e.toDate() })
                   }
@@ -192,6 +205,7 @@ class EditPost extends React.Component {
                     placeholder: "Time Picker Here"
                   }}
                   dateFormat={false}
+                  value={this.state.selectedTime}
 
                   onChange={e =>
                     this.setState({ selectedTime: e.toDate() })
@@ -203,7 +217,7 @@ class EditPost extends React.Component {
 
           <Label for="exampleText">Event Description</Label>
           <InputGroup>
-            <Input type="textarea" name="text" id="exampleText" onChange={({ target }) => this.setState({ description: target.value })} />
+            <Input type="textarea" name="text" id="exampleText" value={this.state.description} onChange={({ target }) => this.setState({ description: target.value })} />
           </InputGroup>
 
         </div>
