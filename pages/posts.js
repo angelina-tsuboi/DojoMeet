@@ -5,12 +5,14 @@ import { useFirestore } from '../firebase/useFirestore';
 import PostCard from '../components/PostCard/PostCard';
 const firestore = useFirestore();
 import Calendar from 'react-calendar';
+import { infinteScroll } from '../firebase/infinteScroll';
 import 'react-calendar/dist/Calendar.css';
 import Grid from '@material-ui/core/Grid';
 import { useRouter } from 'next/router';
+import InfiniteScroll from 'react-infinite-scroll-component';
 import format from 'date-fns/format';
 import ViewCard from '../components/ViewCard/ViewCard';
-import styles from'../public/css/posts.module.css';
+import styles from '../public/css/posts.module.css';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import AddIcon from '@material-ui/icons/Add';
@@ -18,11 +20,14 @@ import AdapterDateFns from '@material-ui/lab/AdapterDateFns';
 import CreatePost from '../components/CreatePost/CreatePost';
 import LocalizaitonProvider from '@material-ui/lab/LocalizationProvider';
 import StaticDatePicker from '@material-ui/lab/StaticDatePicker';
+const scroll = infinteScroll();
+
 
 
 const Posts = () => {
   const router = useRouter()
-  const [posts, setPosts] = useState([]);
+  const [posts, setPosts] = useState(scroll.getMessages("posts", "rrr", 10));
+  const [hasMore, setHasMore] = useState(true);
   const [timeEvents, setTimeEvents] = useState([]);
   const [notification, setNotification] = useState('');
   const [loggedIn, setLoggedIn] = useState(false);
@@ -39,6 +44,22 @@ const Posts = () => {
   const handleClickOpen = () => {
     setOpen(true);
   };
+
+  const fetchMoreData = () => {
+    if (posts.length % 10 != 0) {
+      setHasMore(false);
+      return;
+    }
+    setTimeout(() => {
+      setPosts(...posts, ...scroll.getMoreMessages("posts", 10))
+    }, 500);
+  };
+
+  const handleScroll = (e) => {
+    const bottom = e.target.scrollHeight - e.target.scrollTop === e.target.clientHeight;
+    if (bottom) console.log("hit the bottom");
+    return bottom;
+  }
 
   useEffect(() => {
     // Remove the server-side injected CSS.
@@ -113,11 +134,28 @@ const Posts = () => {
               </Button>
             </div>
 
-            <ul className={styles.postsDisplay}>
+            <InfiniteScroll
+              dataLength={this.state.items.length}
+              next={this.fetchMoreData}
+              hasMore={this.state.hasMore}
+              loader={<h4>Loading...</h4>}
+              endMessage={
+                <p style={{ textAlign: "center" }}>
+                  <b>Yay! You have seen it all</b>
+                </p>
+              }
+            >
+
               {posts.map(post =>
                 <PostCard post={post} key={post.id} />
               )}
-            </ul>
+            </InfiniteScroll>
+
+            {/* <ul className={styles.postsDisplay} onScroll={handleScroll}>
+              {posts.map(post =>
+                <PostCard post={post} key={post.id} />
+              )}
+            </ul> */}
           </Grid>
           <Grid item xs={4}>
             <LocalizaitonProvider dateAdapter={AdapterDateFns}>
@@ -138,7 +176,7 @@ const Posts = () => {
         {notification}
       </div>
 
-      {currentUser && <CreatePost open={open} onClose={handleClose} uid={currentUser.uid} router={router}/>}
+      {currentUser && <CreatePost open={open} onClose={handleClose} uid={currentUser.uid} router={router} />}
     </main>
   )
 }
