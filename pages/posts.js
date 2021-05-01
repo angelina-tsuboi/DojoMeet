@@ -30,6 +30,7 @@ const Posts = () => {
   let { currentUser } = fire.auth();
 
   const handleClose = () => {
+    console.log("closing 2")
     setOpen(false);
   };
 

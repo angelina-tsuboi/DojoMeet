@@ -67,7 +67,8 @@ class CreatePost extends React.Component{
   };
 
   handleClose = () => {
-    this.setState({ open: false })
+    console.log("closing")
+   this.props.onClose();
   };
 
 
@@ -164,21 +165,29 @@ class CreatePost extends React.Component{
       //     </div>
       //   </Dialog>
       
+
+      // title: title,
+      // description: description,
+      // date: selectedDate,
+      // time: selectedTime,
+      // location: location,
+
+
       <Modal
         className="modal-dialog-centered"
         isOpen={this.props.open}
-        // toggle={this.handleClose()}
+        toggle={() => this.handleClose()}
       >
         <div className="modal-header">
           <h6 className="modal-title" id="modal-title-default">
-            Type your modal title
+          Create Event
       </h6>
           <button
             aria-label="Close"
             className="close"
             data-dismiss="modal"
             type="button"
-            // onClick={this.handleClose()}
+            onClick={() => this.handleClose()}
           >
             <span aria-hidden={true}>×</span>
           </button>
@@ -198,14 +207,14 @@ class CreatePost extends React.Component{
         </div>
         <div className="modal-footer">
           <Button color="primary" type="button">
-            Save changes
+            Create Event
       </Button>
           <Button
             className="ml-auto"
             color="link"
             data-dismiss="modal"
             type="button"
-            // onClick={this.handleClose()}
+            onClick={() => this.handleClose()}
           >
             Close
       </Button>
