@@ -34,3 +34,7 @@
     display: flex;
     align-items:center;
 }
+
+.cardBody:hover{
+    cursor: pointer;
+}
