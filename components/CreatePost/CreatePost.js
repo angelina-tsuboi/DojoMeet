@@ -163,58 +163,54 @@ class CreatePost extends React.Component{
       //     </div>
       //     </div>
       //   </Dialog>
-      <div>
-{this.props.open && <h1>Open</h1>}
-{!this.props.open && <h1>NOT Open</h1>}
-      </div>
       
-      // <Modal
-      //   className="modal-dialog-centered"
-      //   isOpen={this.state.open}
-      //   toggle={this.handleClose()}
-      // >
-      //   <div className="modal-header">
-      //     <h6 className="modal-title" id="modal-title-default">
-      //       Type your modal title
-      // </h6>
-      //     <button
-      //       aria-label="Close"
-      //       className="close"
-      //       data-dismiss="modal"
-      //       type="button"
-      //       onClick={this.handleClose()}
-      //     >
-      //       <span aria-hidden={true}>×</span>
-      //     </button>
-      //   </div>
-      //   <div className="modal-body">
-      //     <p>
-      //       Far far away, behind the word mountains, far from the
-      //       countries Vokalia and Consonantia, there live the blind texts.
-      //       Separated they live in Bookmarksgrove right at the coast of
-      //       the Semantics, a large language ocean.
-      // </p>
-      //     <p>
-      //       A small river named Duden flows by their place and supplies it
-      //       with the necessary regelialia. It is a paradisematic country,
-      //       in which roasted parts of sentences fly into your mouth.
-      // </p>
-      //   </div>
-      //   <div className="modal-footer">
-      //     <Button color="primary" type="button">
-      //       Save changes
-      // </Button>
-      //     <Button
-      //       className="ml-auto"
-      //       color="link"
-      //       data-dismiss="modal"
-      //       type="button"
-      //       onClick={this.handleClose()}
-      //     >
-      //       Close
-      // </Button>
-      //   </div>
-      // </Modal>
+      <Modal
+        className="modal-dialog-centered"
+        isOpen={this.props.open}
+        // toggle={this.handleClose()}
+      >
+        <div className="modal-header">
+          <h6 className="modal-title" id="modal-title-default">
+            Type your modal title
+      </h6>
+          <button
+            aria-label="Close"
+            className="close"
+            data-dismiss="modal"
+            type="button"
+            // onClick={this.handleClose()}
+          >
+            <span aria-hidden={true}>×</span>
+          </button>
+        </div>
+        <div className="modal-body">
+          <p>
+            Far far away, behind the word mountains, far from the
+            countries Vokalia and Consonantia, there live the blind texts.
+            Separated they live in Bookmarksgrove right at the coast of
+            the Semantics, a large language ocean.
+      </p>
+          <p>
+            A small river named Duden flows by their place and supplies it
+            with the necessary regelialia. It is a paradisematic country,
+            in which roasted parts of sentences fly into your mouth.
+      </p>
+        </div>
+        <div className="modal-footer">
+          <Button color="primary" type="button">
+            Save changes
+      </Button>
+          <Button
+            className="ml-auto"
+            color="link"
+            data-dismiss="modal"
+            type="button"
+            // onClick={this.handleClose()}
+          >
+            Close
+      </Button>
+        </div>
+      </Modal>
     );
   }
 
