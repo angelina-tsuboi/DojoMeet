@@ -71,106 +71,42 @@ class CreatePost extends React.Component {
 
 
   handleCreatePost = () => {
-    if (fire.auth().currentUser) {
-      fire.firestore().doc(`users/${currentUser.uid}`).get().then((docData) => {
-        let userData = { email: docData.data().email, uid: uid, photoURL: docData.data().photoURL, name: docData.data().name };
-        fire.firestore()
-          .collection('posts')
-          .add({
-            title: title,
-            description: description,
-            date: selectedDate,
-            time: selectedTime,
-            location: location,
-            likesMembers: [],
-            ...userData
-          }).then((doc) => {
-            fire.firestore().collection("posts").doc(doc.id).collection("joining").add(userData).then(() => {
-              onClose(selectedValue);
-            })
-          }).catch((err) => {
-            console.log("Found an error", err);
-          })
+    console.log(this.state, "the state");
+    // if (fire.auth().currentUser) {
+    //   fire.firestore().doc(`users/${currentUser.uid}`).get().then((docData) => {
+    //     let userData = { email: docData.data().email, uid: uid, photoURL: docData.data().photoURL, name: docData.data().name };
+    //     fire.firestore()
+    //       .collection('posts')
+    //       .add({
+    //         title: title,
+    //         description: description,
+    //         date: selectedDate,
+    //         time: selectedTime,
+    //         location: location,
+    //         likesMembers: [],
+    //         ...userData
+    //       }).then((doc) => {
+    //         fire.firestore().collection("posts").doc(doc.id).collection("joining").add(userData).then(() => {
+    //           onClose(selectedValue);
+    //         })
+    //       }).catch((err) => {
+    //         console.log("Found an error", err);
+    //       })
 
-        this.setState({
-          title: "",
-          description: "",
-          location: "",
-          selectedDate: new Date(),
-          selectedTime: new Date()
-        })
-        router.push("/")
-      })
-    }
+    //     this.setState({
+    //       title: "",
+    //       description: "",
+    //       location: "",
+    //       selectedDate: new Date(),
+    //       selectedTime: new Date()
+    //     })
+    //     router.push("/")
+    //   })
+    // }
   }
 
   render() {
     return (
-      //   <Dialog onClose={handleClose} aria-labelledby="simple-dialog-title" open={open}>
-      //       <div className={styles.Dialog}>
-      //     <DialogTitle id="simple-dialog-title">Create Event</DialogTitle>
-      //     <TextField id="standard-basic" label="Event Title" value={title} onChange= {({target}) => setTitle(target.value)}  />
-      //     <MuiPickersUtilsProvider utils={DateFnsUtils}>
-      //   <Grid container justify="space-between">
-      //     <KeyboardDatePicker
-      //       disableToolbar
-      //       variant="inline"
-      //       format="MM/dd/yyyy"
-      //       margin="normal"
-      //       id="date-picker-inline"
-      //       label="Select Date"
-      //       value={selectedDate}
-      //       onChange={handleDateChange}
-      //       KeyboardButtonProps={{
-      //         'aria-label': 'change date',
-      //       }}
-      //     />
-      //     <KeyboardTimePicker
-      //       margin="normal"
-      //       id="time-picker"
-      //       label="Select Time"
-      //       value={selectedTime}
-      //       onChange={handleTimeChange}
-      //       KeyboardButtonProps={{
-      //         'aria-label': 'change time',
-      //       }}
-      //     />
-      //   </Grid>
-      // </MuiPickersUtilsProvider>
-      // <Grid container spacing={1} alignItems="flex-end">
-      //       <Grid item>
-      //         <RoomIcon />
-      //       </Grid>
-      //       <Grid item>
-      //         <TextField id="input-with-icon-grid" label="Enter location" value={location} onChange= {({target}) => setLocation(target.value)} />
-      //       </Grid>
-      //     </Grid>
-      //     <Grid container spacing={1} alignItems="flex-end">
-      //       <Grid item>
-      //         <SubjectIcon />
-      //       </Grid>
-      //       <Grid item>
-      //         <TextField id="input-with-icon-grid" label="Enter description..." value={description} onChange= {({target}) => setDescription(target.value)} />
-      //       </Grid>
-      //     </Grid>
-
-      //     <div className={styles.bottomButtons}>
-      //         <Button onClick={() => handleClose()}>Cancel</Button>
-      //         <Button variant="contained" className={styles.createEvent} onClick={() => { handleCreatePost() }} >
-      //         Create Event
-      //         </Button>
-      //     </div>
-      //     </div>
-      //   </Dialog>
-
-
-      // title: title,
-      // description: description,
-      // date: selectedDate,
-      // time: selectedTime,
-      // location: location,
-
-
       <Modal
         className="modal-dialog-centered"
         isOpen={this.props.open}
@@ -192,7 +128,7 @@ class CreatePost extends React.Component {
         </div>
         <div className="modal-body">
         <Label for="exampleText">Event Title</Label>
-          <Input placeholder="Event Title..." type="text" />
+          <Input placeholder="Event Title..." type="text" onChange= {({target}) => this.setState({title: target.value})}/>
 
           <Label for="exampleText">Event Location</Label>
           <InputGroup className="mb-4">
@@ -204,6 +140,7 @@ class CreatePost extends React.Component {
             <Input
               placeholder="Event Location..."
               type="text"
+              onChange= {({target}) => this.setState({location: target.value})}
             />
           </InputGroup>
 
@@ -221,6 +158,9 @@ class CreatePost extends React.Component {
                     placeholder: "Date Picker Here"
                   }}
                   timeFormat={false}
+                  onChange={e =>
+                    this.setState({date: e})
+                  }
                 />
               </InputGroup>
             </Col>
@@ -237,6 +177,10 @@ class CreatePost extends React.Component {
                     placeholder: "Time Picker Here"
                   }}
                   dateFormat={false}
+
+                  onChange={e =>
+                    this.setState({time: e})
+                  }
                 />
               </InputGroup>
             </Col>
@@ -244,14 +188,14 @@ class CreatePost extends React.Component {
 
           <Label for="exampleText">Event Description</Label>
           <InputGroup>
-            <Input type="textarea" name="text" id="exampleText" />
+            <Input type="textarea" name="text" id="exampleText" onChange= {({target}) => this.setState({description: target.value})}/>
           </InputGroup>
 
         </div>
         <div className="modal-footer">
-          <Button color="primary" type="button">
+          <Button color="primary" type="button" onClick={() => this.handleCreatePost()}>
             Create Event
-      </Button>
+          </Button>
           <Button
             className="ml-auto"
             color="link"
