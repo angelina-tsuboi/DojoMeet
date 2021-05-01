@@ -50,7 +50,7 @@ class EditPost extends React.Component {
   formDisabled = () => {
     //check time is before current date time
     //check date is before current date
-    if(this.state.title == "" || this.state.location == ""){
+    if (this.state.title == "" || this.state.location == "") {
       return true;
     }
     return false;
@@ -76,67 +76,38 @@ class EditPost extends React.Component {
   };
 
   handleUpdatePost = () => {
-    console.log(this.state.selectedDate.toDate())
+    console.log(this.state, "the state");
+    if (fire.auth().currentUser) {
+      let uid = fire.auth().currentUser.uid;
+      fire.firestore().doc(`users/${uid}`).get().then((docData) => {
+        fire.firestore()
+          .collection('posts').doc(this.props.post.id)
+          .update({
+            title: this.state.title,
+            description: this.state.description,
+            date: this.state.selectedDate,
+            time: this.state.selectedTime,
+            location: this.state.location
+          }).then((doc) => {
+            this.handleClose();
+          }).catch((err) => {
+            console.log("Found an error", err);
+          })
+
+        this.setState({
+          title: "",
+          description: "",
+          location: "",
+          selectedDate: new Date(),
+          selectedTime: new Date()
+        })
+      })
+    }
   }
 
   render() {
     return (
-      //     <Dialog onClose={handleClose} aria-labelledby="simple-dialog-title" open={open}>
-      //       <div className={styles.Dialog}>
-      //     <DialogTitle id="simple-dialog-title">Update Event</DialogTitle>
-      //     <TextField id="standard-basic" label="Event Title" value={title} onChange= {({target}) => setTitle(target.value)}  />
-      //     <MuiPickersUtilsProvider utils={DateFnsUtils}>
-      //   <Grid container justify="space-between">
-      //     <KeyboardDatePicker
-      //       disableToolbar
-      //       variant="inline"
-      //       format="MM/dd/yyyy"
-      //       margin="normal"
-      //       id="date-picker-inline"
-      //       label="Select Date"
-      //       value={selectedDate}
-      //       onChange={handleDateChange}
-      //       KeyboardButtonProps={{
-      //         'aria-label': 'change date',
-      //       }}
-      //     />
-      //     <KeyboardTimePicker
-      //       margin="normal"
-      //       id="time-picker"
-      //       label="Select Time"
-      //       value={selectedTime}
-      //       onChange={handleTimeChange}
-      //       KeyboardButtonProps={{
-      //         'aria-label': 'change time',
-      //       }}
-      //     />
-      //   </Grid>
-      // </MuiPickersUtilsProvider>
-      // <Grid container spacing={1} alignItems="flex-end">
-      //       <Grid item>
-      //         <RoomIcon />
-      //       </Grid>
-      //       <Grid item>
-      //         <TextField id="input-with-icon-grid" label="Enter location" value={location} onChange= {({target}) => setLocation(target.value)} />
-      //       </Grid>
-      //     </Grid>
-      //     <Grid container spacing={1} alignItems="flex-end">
-      //       <Grid item>
-      //         <SubjectIcon />
-      //       </Grid>
-      //       <Grid item>
-      //         <TextField id="input-with-icon-grid" label="Enter description..." value={description} onChange= {({target}) => setDescription(target.value)} />
-      //       </Grid>
-      //     </Grid>
 
-      //     <div className={styles.bottomButtons}>
-      //         <Button onClick={() => handleClose()}>Cancel</Button>
-      //         <Button variant="contained" className={styles.createEvent} onClick={() => { updatePost() }} >
-      //         Update Event
-      //         </Button>
-      //     </div>
-      //     </div>
-      //   </Dialog>
       <Modal
         className="modal-dialog-centered"
         isOpen={this.props.open}

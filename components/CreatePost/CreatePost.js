@@ -85,7 +85,7 @@ class CreatePost extends React.Component {
             ...userData
           }).then((doc) => {
             fire.firestore().collection("posts").doc(doc.id).collection("joining").add(userData).then(() => {
-              this.handleClose
+              this.handleClose();
             })
           }).catch((err) => {
             console.log("Found an error", err);
