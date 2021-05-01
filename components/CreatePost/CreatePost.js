@@ -20,18 +20,14 @@ import classnames from "classnames";
 // reactstrap components
 import {
   Button,
-  Card,
-  CardHeader,
-  CardBody,
-  FormGroup,
-  Form,
   Input,
   InputGroupAddon,
   InputGroupText,
   InputGroup,
   Modal,
   Row,
-  Col
+  Col,
+  Label
 } from "reactstrap";
 
 import {
@@ -195,8 +191,10 @@ class CreatePost extends React.Component {
           </button>
         </div>
         <div className="modal-body">
+        <Label for="exampleText">Event Title</Label>
           <Input placeholder="Event Title..." type="text" />
 
+          <Label for="exampleText">Event Location</Label>
           <InputGroup className="mb-4">
             <InputGroupAddon addonType="prepend">
               <InputGroupText>
@@ -209,46 +207,46 @@ class CreatePost extends React.Component {
             />
           </InputGroup>
 
+          <Label for="exampleText">Event Time</Label>
+          <Row>
+            <Col md="6">
+              <InputGroup>
+                <InputGroupAddon addonType="prepend">
+                  <InputGroupText>
+                    <i className="ni ni-calendar-grid-58" />
+                  </InputGroupText>
+                </InputGroupAddon>
+                <ReactDatetime
+                  inputProps={{
+                    placeholder: "Date Picker Here"
+                  }}
+                  timeFormat={false}
+                />
+              </InputGroup>
+            </Col>
+
+            <Col md="6">
+              <InputGroup>
+                <InputGroupAddon addonType="prepend">
+                  <InputGroupText>
+                    <i className="ni ni-calendar-grid-58" />
+                  </InputGroupText>
+                </InputGroupAddon>
+                <ReactDatetime
+                  inputProps={{
+                    placeholder: "Time Picker Here"
+                  }}
+                  dateFormat={false}
+                />
+              </InputGroup>
+            </Col>
+          </Row>
+
+          <Label for="exampleText">Event Description</Label>
           <InputGroup>
-            <InputGroupAddon addonType="prepend">
-              <InputGroupText>
-                <i className="ni ni-calendar-grid-58" />
-              </InputGroupText>
-            </InputGroupAddon>
-            <ReactDatetime
-              inputProps={{
-                placeholder: "Date Picker Here"
-              }}
-              timeFormat={false}
-            />
+            <Input type="textarea" name="text" id="exampleText" />
           </InputGroup>
 
-          <InputGroup>
-            <InputGroupAddon addonType="prepend">
-              <InputGroupText>
-                <i className="ni ni-calendar-grid-58" />
-              </InputGroupText>
-            </InputGroupAddon>
-            <ReactDatetime
-              inputProps={{
-                placeholder: "Time Picker Here"
-              }}
-              dateFormat={false}
-            />
-          </InputGroup>
-
-          {/* <TimePicker /> */}
-          <p>
-            Far far away, behind the word mountains, far from the
-            countries Vokalia and Consonantia, there live the blind texts.
-            Separated they live in Bookmarksgrove right at the coast of
-            the Semantics, a large language ocean.
-      </p>
-          <p>
-            A small river named Duden flows by their place and supplies it
-            with the necessary regelialia. It is a paradisematic country,
-            in which roasted parts of sentences fly into your mouth.
-      </p>
         </div>
         <div className="modal-footer">
           <Button color="primary" type="button">

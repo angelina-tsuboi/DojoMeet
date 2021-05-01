@@ -198,6 +198,7 @@ class Inputs extends React.Component {
                   </FormGroup>
                 </Col>
               </Row>
+              
             </Container>
           </div>
         </section>
