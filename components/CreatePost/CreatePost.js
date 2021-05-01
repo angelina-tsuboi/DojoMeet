@@ -3,9 +3,11 @@ import Dialog from '@material-ui/core/Dialog';
 import fire from '../../config/fire-conf';
 import Grid from '@material-ui/core/Grid';
 import React from 'react';
+// import TimePicker from 'react-time-picker';
 import styles from './CreatePost.module.css'
 import QueryBuilderIcon from '@material-ui/icons/QueryBuilder';
 import { useRouter } from 'next/router';
+import ReactDatetime from "react-datetime";
 import TextField from '@material-ui/core/TextField';
 import DateFnsUtils from '@date-io/date-fns';
 // import Button from '@material-ui/core/Button';
@@ -39,23 +41,23 @@ import {
 } from '@material-ui/pickers';
 import 'date-fns';
 
-class CreatePost extends React.Component{
-    state = {
-      title: "",
-      description: "",
-      location: "",
-      selectedDate: new Date(),
-      selectedTime: new Date(),
-      userData: {
-        uid: this.props.uid,
-        email: this.props.email,
-        name: this.props.name,
-        photoURL: this.props.photoURL
-      },
-      onClose: this.props.onClose,
-      selectedValue: this.props.selectedValue,
-      open: this.props.open
-    };
+class CreatePost extends React.Component {
+  state = {
+    title: "",
+    description: "",
+    location: "",
+    selectedDate: new Date(),
+    selectedTime: new Date(),
+    userData: {
+      uid: this.props.uid,
+      email: this.props.email,
+      name: this.props.name,
+      photoURL: this.props.photoURL
+    },
+    onClose: this.props.onClose,
+    selectedValue: this.props.selectedValue,
+    open: this.props.open
+  };
 
 
   handleDateChange = (date) => {
@@ -68,7 +70,7 @@ class CreatePost extends React.Component{
 
   handleClose = () => {
     console.log("closing")
-   this.props.onClose();
+    this.props.onClose();
   };
 
 
@@ -164,7 +166,7 @@ class CreatePost extends React.Component{
       //     </div>
       //     </div>
       //   </Dialog>
-      
+
 
       // title: title,
       // description: description,
@@ -180,7 +182,7 @@ class CreatePost extends React.Component{
       >
         <div className="modal-header">
           <h6 className="modal-title" id="modal-title-default">
-          Create Event
+            Create Event
       </h6>
           <button
             aria-label="Close"
@@ -193,6 +195,49 @@ class CreatePost extends React.Component{
           </button>
         </div>
         <div className="modal-body">
+          <Input placeholder="Event Title..." type="text" />
+
+          <InputGroup className="mb-4">
+            <InputGroupAddon addonType="prepend">
+              <InputGroupText>
+                <i className="ni ni-zoom-split-in" />
+              </InputGroupText>
+            </InputGroupAddon>
+            <Input
+              placeholder="Event Location..."
+              type="text"
+            />
+          </InputGroup>
+
+          <InputGroup>
+            <InputGroupAddon addonType="prepend">
+              <InputGroupText>
+                <i className="ni ni-calendar-grid-58" />
+              </InputGroupText>
+            </InputGroupAddon>
+            <ReactDatetime
+              inputProps={{
+                placeholder: "Date Picker Here"
+              }}
+              timeFormat={false}
+            />
+          </InputGroup>
+
+          <InputGroup>
+            <InputGroupAddon addonType="prepend">
+              <InputGroupText>
+                <i className="ni ni-calendar-grid-58" />
+              </InputGroupText>
+            </InputGroupAddon>
+            <ReactDatetime
+              inputProps={{
+                placeholder: "Time Picker Here"
+              }}
+              dateFormat={false}
+            />
+          </InputGroup>
+
+          {/* <TimePicker /> */}
           <p>
             Far far away, behind the word mountains, far from the
             countries Vokalia and Consonantia, there live the blind texts.
