@@ -5,7 +5,7 @@ import { useFirestore } from '../firebase/useFirestore';
 import PostCard from '../components/PostCard/PostCard';
 const firestore = useFirestore();
 import Calendar from 'react-calendar';
-import { infinteScroll } from '../firebase/infinteScroll';
+import { infiniteScroll } from '../firebase/infinteScroll';
 import 'react-calendar/dist/Calendar.css';
 import Grid from '@material-ui/core/Grid';
 import { useRouter } from 'next/router';
@@ -20,13 +20,13 @@ import AdapterDateFns from '@material-ui/lab/AdapterDateFns';
 import CreatePost from '../components/CreatePost/CreatePost';
 import LocalizaitonProvider from '@material-ui/lab/LocalizationProvider';
 import StaticDatePicker from '@material-ui/lab/StaticDatePicker';
-const scroll = infinteScroll();
+const scroll = infiniteScroll();
 
 
 
 const Posts = () => {
   const router = useRouter()
-  const [posts, setPosts] = useState(scroll.getMessages("posts", "rrr", 10));
+  const [posts, setPosts] = useState(scroll.messages);
   const [hasMore, setHasMore] = useState(true);
   const [timeEvents, setTimeEvents] = useState([]);
   const [notification, setNotification] = useState('');
@@ -63,6 +63,7 @@ const Posts = () => {
 
   useEffect(() => {
     // Remove the server-side injected CSS.
+    scroll.getMessages("posts", "rrr", 10);
     const jssStyles = document.querySelector('#jss-server-side');
     if (jssStyles) {
       jssStyles.parentElement.removeChild(jssStyles);
@@ -135,9 +136,9 @@ const Posts = () => {
             </div>
 
             <InfiniteScroll
-              dataLength={this.state.items.length}
-              next={this.fetchMoreData}
-              hasMore={this.state.hasMore}
+              dataLength={posts.length}
+              next={fetchMoreData}
+              hasMore={hasMore}
               loader={<h4>Loading...</h4>}
               endMessage={
                 <p style={{ textAlign: "center" }}>
