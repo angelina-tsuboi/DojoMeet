@@ -149,9 +149,10 @@ const PostCard = ({ post }) => {
     })
   }
 
-  const openPost = (id) => {
-    console.log("opening", id)
-    router.push(`/posts/${id}`);
+  const openPostModal = () => {
+    let postData = {name: post.name, email: post.email, title: post.title, date: post.date, time: post.time, id: post.id, photoURL: post.photoURL}
+    // this.props.openPost(postData)
+    console.log(postData)
   }
 
 
@@ -229,7 +230,7 @@ const PostCard = ({ post }) => {
               subheader={format(post.date.toDate(), 'MM/dd/yyyy') + " at " + format(post.time.toDate(), "HH:mm aaaaa'm'")}
             />
 
-            <CardContent onClick={() => { openPost(post.id) }} className={styles.cardBody}>
+            <CardContent onClick={() => { openPostModal(post.id) }} className={styles.cardBody}>
               <Typography variant="h6" color="textPrimary" component="p">
                 {post.title.length >= 100 ? `${post.title.slice(0, 97)}...` : post.title}
               </Typography>

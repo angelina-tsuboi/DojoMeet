@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import Head from 'next/head';
 import fire from '../config/fire-conf';
 import { useFirestore } from '../firebase/useFirestore';
@@ -18,6 +18,7 @@ import Button from '@material-ui/core/Button';
 import AddIcon from '@material-ui/icons/Add';
 import AdapterDateFns from '@material-ui/lab/AdapterDateFns';
 import CreatePost from '../components/CreatePost/CreatePost';
+import { UserDataContext } from '../providers/userdataprovider';
 import LocalizaitonProvider from '@material-ui/lab/LocalizationProvider';
 import StaticDatePicker from '@material-ui/lab/StaticDatePicker';
 const scroll = infiniteScroll();
@@ -38,11 +39,18 @@ const Posts = () => {
   const [selectedDate, setSelectedDate] = useState(false);
   const [postsForSelectedDate, setPostsForSelectedDate] = useState([]);
   const [open, setOpen] = useState(false);
+  const [selectedPost, setSelectedPost] = useState(null);
+  const [openPostModal, setOpenPostModal] = useState(false);
   let { currentUser } = fire.auth();
+  const userData = useContext(UserDataContext);
 
   const handleClose = () => {
     console.log("closing 2")
     setOpen(false);
+  };
+
+  const handleClosePostModal = () => {
+    setOpenPostModal(false);
   };
 
   const handleClickOpen = () => {
@@ -124,7 +132,11 @@ const Posts = () => {
 
   const updateDate = (date) => {
     onChange(date);
+  }
 
+  const togglePostModal = (postData) => {
+    setSelectedPost(postData);
+    setOpenPostModal(true);
   }
 
 
@@ -203,7 +215,7 @@ const Posts = () => {
               )}
             </InfiniteScroll>:<ul className={styles.postsDisplay}>
               {postsForSelectedDate.map(post =>
-                <PostCard post={post} key={post.id} />
+                <PostCard post={post} key={post.id} openPost={(postData) => togglePostModal(postData)}/>
               )}
             </ul>
             }
@@ -235,6 +247,7 @@ const Posts = () => {
       </div>
 
       {currentUser && <CreatePost open={open} onClose={handleClose} uid={currentUser.uid} router={router} />}
+      {(currentUser && selectedPost) && <PostModal open={openPostModal} onClose={handleClosePostModal} post={selectedPost} userData={userData} />}
     </main>
   )
 }
