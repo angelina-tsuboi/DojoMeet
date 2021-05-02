@@ -8,9 +8,9 @@ import Calendar from 'react-calendar';
 import { infiniteScroll } from '../firebase/infinteScroll';
 import 'react-calendar/dist/Calendar.css';
 import Grid from '@material-ui/core/Grid';
+import { format, toDate } from 'date-fns';
 import { useRouter } from 'next/router';
 import InfiniteScroll from 'react-infinite-scroll-component';
-import format from 'date-fns/format';
 import ViewCard from '../components/ViewCard/ViewCard';
 import styles from '../public/css/posts.module.css';
 import TextField from '@material-ui/core/TextField';
@@ -47,11 +47,29 @@ const Posts = () => {
     setOpen(true);
   };
 
+  const handleClickDate = (date) => {
+    // setValue(date)
+    console.log("clicked", date)
+    let today = new Date().toLocaleDateString('en-US', {year: 'numeric', month: '2-digit', day: '2-digit'});
+    let yesterday = new Date(today);
+    let tommorow = new Date(today);
+    yesterday.setDate(yesterday.getDate() - 1)
+    tommorow.setDate(yesterday.getDate() + 1)
+
+    today = new Date(today);
+    yesterday.toDateString()
+    tommorow.toDateString()
+
+    console.log("today", today)
+    console.log("yesterday", yesterday)
+    console.log("tommorow", tommorow)
+  }
+
   const fetchUpcomingData = () => {
     let postArray = [];
     fire.firestore().collection("posts").where("date", ">", new Date()).limit(5).get().then((snapshot) => {
       snapshot.forEach((doc) => {
-        let postData = {...doc.data(), id: doc.id};
+        let postData = { ...doc.data(), id: doc.id };
         postArray.push(postData);
       })
       setUpcomingPosts(postArray);
@@ -154,11 +172,11 @@ const Posts = () => {
               next={fetchMoreData}
               hasMore={hasMore}
               loader={<h4>Loading...</h4>}
-              // endMessage={
-              //   <p style={{ textAlign: "center" }}>
-              //     <b>Yay! You have seen it all</b>
-              //   </p>
-              // }
+            // endMessage={
+            //   <p style={{ textAlign: "center" }}>
+            //     <b>Yay! You have seen it all</b>
+            //   </p>
+            // }
             >
 
               {posts.map(post =>
@@ -173,14 +191,14 @@ const Posts = () => {
                 displayStaticWrapperAs="desktop"
                 value={value2}
                 onChange={(newValue) => {
-                  setValue(newValue);
+                  handleClickDate(newValue);
                 }}
                 renderInput={(params) => <TextField {...params} variant="standard" />}
               />
             </LocalizaitonProvider>
             <h3 className={styles.upcomingTitle}>Upcoming Events</h3>
             <ul className={styles.postsDisplay} onScroll={handleScroll}>
-              { upcomingPosts.map(post =>
+              {upcomingPosts.map(post =>
                 <ViewCard post={post} key={post.id} />
               )}
             </ul>

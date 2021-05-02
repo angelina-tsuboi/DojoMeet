@@ -42,18 +42,6 @@ const DeletePost = ({ post, open, onClose }) => {
   }
 
   return (
-    // <div>
-    //   <Dialog onClose={handleCloseDialog} aria-labelledby="simple-dialog-title" open={open}>
-    //     <DialogTitle id="simple-dialog-title">Delete Post</DialogTitle>
-    //     <p>Are you sure you want to delete "<b>{post.title}</b>"? You can't undo this action.</p>
-    //     <div className={styles.buttons}>
-    //       <Button onClick={handleCloseDialog}>Cancel</Button>
-    //       <Button onClick={deletePost}>Delete</Button>
-    //     </div>
-    //   </Dialog>
-
-    // </div>
-
     <Modal
       className="modal-dialog-centered"
       isOpen={open}
