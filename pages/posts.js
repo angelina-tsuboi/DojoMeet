@@ -49,14 +49,22 @@ const Posts = () => {
     setOpen(true);
   };
 
+  const getFormattedDate = (date) => {
+    let year = date.getFullYear();
+    let month = (1 + date.getMonth()).toString().padStart(2, '0');
+    let day = date.getDate().toString().padStart(2, '0');
+  
+    return month + '/' + day + '/' + year;
+}
+
   const handleClickDate = (date) => {
     setValue(date)
     setSelectedDate(true);
-    let today = new Date().toLocaleDateString('en-US', {year: 'numeric', month: '2-digit', day: '2-digit'});
+    let today = getFormattedDate(date);
     let yesterday = new Date(today);
     let tommorow = new Date(today);
     yesterday.setDate(yesterday.getDate() - 1)
-    tommorow.setDate(yesterday.getDate() + 1)
+    tommorow.setDate(tommorow.getDate() + 1)
 
     today = new Date(today);
     fetchDataForDate(today, yesterday, tommorow);
@@ -64,13 +72,16 @@ const Posts = () => {
 
   const fetchDataForDate = (today, yesterday, tommorow) => {
     let postArray = [];
-    fire.firestore().collection("posts").where("date", ">", yesterday).where("date", "<", tommorow).limit(5).get().then((snapshot) => {
+    console.log(yesterday.toDateString())
+    console.log(tommorow.toDateString())
+    fire.firestore().collection("posts").orderBy("date").where("date", "<", tommorow).where("date", ">", yesterday).limit(5).get().then((snapshot) => {
       snapshot.forEach((doc) => {
         let postData = { ...doc.data(), id: doc.id };
         postArray.push(postData);
       })
+      console.log("gottem", postArray)
       setPostsForSelectedDate(postArray);
-    })
+    }).catch((err) => {console.log(err)});
   }
 
   const fetchUpcomingData = () => {
@@ -175,7 +186,7 @@ const Posts = () => {
               </Button>
             </div>
 
-{postsForSelectedDate.length == 0 ?  <InfiniteScroll
+{(postsForSelectedDate.length == 0 && !selectedDate) ?  <InfiniteScroll
               dataLength={posts.length}
               next={fetchMoreData}
               hasMore={hasMore}
