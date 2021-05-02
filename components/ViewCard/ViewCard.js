@@ -39,10 +39,10 @@ const ViewCard = ({ post }) => {
             />
             <CardContent className={styles.cardBody}>
               <Typography variant="h6" color="textPrimary" component="p">
-                {post.title}
+              {post.title.length >= 30 ? `${post.title.slice(0, 27)}...` : post.title}
               </Typography>
               <Typography variant="body2" color="textSecondary" component="p">
-                {post.description}
+              {post.description.length >= 50 ? `${post.description.slice(0, 47)}...` : post.description}
               </Typography>
               {post.joining && <Typography variant="body2" color="textSecondary" component="p">
                 {post.joining.length} joining

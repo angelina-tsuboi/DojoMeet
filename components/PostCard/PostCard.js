@@ -37,6 +37,7 @@ const MenuOption = ({ isUser, post }) => {
     setAnchorEl(event.currentTarget);
   };
 
+
   const handleClose = () => {
     setAnchorEl(null);
   };
@@ -230,10 +231,11 @@ const PostCard = ({ post }) => {
 
             <CardContent onClick={() => { openPost(post.id) }} className={styles.cardBody}>
               <Typography variant="h6" color="textPrimary" component="p">
-                {post.title}
+                {post.title.length >= 100 ? `${post.title.slice(0, 97)}...` : post.title}
               </Typography>
               <Typography variant="body2" color="textSecondary" component="p">
-                {post.description}
+                {/* TODO: make cleaner */}
+              {post.description.length >= 180 ? `${post.description.slice(0, 177) + "..."}` : post.description}
               </Typography>
             </CardContent>
           </div>
