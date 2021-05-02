@@ -4,15 +4,26 @@ import styles from './DeletePost.module.css';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import Dialog from '@material-ui/core/Dialog';
 import { useFirestore } from '../../firebase/useFirestore';
-import Button from '@material-ui/core/Button';
 import Snackbar from '@material-ui/core/Snackbar';
 import IconButton from '@material-ui/core/IconButton';
 import CloseIcon from '@material-ui/icons/Close';
 const firestore = useFirestore();
 
+import {
+  Button,
+  Input,
+  InputGroupAddon,
+  InputGroupText,
+  InputGroup,
+  Modal,
+  Row,
+  Col,
+  Label
+} from "reactstrap";
+
 
 const DeletePost = ({ post, open, onClose }) => {
-  
+
   const handleCloseDialog = () => {
     onClose(false);
   };
@@ -27,21 +38,48 @@ const DeletePost = ({ post, open, onClose }) => {
         onClose(true);
       })
     })
-    
+
   }
 
   return (
-    <div>
-      <Dialog onClose={handleCloseDialog} aria-labelledby="simple-dialog-title" open={open}>
-        <DialogTitle id="simple-dialog-title">Delete Post</DialogTitle>
-        <p>Are you sure you want to delete "<b>{post.title}</b>"? You can't undo this action.</p>
-        <div className={styles.buttons}>
-          <Button onClick={handleCloseDialog}>Cancel</Button>
-          <Button onClick={deletePost}>Delete</Button>
-        </div>
-      </Dialog>
-      
-    </div>
+    // <div>
+    //   <Dialog onClose={handleCloseDialog} aria-labelledby="simple-dialog-title" open={open}>
+    //     <DialogTitle id="simple-dialog-title">Delete Post</DialogTitle>
+    //     <p>Are you sure you want to delete "<b>{post.title}</b>"? You can't undo this action.</p>
+    //     <div className={styles.buttons}>
+    //       <Button onClick={handleCloseDialog}>Cancel</Button>
+    //       <Button onClick={deletePost}>Delete</Button>
+    //     </div>
+    //   </Dialog>
+
+    // </div>
+
+    <Modal
+      className="modal-dialog-centered"
+      isOpen={open}
+      toggle={handleCloseDialog}
+    >
+      <div className="modal-header">
+        <h6 className="modal-title" id="modal-title-default">
+          Delete Event
+      </h6>
+        <button
+          aria-label="Close"
+          className="close"
+          data-dismiss="modal"
+          type="button"
+          onClick={handleCloseDialog}
+        >
+          <span aria-hidden={true}>×</span>
+        </button>
+      </div>
+      <div className="modal-body">
+        <Label for="exampleText">Are you sure you want to delete "{post.title}"? This action cannot be undone.</Label>
+        <Button className="btn-1 ml-1" color="warning" type="button" onClick={deletePost}>
+                    Delete Event
+        </Button>
+      </div>
+    </Modal>
 
   );
 }
