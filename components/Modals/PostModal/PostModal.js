@@ -7,53 +7,66 @@ import ReactDatetime from "react-datetime";
 
 // reactstrap components
 import {
-  Button,
-  Input,
-  InputGroupAddon,
-  InputGroupText,
-  InputGroup,
-  Modal,
-  Row,
-  Col,
-  Label
+    Button,
+    Input,
+    InputGroupAddon,
+    InputGroupText,
+    InputGroup,
+    Modal,
+    Row,
+    Container,
+    Col,
+    Label
 } from "reactstrap";
 
 import 'date-fns';
 
 class PostModal extends React.Component {
-  state = {
-    title: this.props.post.title,
-    description: this.props.post.description,
-    location: this.props.post.location,
-    selectedDate: this.props.post.date,
-    selectedTime: this.props.post.time,
-    userData: {
-      uid: this.props.userData.uid,
-      email: this.props.userData.email,
-      name: this.props.userData.name,
-      photoURL: this.props.userData.photoURL
-    },
-    onClose: this.props.onClose,
-    selectedValue: this.props.selectedValue,
-    open: this.props.open
-  };
+    state = {
+        title: this.props.post.title,
+        description: this.props.post.description,
+        location: this.props.post.location,
+        selectedDate: this.props.post.date,
+        selectedTime: this.props.post.time,
+        userData: {
+            uid: this.props.userData.uid,
+            email: this.props.userData.email,
+            name: this.props.userData.name,
+            photoURL: this.props.userData.photoURL
+        },
+        onClose: this.props.onClose,
+        selectedValue: this.props.selectedValue,
+        open: this.props.open
+    };
 
-  handleClose = () => {
-    console.log("closing")
-    this.props.onClose();
-  };
+    handleClose = () => {
+        console.log("closing")
+        this.props.onClose();
+    };
 
-  render() {
-    return (
-      <Modal
-        className="modal-dialog-centered"
-        isOpen={this.props.open}
-        toggle={() => this.handleClose()}
-      >
-        <h1>Hello {this.state.name}, to {this.state.title}</h1>
-      </Modal>
-    );
-  }
+    render() {
+        return (
+            <Container>
+                <Row>
+                    <Col md="4" sm="6">
+                        <Modal
+                            className="modal-dialog-centered"
+                            isOpen={this.props.open}
+                            toggle={() => this.handleClose()}
+                        >
+                            <h1>{this.state.title}</h1>
+                            <h4>{this.state.location}</h4>
+
+                            <p>{this.state.description}</p>
+
+                            <h3>Address:</h3>
+                            <h3>{this.state.location}</h3>
+                        </Modal>
+                    </Col>
+                </Row>
+            </Container>
+        );
+    }
 
 }
 
