@@ -35,6 +35,8 @@ const Posts = () => {
   const [loggedIn, setLoggedIn] = useState(false);
   const [value, onChange] = useState(new Date());
   const [value2, setValue] = useState(new Date());
+  const [selectedDate, setSelectedDate] = useState(false);
+  const [postsForSelectedDate, setPostsForSelectedDate] = useState([]);
   const [open, setOpen] = useState(false);
   let { currentUser } = fire.auth();
 
@@ -48,8 +50,8 @@ const Posts = () => {
   };
 
   const handleClickDate = (date) => {
-    // setValue(date)
-    console.log("clicked", date)
+    setValue(date)
+    setSelectedDate(true);
     let today = new Date().toLocaleDateString('en-US', {year: 'numeric', month: '2-digit', day: '2-digit'});
     let yesterday = new Date(today);
     let tommorow = new Date(today);
@@ -57,12 +59,18 @@ const Posts = () => {
     tommorow.setDate(yesterday.getDate() + 1)
 
     today = new Date(today);
-    yesterday.toDateString()
-    tommorow.toDateString()
+    fetchDataForDate(today, yesterday, tommorow);
+  }
 
-    console.log("today", today)
-    console.log("yesterday", yesterday)
-    console.log("tommorow", tommorow)
+  const fetchDataForDate = (today, yesterday, tommorow) => {
+    let postArray = [];
+    fire.firestore().collection("posts").where("date", ">", yesterday).where("date", "<", tommorow).limit(5).get().then((snapshot) => {
+      snapshot.forEach((doc) => {
+        let postData = { ...doc.data(), id: doc.id };
+        postArray.push(postData);
+      })
+      setPostsForSelectedDate(postArray);
+    })
   }
 
   const fetchUpcomingData = () => {
@@ -156,7 +164,7 @@ const Posts = () => {
         <Grid container>
           <Grid item xs={8}>
             <div className={styles.actionDisplay}>
-              <h3 className={styles.eventTitle}>Events</h3>
+              <h3 className={styles.eventTitle}>{!selectedDate ? "Events": `Events on ${format(value2, 'MM/dd/yyyy')}`}</h3>
               <Button
                 variant="contained"
                 color="secondary"
@@ -167,7 +175,7 @@ const Posts = () => {
               </Button>
             </div>
 
-            <InfiniteScroll
+{postsForSelectedDate.length == 0 ?  <InfiniteScroll
               dataLength={posts.length}
               next={fetchMoreData}
               hasMore={hasMore}
@@ -182,7 +190,13 @@ const Posts = () => {
               {posts.map(post =>
                 <PostCard post={post} key={post.id} />
               )}
-            </InfiniteScroll>
+            </InfiniteScroll>:<ul className={styles.postsDisplay}>
+              {postsForSelectedDate.map(post =>
+                <PostCard post={post} key={post.id} />
+              )}
+            </ul>
+            }
+           
 
           </Grid>
           <Grid item xs={4}>
