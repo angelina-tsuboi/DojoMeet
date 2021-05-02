@@ -26,6 +26,8 @@ class PostModal extends React.Component {
         title: this.props.post.title,
         description: this.props.post.description,
         location: this.props.post.location,
+        likeMembers: this.props.post.likeMembers,
+        joining: this.props.post.joining,
         selectedDate: this.props.post.date,
         selectedTime: this.props.post.time,
         userData: {
@@ -40,7 +42,6 @@ class PostModal extends React.Component {
     };
 
     handleClose = () => {
-        console.log("closing")
         this.props.onClose();
     };
 
@@ -61,6 +62,9 @@ class PostModal extends React.Component {
 
                             <h3>Address:</h3>
                             <h3>{this.state.location}</h3>
+
+                            <h3>{this.state.joining.length} joining</h3> 
+                            <h3>{this.state.likeMembers.length} likes</h3> 
                         </Modal>
                     </Col>
                 </Row>

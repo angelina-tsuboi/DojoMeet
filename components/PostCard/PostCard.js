@@ -150,7 +150,7 @@ const PostCard = ({ post, openPost }) => {
   }
 
   const openPostModal = () => {
-    let postData = {name: post.name, email: post.email, title: post.title, date: post.date, time: post.time, id: post.id, photoURL: post.photoURL, description: post.description, location: post.location}
+    let postData = {name: post.name, email: post.email, title: post.title, date: post.date, time: post.time, id: post.id, photoURL: post.photoURL, description: post.description, location: post.location, joining: joining, likeMembers: post.likesMembers}
     console.log("data", postData);
     openPost(postData)
   }
