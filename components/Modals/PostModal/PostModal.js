@@ -1,6 +1,6 @@
 import DialogTitle from '@material-ui/core/DialogTitle';
 import Dialog from '@material-ui/core/Dialog';
-import fire from '../../config/fire-conf';
+import fire from '../../../config/fire-conf';
 import Grid from '@material-ui/core/Grid';
 import React from 'react';
 import ReactDatetime from "react-datetime";
@@ -22,16 +22,16 @@ import 'date-fns';
 
 class PostModal extends React.Component {
   state = {
-    title: props.post.title,
-    description: props.post.description,
-    location: props.post.location,
-    selectedDate: props.post.date,
-    selectedTime: props.post.time,
+    title: this.props.post.title,
+    description: this.props.post.description,
+    location: this.props.post.location,
+    selectedDate: this.props.post.date,
+    selectedTime: this.props.post.time,
     userData: {
-      uid: props.userData.uid,
-      email: props.userData.email,
-      name: props.userData.name,
-      photoURL: props.userData.photoURL
+      uid: this.props.userData.uid,
+      email: this.props.userData.email,
+      name: this.props.userData.name,
+      photoURL: this.props.userData.photoURL
     },
     onClose: this.props.onClose,
     selectedValue: this.props.selectedValue,

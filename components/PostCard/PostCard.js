@@ -130,7 +130,7 @@ const JoinButton = ({ joiningEvent, onJoin, onLeave }) => {
 
 
 
-const PostCard = ({ post }) => {
+const PostCard = ({ post, openPost }) => {
   const [open, setOpen] = useState(false);
   const router = useRouter()
   const userData = useContext(UserDataContext);
@@ -151,8 +151,7 @@ const PostCard = ({ post }) => {
 
   const openPostModal = () => {
     let postData = {name: post.name, email: post.email, title: post.title, date: post.date, time: post.time, id: post.id, photoURL: post.photoURL}
-    // this.props.openPost(postData)
-    console.log(postData)
+    openPost(postData)
   }
 
 

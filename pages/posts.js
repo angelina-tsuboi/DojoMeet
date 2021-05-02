@@ -14,6 +14,7 @@ import InfiniteScroll from 'react-infinite-scroll-component';
 import ViewCard from '../components/ViewCard/ViewCard';
 import styles from '../public/css/posts.module.css';
 import TextField from '@material-ui/core/TextField';
+import PostModal from '../components/Modals/PostModal/PostModal';
 import Button from '@material-ui/core/Button';
 import AddIcon from '@material-ui/icons/Add';
 import AdapterDateFns from '@material-ui/lab/AdapterDateFns';
@@ -211,7 +212,7 @@ const Posts = () => {
             >
 
               {posts.map(post =>
-                <PostCard post={post} key={post.id} />
+                <PostCard post={post} key={post.id} openPost={(postData) => togglePostModal(postData)}/>
               )}
             </InfiniteScroll>:<ul className={styles.postsDisplay}>
               {postsForSelectedDate.map(post =>
