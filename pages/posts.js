@@ -237,7 +237,7 @@ const Posts = () => {
             <h3 className={styles.upcomingTitle}>Upcoming Events</h3>
             <ul className={styles.postsDisplay} onScroll={handleScroll}>
               {upcomingPosts.map(post =>
-                <ViewCard post={post} key={post.id} />
+                <ViewCard post={post} key={post.id} openPost={(postData) => togglePostModal(postData)}/>
               )}
             </ul>
           </Grid>

@@ -13,22 +13,44 @@ import { UserDataContext } from '../../providers/userdataprovider';
 const firestore = useFirestore();
 
 
-const ViewCard = ({ post }) => {
+const ViewCard = ({ post, openPost }) => {
   const router = useRouter()
   const userData = useContext(UserDataContext);
   const [date, setDate] = useState(post.date.toDate());
+  const [likeMembers, setLikeMembers] = useState([]);
+  const [joining, setJoiningMembers] = useState([]);
+  const [gotJoinedMembers, setJoinedMembers] = useState(false)
 
-  const openPost = (id) => {
-    console.log("opening", id)
-    router.push(`/posts/${id}`);
+  const openPostModal = () => {
+    let postData = {name: post.name, email: post.email, title: post.title, date: post.date, time: post.time, id: post.id, photoURL: post.photoURL, description: post.description, location: post.location, joining: joining, likeMembers: post.likesMembers}
+    console.log("data", postData);
+    openPost(postData)
   }
 
+  useEffect(() => {
+    getJoiningMembers();
+    setLikeMembers(post.likesMembers);
+  }, [])
+
+
+  const getJoiningMembers = () => {
+    if (!gotJoinedMembers) {
+      firestore.getCollection(`posts/${post.id}/joining`, (result) => {
+        const returnData = result.docs.map(doc => ({
+          id: doc.id,
+          ...doc.data()
+        }));
+        setJoinedMembers(true);
+        setJoiningMembers(returnData);
+      })
+    }
+  }
 
   if (userData) {
     return (
       <div>
         <Card className={styles.card}>
-          <div className={styles.cardHover} onClick={() => { this.openPost(post.id) }}>
+          <div className={styles.cardHover} onClick={openPostModal}>
             <CardHeader
               avatar={
                 <Avatar aria-label="recipe" src={post.photoURL} className={styles.avatar}></Avatar>
@@ -37,7 +59,7 @@ const ViewCard = ({ post }) => {
               subheader={format(post.date.toDate(), 'MM/dd/yyyy') + " at " + format(post.time.toDate(), "HH:mm aaaaa'm'")}
               className={styles.cardHeader}
             />
-            <CardContent className={styles.cardBody}>
+            <CardContent className={styles.cardBody} onClick={() => { openPostModal(post.id) }}>
               <Typography variant="h6" color="textPrimary" component="p">
               {post.title.length >= 30 ? `${post.title.slice(0, 27)}...` : post.title}
               </Typography>
