@@ -198,7 +198,7 @@ const Home = () => {
                           onClick={e => e.preventDefault()}
                           size="sm"
                         >
-                          Connect
+                          Edit
                         </Button>
                         <Button
                           className="float-right"
@@ -207,7 +207,7 @@ const Home = () => {
                           onClick={e => e.preventDefault()}
                           size="sm"
                         >
-                          Message
+                          Delete
                         </Button>
                       </div>
                     </Col>
